@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='CopaPC'>
+
+  <inherits name="com.google.gwt.user.User" />
+  <inherits name="org.gwtbootstrap3.GwtBootstrap3" />
+  <inherits name="org.gwtbootstrap3.GwtBootstrap3Theme" />
+
+  <entry-point class="copapc.web.client.CopaPC" />
+
+  <source path="client" />
+  <source path="shared" />
+
+</module>

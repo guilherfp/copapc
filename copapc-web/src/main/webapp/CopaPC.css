@@ -1,0 +1,36 @@
+.tabela-pontos th {
+  padding: 0 16px;
+}
+
+.tabela-pontos thead {
+  color: gray;
+  font-size: 14px;
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  border-left-width: 0;
+  border-right-width: 0;
+  font-weight: normal;
+}
+
+.tabela-pontos tbody tr {
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.tabela-body-linha {
+  vertical-align: middle;
+  height: 45px;
+}
+
+.tabela-body-linha td {
+  padding: 0 16px;
+}
+
+.tabela-body-linha td:nth-child(odd) {
+  background-color: #f5f5f5;
+}
