@@ -8,7 +8,7 @@ import org.apache.commons.lang3.Validate;
 
 import copapc.model.jogador.Jogador;
 
-public class Time {
+public class Time implements Comparable<Time> {
 
   private int numero;
   private String nome;
@@ -28,7 +28,7 @@ public class Time {
     this(numero, "Time " + numero);
   }
 
-  public int id() {
+  public int numero() {
     return numero;
   }
 
@@ -102,6 +102,11 @@ public class Time {
   @Override
   public String toString() {
     return nome;
+  }
+
+  @Override
+  public int compareTo(Time o) {
+    return Integer.compare(numero, o.numero);
   }
 
 }

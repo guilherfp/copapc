@@ -1,13 +1,22 @@
 package copapc.model.jogador;
 
-import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 import copapc.model.time.Time;
 
 public interface JogadorRepository {
 
-  Jogador jogadores();
+  List<Jogador> jogadores();
 
-  Collection<Jogador> jogadoresDoTime(Time time);
+  List<Jogador> jogadoresDoTime(Time time);
+
+  void atualizar(Jogador jogador);
+
+  default List<Jogador> artilharia() {
+    final List<Jogador> jogadores = jogadores();
+    jogadores.sort(Comparator.comparingInt(Jogador::totalDeGolsMarcados));
+    return jogadores;
+  }
 
 }

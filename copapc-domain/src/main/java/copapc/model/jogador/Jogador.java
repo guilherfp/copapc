@@ -1,10 +1,14 @@
 package copapc.model.jogador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.Validate;
 
+import copapc.model.jogo.Gol;
 import copapc.model.time.Time;
 
-public class Jogador {
+public class Jogador implements Comparable<Jogador> {
 
   private int id;
   private String nome;
@@ -12,6 +16,7 @@ public class Jogador {
   private int pontuacao;
   private Posicao posicao;
   private Time time;
+  private List<Gol> golsMarcados = new ArrayList<>();
 
   Jogador() {}
 
@@ -69,6 +74,14 @@ public class Jogador {
     this.time = time;
   }
 
+  public void adicionarGol(Gol gol) {
+    golsMarcados.add(gol);
+  }
+
+  public int totalDeGolsMarcados() {
+    return golsMarcados.size();
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -102,6 +115,11 @@ public class Jogador {
   @Override
   public String toString() {
     return nome;
+  }
+
+  @Override
+  public int compareTo(Jogador o) {
+    return nome.compareTo(o.nome);
   }
 
 }

@@ -12,4 +12,8 @@ public class Td extends Container {
     this();
     getElement().setInnerText(text);
   }
+
+  public Td(Object object) {
+    this(object.toString());
+  }
 }

@@ -6,22 +6,59 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 import org.joda.time.LocalDateTime;
 
+import copapc.model.campeonato.Campeonato;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 
 public class Jogo {
 
+  private LocalDateTime inicio;
+  private LocalDateTime encerramento;
   private Time mandante;
   private Time visitante;
   private LocalDateTime horario;
-  private List<Jogador> jogadoresMarcaramQueGol = new ArrayList<>();
+  private List<Gol> gols = new ArrayList<>();
+  private final Campeonato campeonato;
 
-  public Jogo(Time mandante, Time visitante) {
+  public Jogo(Time mandante, Time visitante, Campeonato campeonato) {
     visitante(visitante);
     mandante(mandante);
+    Validate.notNull(campeonato);
+    this.campeonato = campeonato;
   }
 
-  public Time ganhador() {
+  public Campeonato campeonato() {
+    return campeonato;
+  }
+
+  public void iniciar() {
+    inicio = new LocalDateTime();
+  }
+
+  public void encerrar() {
+    encerramento = new LocalDateTime();
+  }
+
+  public LocalDateTime inicio() {
+    return inicio;
+  }
+
+  public LocalDateTime encerramento() {
+    return encerramento;
+  }
+
+  private boolean encerrado() {
+    return encerramento != null;
+  }
+
+  public Gol adicionarGol(Jogador jogador) {
+    Validate.isTrue(encerrado() == false, "Jogo já foi encerrado");
+    final Gol gol = new Gol(jogador, jogador.time(), this);
+    gols.add(gol);
+    return gol;
+  }
+
+  public Time vencedor() {
     int golsMandante = totalDeGolsDoMandante();
     int golsVisitante = totalDeGolsDoVisitante();
     if (golsMandante > golsVisitante) {
@@ -39,6 +76,7 @@ public class Jogo {
 
   public void mandante(Time mandante) {
     Validate.notNull(mandante, "Time mandante inválido");
+    Validate.isTrue(mandante.equals(visitante) == false, "Time inválido");
     this.mandante = mandante;
   }
 
@@ -47,7 +85,8 @@ public class Jogo {
   }
 
   public void visitante(Time visitante) {
-    Validate.notNull(mandante, "Time visitante inválido");
+    Validate.notNull(visitante, "Time visitante inválido");
+    Validate.isTrue(visitante.equals(mandante) == false, "Time inválido");
     this.visitante = visitante;
   }
 
@@ -61,11 +100,15 @@ public class Jogo {
   }
 
   public int totalDeGolsDoMandante() {
-    return (int) jogadoresMarcaramQueGol.stream().filter(j -> j.time().equals(mandante)).count();
+    return (int) gols.stream().filter(j -> j.time().equals(mandante)).count();
   }
 
   public int totalDeGolsDoVisitante() {
-    return (int) jogadoresMarcaramQueGol.stream().filter(j -> j.time().equals(visitante)).count();
+    return (int) gols.stream().filter(j -> j.time().equals(visitante)).count();
+  }
+
+  public int totalDeGols() {
+    return totalDeGolsDoMandante() + totalDeGolsDoVisitante();
   }
 
   @Override
@@ -116,7 +159,15 @@ public class Jogo {
 
   @Override
   public String toString() {
-    return String.format("%s X %s, horário: %s", mandante, visitante, horario.toString("dd/MM/yy HH:mm"));
+    return String.format("%s X %s, horário: %s", mandante, visitante, horarioFormatado());
+  }
+
+  public String horarioFormatado() {
+    if (horario != null) {
+      return horario.toString("dd/MM/yy HH:mm");
+    } else {
+      return "Não de definido";
+    }
   }
 
 }

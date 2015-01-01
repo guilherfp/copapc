@@ -3,7 +3,7 @@ package copapc.web.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import copapc.web.client.ui.components.tabela.Classificacao;
+import copapc.web.client.ui.MainView;
 
 public class CopaPC implements EntryPoint {
 
@@ -12,7 +12,7 @@ public class CopaPC implements EntryPoint {
 
   @Override
   public void onModuleLoad() {
-    RootPanel.get("main").add(new Classificacao());
+    RootPanel.get("main").add(new MainView());
   }
 
 }

@@ -1,0 +1,105 @@
+.tabela-pontos {
+  font-family: 'opensans-regular';
+}
+
+.tabela-pontos th {
+  padding: 0 16px;
+}
+
+.tabela-pontos thead {
+  color: gray;
+  font-size: 14px;
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  border-left-width: 0;
+  border-right-width: 0;
+  font-weight: normal;
+}
+
+.tabela-pontos tbody tr {
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.tabela-nome-time {
+  padding: 0 10px;
+}
+
+.tabela-nome-time:HOVER {
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabela-body-linha {
+  vertical-align: middle;
+  height: 40px;
+}
+
+.tabela-body-linha td {
+  padding: 0 16px;
+}
+
+.tabela-body-linha td:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+.coluna-colocacao {
+  color: #999;
+  padding-left: 10px;
+  font-size: 28px;
+  width: 45px;
+}
+
+.coluna-colocacao-vazia {
+  border-top-width: 0;
+  border-top: 1px solid #fff;
+}
+
+.artilheiro-posicao {
+  color: #999;
+  display: block;
+  font-family: arial;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.artilheiro-nome {
+  color: #333;
+  display: inline-block;
+  font-size: 20px;
+  letter-spacing: -1px;
+  vertical-align: middle;
+}
+
+.artilheiros {
+  font-family: 'opensans-regular';
+  width: 100%;
+}
+
+.artilheiros td {
+  border-top: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.artilheiro-gols {
+  color: #333;
+  font-family: 'opensans-bold';
+  font-size: 26px;
+}
+
+.coluna-gols {
+  padding-right: 20px;
+  text-align: right;
+  width: 18%;
+}
+
+.artilheiros-linha-corpo {
+  height: 58px;
+}
