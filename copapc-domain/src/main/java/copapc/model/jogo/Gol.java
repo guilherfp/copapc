@@ -22,26 +22,26 @@ public class Gol {
     this.jogador = jogador;
     this.time = time;
     this.jogo = jogo;
-    numero = jogo.totalDeGols() + 1;
+    numero = jogo.getTotalDeGols() + 1;
   }
 
-  public int minuto() {
+  public int getMinuto() {
     return minuto;
   }
 
-  public int numero() {
+  public int getNumero() {
     return numero;
   }
 
-  public Jogador jogador() {
+  public Jogador getJogador() {
     return jogador;
   }
 
-  public Time time() {
+  public Time getTime() {
     return time;
   }
 
-  public Jogo jogo() {
+  public Jogo getJogo() {
     return jogo;
   }
 

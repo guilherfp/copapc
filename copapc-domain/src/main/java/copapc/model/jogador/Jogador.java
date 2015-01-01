@@ -7,10 +7,10 @@ import org.apache.commons.lang3.Validate;
 
 import copapc.model.jogo.Gol;
 import copapc.model.time.Time;
+import copapc.shared.Entity;
 
-public class Jogador implements Comparable<Jogador> {
+public class Jogador extends Entity implements Comparable<Jogador> {
 
-  private int id;
   private String nome;
   private String email;
   private int pontuacao;
@@ -21,55 +21,51 @@ public class Jogador implements Comparable<Jogador> {
   Jogador() {}
 
   public Jogador(String nome, String email) {
-    email(email);
-    nome(nome);
+    setEmail(email);
+    setNome(nome);
   }
 
-  int id() {
-    return id;
-  }
-
-  public String nome() {
+  public String getNome() {
     return nome;
   }
 
-  public void nome(String nome) {
+  public void setNome(String nome) {
     Validate.notBlank(nome, "Nome inválido");
     this.nome = nome;
   }
 
-  public String email() {
+  public String getEmail() {
     return email;
   }
 
-  public void email(String email) {
+  public void setEmail(String email) {
     Validate.notBlank(email, "Nome inválido");
     this.email = email;
   }
 
-  public int pontuacao() {
+  public int getPontuacao() {
     return pontuacao;
   }
 
-  public void pontuacao(int pontuacao) {
+  public void setPontuacao(int pontuacao) {
     Validate.isTrue(pontuacao > 0, "Pontuação inválida");
     this.pontuacao = pontuacao;
   }
 
-  public Posicao posicao() {
+  public Posicao getPosicao() {
     return posicao;
   }
 
-  public void posicao(Posicao posicao) {
+  public void setPosicao(Posicao posicao) {
     Validate.notNull(posicao, "Posição inválida");
     this.posicao = posicao;
   }
 
-  public Time time() {
+  public Time getTime() {
     return time;
   }
 
-  public void time(Time time) {
+  public void setTime(Time time) {
     Validate.notNull(time, "Time inválido");
     this.time = time;
   }
@@ -78,7 +74,7 @@ public class Jogador implements Comparable<Jogador> {
     golsMarcados.add(gol);
   }
 
-  public int totalDeGolsMarcados() {
+  public int getTotalDeGolsMarcados() {
     return golsMarcados.size();
   }
 

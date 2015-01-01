@@ -40,7 +40,7 @@ public class CampeonatoTest {
     Modalidade modalidade = new PorGrupoEMataMata(5, campeonato);
     campeonato.iniciarCampeonato(modalidade);
     for (Entry<Jogo, Fase> jogo : campeonato.jogos().entrySet()) {
-      final Jogador jogador = jogo.getKey().mandante().jogadores().iterator().next();
+      final Jogador jogador = jogo.getKey().getMandante().getJogadores().iterator().next();
       jogo.getKey().adicionarGol(jogador);
       System.out.println(jogo + " " + jogo.getValue());
     }

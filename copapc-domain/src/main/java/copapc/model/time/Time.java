@@ -19,7 +19,7 @@ public class Time implements Comparable<Time> {
   Time() {}
 
   public Time(int numero, String nome) {
-    nome(nome);
+    setNome(nome);
     Validate.isTrue(numero > 0, "Número do time inválido");
     this.numero = numero;
   }
@@ -28,11 +28,11 @@ public class Time implements Comparable<Time> {
     this(numero, "Time " + numero);
   }
 
-  public int numero() {
+  public int getNumero() {
     return numero;
   }
 
-  public String nome() {
+  public String getNome() {
     return nome;
   }
 
@@ -40,31 +40,31 @@ public class Time implements Comparable<Time> {
     return cor;
   }
 
-  public void cor(String cor) {
+  public void setCor(String cor) {
     Validate.notBlank(cor, "Cor inválida");
     this.cor = cor;
   }
 
-  public void nome(String nome) {
+  public void setNome(String nome) {
     Validate.notBlank(nome, "Nome inválido");
     this.nome = nome;
   }
 
-  public Set<Jogador> jogadores() {
+  public Set<Jogador> getJogadores() {
     return Collections.unmodifiableSet(jogadores);
   }
 
   public void adicionarJogador(Jogador jogador) {
     Validate.notNull(jogador, "Jogador inválido");
     jogadores.add(jogador);
-    jogador.time(this);
+    jogador.setTime(this);
   }
 
-  public Jogador responsavel() {
+  public Jogador getResponsavel() {
     return responsavel;
   }
 
-  public void responsavel(Jogador responsavel) {
+  public void setResponsavel(Jogador responsavel) {
     Validate.notNull(responsavel, "Responsável inválido");
     this.responsavel = responsavel;
   }

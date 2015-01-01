@@ -1,0 +1,12 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd"
+  updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+
+  <defaultCache maxElementsInMemory="1000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" />
+
+  <cache name="br.com.devsource.domain.model.produto.Produto" maxElementsInMemory="1000" eternal="false"
+    timeToIdleSeconds="300" timeToLiveSeconds="28800" />
+
+  <cache name="br.com.devsource.pdv.domain.model.campanhadebrinde.CampanhaDeBrinde" maxElementsInMemory="100"
+    eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="28800" />
+
+</ehcache>

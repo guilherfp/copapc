@@ -59,7 +59,7 @@ public class PorGrupoEMataMata extends Modalidade {
   }
 
   private Time getTimePorNumero(final int numero) {
-    final Optional<Time> find = grupos.keySet().stream().filter(t -> t.numero() == numero).findFirst();
+    final Optional<Time> find = grupos.keySet().stream().filter(t -> t.getNumero() == numero).findFirst();
     return find.orElseThrow(() -> new RuntimeException("Jogos não pode ser gerado"));
   }
 

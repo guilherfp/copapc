@@ -21,13 +21,13 @@ public class Jogo {
   private final Campeonato campeonato;
 
   public Jogo(Time mandante, Time visitante, Campeonato campeonato) {
-    visitante(visitante);
-    mandante(mandante);
+    setVisitante(visitante);
+    setMandante(mandante);
     Validate.notNull(campeonato);
     this.campeonato = campeonato;
   }
 
-  public Campeonato campeonato() {
+  public Campeonato getCampeonato() {
     return campeonato;
   }
 
@@ -39,28 +39,28 @@ public class Jogo {
     encerramento = new LocalDateTime();
   }
 
-  public LocalDateTime inicio() {
+  public LocalDateTime getInicio() {
     return inicio;
   }
 
-  public LocalDateTime encerramento() {
+  public LocalDateTime getEncerramento() {
     return encerramento;
   }
 
-  private boolean encerrado() {
+  private boolean isEncerrado() {
     return encerramento != null;
   }
 
   public Gol adicionarGol(Jogador jogador) {
-    Validate.isTrue(encerrado() == false, "Jogo já foi encerrado");
-    final Gol gol = new Gol(jogador, jogador.time(), this);
+    Validate.isTrue(isEncerrado() == false, "Jogo já foi encerrado");
+    final Gol gol = new Gol(jogador, jogador.getTime(), this);
     gols.add(gol);
     return gol;
   }
 
-  public Time vencedor() {
-    int golsMandante = totalDeGolsDoMandante();
-    int golsVisitante = totalDeGolsDoVisitante();
+  public Time getVencedor() {
+    int golsMandante = getTotalDeGolsDoMandante();
+    int golsVisitante = getTotalDeGolsDoVisitante();
     if (golsMandante > golsVisitante) {
       return mandante;
     } else if (golsVisitante > golsMandante) {
@@ -70,45 +70,45 @@ public class Jogo {
     }
   }
 
-  public Time mandante() {
+  public Time getMandante() {
     return mandante;
   }
 
-  public void mandante(Time mandante) {
+  public void setMandante(Time mandante) {
     Validate.notNull(mandante, "Time mandante inválido");
     Validate.isTrue(mandante.equals(visitante) == false, "Time inválido");
     this.mandante = mandante;
   }
 
-  public Time visitante() {
+  public Time getVisitante() {
     return visitante;
   }
 
-  public void visitante(Time visitante) {
+  public void setVisitante(Time visitante) {
     Validate.notNull(visitante, "Time visitante inválido");
     Validate.isTrue(visitante.equals(mandante) == false, "Time inválido");
     this.visitante = visitante;
   }
 
-  public LocalDateTime horario() {
+  public LocalDateTime getHorario() {
     return horario;
   }
 
-  public void horario(LocalDateTime horario) {
+  public void setHorario(LocalDateTime horario) {
     Validate.notNull(horario, "Horário do jogo inválido");
     this.horario = horario;
   }
 
-  public int totalDeGolsDoMandante() {
-    return (int) gols.stream().filter(j -> j.time().equals(mandante)).count();
+  public int getTotalDeGolsDoMandante() {
+    return (int) gols.stream().filter(j -> j.getTime().equals(mandante)).count();
   }
 
-  public int totalDeGolsDoVisitante() {
-    return (int) gols.stream().filter(j -> j.time().equals(visitante)).count();
+  public int getTotalDeGolsDoVisitante() {
+    return (int) gols.stream().filter(j -> j.getTime().equals(visitante)).count();
   }
 
-  public int totalDeGols() {
-    return totalDeGolsDoMandante() + totalDeGolsDoVisitante();
+  public int getTotalDeGols() {
+    return getTotalDeGolsDoMandante() + getTotalDeGolsDoVisitante();
   }
 
   @Override
