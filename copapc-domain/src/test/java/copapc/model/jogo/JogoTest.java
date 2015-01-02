@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import copapc.model.campeonato.Campeonato;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 
@@ -19,11 +18,10 @@ public class JogoTest {
   private Time visitante = new Time(2);
   private List<Jogador> jogadoresMandante = new ArrayList<>();
   private List<Jogador> jogadoresVisitante = new ArrayList<>();
-  private Campeonato campeonato = new Campeonato("CPC");
 
   @Before
   public void setUp() throws Exception {
-    jogo = new Jogo(mandante, visitante, campeonato);
+    jogo = new Jogo(mandante, visitante);
     for (int i = 0; i < 5; i++) {
       final Jogador jogadorMandante = new Jogador("Nome " + i, i + "@email.com");
       jogadoresMandante.add(jogadorMandante);

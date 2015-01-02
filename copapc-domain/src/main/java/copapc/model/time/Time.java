@@ -1,6 +1,7 @@
 package copapc.model.time;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,8 +42,8 @@ public class Time extends Entity implements Comparable<Time> {
     this.nome = nome;
   }
 
-  public Set<Jogador> getJogadores() {
-    return Collections.unmodifiableSet(jogadores);
+  public Collection<Jogador> getJogadores() {
+    return new ArrayList<>(jogadores);
   }
 
   public void adicionarJogador(Jogador jogador) {

@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 import org.joda.time.LocalDateTime;
 
-import copapc.model.campeonato.Campeonato;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
@@ -19,17 +18,10 @@ public class Jogo extends Entity {
   private Time visitante;
   private LocalDateTime horario;
   private List<Gol> gols = new ArrayList<>();
-  private final Campeonato campeonato;
 
-  public Jogo(Time mandante, Time visitante, Campeonato campeonato) {
+  public Jogo(Time mandante, Time visitante) {
     setVisitante(visitante);
     setMandante(mandante);
-    Validate.notNull(campeonato);
-    this.campeonato = campeonato;
-  }
-
-  public Campeonato getCampeonato() {
-    return campeonato;
   }
 
   public void iniciar() {
@@ -160,10 +152,10 @@ public class Jogo extends Entity {
 
   @Override
   public String toString() {
-    return String.format("%s X %s, horário: %s", mandante, visitante, horarioFormatado());
+    return String.format("%s X %s, horário: %s", mandante, visitante, getHorarioFormatado());
   }
 
-  public String horarioFormatado() {
+  public String getHorarioFormatado() {
     if (horario != null) {
       return horario.toString("dd/MM/yy HH:mm");
     } else {

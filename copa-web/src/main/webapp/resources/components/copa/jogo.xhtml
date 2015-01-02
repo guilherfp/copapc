@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://java.sun.com/jsf/composite"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html">
+
+<composite:interface>
+  <composite:attribute name="jogo" required="true" type="copapc.model.jogo.Jogo" />
+</composite:interface>
+
+<composite:implementation>
+  <table style="width: 100%;">
+    <tbody>
+      <tr style="font-weight: bold; font-size: 14px;">
+        <td style="text-align: center;">#{cc.attrs.jogo.mandante.nome}</td>
+        <td style="text-align: center; font-size: 24px">#{cc.attrs.jogo.totalDeGolsDoMandante}</td>
+        <td style="font-weight: bolder; font-size: 20px; text-align: center;">X</td>
+        <td style="text-align: center; font-size: 24px">#{cc.attrs.jogo.totalDeGolsDoVisitante}</td>
+        <td style="text-align: center;">#{cc.attrs.jogo.visitante.nome}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" style="text-align: center;">
+          <h:outputText value="#{cc.attrs.jogo.horarioFormatado}" />
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</composite:implementation>
+
+</html>

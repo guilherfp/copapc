@@ -16,6 +16,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>copapc</groupId>
+      <artifactId>copapc-infrastructure</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>com.sun.faces</groupId>
       <artifactId>jsf-api</artifactId>
     </dependency>
@@ -43,9 +48,9 @@
       <version>3.0.1</version>
     </dependency>
     <dependency>
-      <groupId>copapc</groupId>
-      <artifactId>copapc-infrastructure</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
   </dependencies>
 
