@@ -12,6 +12,7 @@
 
   <artifactId>copa-web</artifactId>
   <packaging>war</packaging>
+
   <name>CopaPC</name>
 
   <dependencies>
