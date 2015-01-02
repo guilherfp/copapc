@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <class name="copapc.model.jogo.Jogo" entity-name="Jogo" table="jogo">
+    <cache usage="read-only" />
+
+    <id name="id" column="id" unsaved-value="none">
+      <generator class="org.hibernate.id.IdentityGenerator" />
+    </id>
+
+    <property name="inicio">
+      <column name="inicio" not-null="true" />
+      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
+    </property>
+
+    <property name="encerramento">
+      <column name="encerramento" not-null="true" />
+      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
+    </property>
+
+    <property name="horario">
+      <column name="horario" not-null="true" />
+      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
+    </property>
+
+    <many-to-one name="mandante" entity-name="Time" foreign-key="fk_jogo_time_mandante">
+      <column name="mandante_id" not-null="true" />
+    </many-to-one>
+
+    <many-to-one name="visitante" entity-name="Time" foreign-key="fk_jogo_time_visitante">
+      <column name="visitante_id" not-null="true" />
+    </many-to-one>
+
+    <bag name="gols" table="jogo_gols">
+      <key foreign-key="fk_jogo_gols_jogo">
+        <column name="jogo_id" not-null="true" unique-key="uk_jogo_gol" />
+      </key>
+      <many-to-many entity-name="Gol" foreign-key="fk_jogo_gol">
+        <column name="gol_id" not-null="true" unique-key="uk_jogo_gol" />
+      </many-to-many>
+    </bag>
+
+  </class>
+</hibernate-mapping>

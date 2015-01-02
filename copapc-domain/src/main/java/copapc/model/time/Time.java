@@ -7,14 +7,14 @@ import java.util.Set;
 import org.apache.commons.lang3.Validate;
 
 import copapc.model.jogador.Jogador;
+import copapc.shared.Entity;
 
-public class Time implements Comparable<Time> {
+public class Time extends Entity implements Comparable<Time> {
 
   private int numero;
   private String nome;
   private Set<Jogador> jogadores = new HashSet<>();
   private Jogador responsavel;
-  private String cor;
 
   Time() {}
 
@@ -34,15 +34,6 @@ public class Time implements Comparable<Time> {
 
   public String getNome() {
     return nome;
-  }
-
-  public String cor() {
-    return cor;
-  }
-
-  public void setCor(String cor) {
-    Validate.notBlank(cor, "Cor inválida");
-    this.cor = cor;
   }
 
   public void setNome(String nome) {

@@ -9,8 +9,9 @@ import org.joda.time.LocalDateTime;
 import copapc.model.campeonato.Campeonato;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
+import copapc.shared.Entity;
 
-public class Jogo {
+public class Jogo extends Entity {
 
   private LocalDateTime inicio;
   private LocalDateTime encerramento;

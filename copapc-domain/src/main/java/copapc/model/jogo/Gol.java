@@ -4,8 +4,9 @@ import org.apache.commons.lang3.Validate;
 
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
+import copapc.shared.Entity;
 
-public class Gol {
+public class Gol extends Entity {
 
   private int minuto;
   private int numero;
@@ -49,6 +50,7 @@ public class Gol {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = (prime * result) + ((jogo == null) ? 0 : jogo.hashCode());
     result = (prime * result) + numero;
     return result;
   }
@@ -65,6 +67,13 @@ public class Gol {
       return false;
     }
     Gol other = (Gol) obj;
+    if (jogo == null) {
+      if (other.jogo != null) {
+        return false;
+      }
+    } else if (!jogo.equals(other.jogo)) {
+      return false;
+    }
     if (numero != other.numero) {
       return false;
     }

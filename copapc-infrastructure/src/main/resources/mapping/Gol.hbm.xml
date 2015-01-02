@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <class name="copapc.model.jogo.Gol" entity-name="Gol" table="gol">
+    <cache usage="read-only" />
+
+    <id name="id" column="id" unsaved-value="none">
+      <generator class="org.hibernate.id.IdentityGenerator" />
+    </id>
+
+    <property name="numero">
+      <column name="numero" not-null="true" unique-key="uk_gol" />
+    </property>
+
+    <many-to-one name="jogador" entity-name="Jogador" foreign-key="fk_gol_jogador">
+      <column name="jogador_id" not-null="true" unique-key="uk_gol" />
+    </many-to-one>
+
+    <many-to-one name="time" entity-name="Time" foreign-key="fk_gol_time">
+      <column name="time_id" not-null="true" unique-key="uk_gol" />
+    </many-to-one>
+
+    <many-to-one name="jogo" entity-name="Jogo" foreign-key="fk_gol_jogo">
+      <column name="jogo_id" not-null="true" unique-key="uk_gol" />
+    </many-to-one>
+
+  </class>
+</hibernate-mapping>
