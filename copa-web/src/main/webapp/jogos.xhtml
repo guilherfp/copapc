@@ -4,9 +4,23 @@
   template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
   <ui:define name="content">
-    <ui:repeat var="jogo" value="#{jogoMB.jogos}">
-      <copa:jogo jogo="#{jogo}" />
-    </ui:repeat>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2>Jogos</h2>
+            <hr />
+          </div>
+          <div class="col-lg-12">
+            <ul class="lista-de-jogos-conteudo">
+              <ui:repeat var="jogo" value="#{jogoMB.jogos}">
+                <copa:jogo jogo="#{jogo}" />
+              </ui:repeat>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </ui:define>
 
 </ui:composition>

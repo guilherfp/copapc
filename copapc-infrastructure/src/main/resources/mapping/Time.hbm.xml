@@ -18,11 +18,19 @@
       <column name="numero" not-null="true" unique-key="uk_numero_time" />
     </property>
 
-    <many-to-one name="responsavel" entity-name="Jogador" foreign-key="fk_time_responsavel">
+    <property name="url">
+      <column name="url" length="50" unique-key="uk_url_time" />
+    </property>
+
+    <property name="sigla">
+      <column name="sigla" length="3" unique-key="uk_sigla_time" />
+    </property>
+
+    <many-to-one name="responsavel" entity-name="Jogador" foreign-key="fk_time_responsavel" lazy="false">
       <column name="responsavel_id" />
     </many-to-one>
 
-    <set name="jogadores" table="time_jogadores">
+    <set name="jogadores" table="time_jogadores" lazy="false">
       <key foreign-key="fk_time_jogador">
         <column name="time_id" not-null="true" unique-key="uk_jogador_time" />
       </key>

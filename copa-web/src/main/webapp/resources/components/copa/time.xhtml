@@ -9,17 +9,21 @@
 </composite:interface>
 
 <composite:implementation>
-  <h:dataTable value="#{cc.attrs.time.jogadores}" var="jogador" style="width: 100%;">
+  <h2>
+    <h:outputText value="#{cc.attrs.time.nome}" />
+  </h2>
+  <h5>
+    Responsável:
+    <h:outputText value="#{cc.attrs.time.responsavel}" />
+  </h5>
+  <h:dataTable value="#{cc.attrs.time.jogadores}" var="jogador"
+    styleClass="table table-striped table-hover table-condensed">
     <h:column>
-      <f:facet name="header">
-        Nome
-      </f:facet>
+      <f:facet name="header">Nome</f:facet>
       <h:outputText value="#{jogador.nome}" />
     </h:column>
     <h:column>
-      <f:facet name="header">
-        Posição
-      </f:facet>
+      <f:facet name="header">Posição</f:facet>
       <h:outputText value="#{jogador.posicao}" />
     </h:column>
   </h:dataTable>

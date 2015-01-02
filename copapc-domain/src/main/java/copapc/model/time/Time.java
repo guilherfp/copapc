@@ -9,6 +9,7 @@ import org.apache.commons.lang3.Validate;
 
 import copapc.model.jogador.Jogador;
 import copapc.shared.Entity;
+import copapc.util.UrlUtil;
 
 public class Time extends Entity implements Comparable<Time> {
 
@@ -16,6 +17,8 @@ public class Time extends Entity implements Comparable<Time> {
   private String nome;
   private Set<Jogador> jogadores = new HashSet<>();
   private Jogador responsavel;
+  private String url;
+  private String sigla;
 
   Time() {}
 
@@ -40,6 +43,7 @@ public class Time extends Entity implements Comparable<Time> {
   public void setNome(String nome) {
     Validate.notBlank(nome, "Nome inválido");
     this.nome = nome;
+    url = UrlUtil.formatURL(nome);
   }
 
   public Collection<Jogador> getJogadores() {
@@ -59,6 +63,19 @@ public class Time extends Entity implements Comparable<Time> {
   public void setResponsavel(Jogador responsavel) {
     Validate.notNull(responsavel, "Responsável inválido");
     this.responsavel = responsavel;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public String getSigla() {
+    return sigla;
+  }
+
+  public void setSigla(String sigla) {
+    Validate.notNull(sigla, "Sigla inválida");
+    this.sigla = sigla;
   }
 
   @Override

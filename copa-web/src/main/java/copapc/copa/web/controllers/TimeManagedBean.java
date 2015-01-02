@@ -1,29 +1,46 @@
 package copapc.copa.web.controllers;
 
-import javax.faces.bean.ManagedBean;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
-import copapc.model.jogador.Jogador;
-import copapc.model.jogador.Posicao;
+import copapc.model.jogo.Jogo;
+import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
+import copapc.model.time.TimeRepository;
 
-@ManagedBean(name = "timeMB")
+// @ManagedBean(name = "timeMB")
+@Scope("request")
 @Controller("timeMB")
-public class TimeManagedBean {
+public class TimeManagedBean extends AbstractManagedBean {
 
-  private Jogador getJogador(int numero) {
-    final Jogador jogador = new Jogador("Jogador " + numero, numero + "@email.com.br");
-    jogador.setPosicao(Posicao.ALA);
-    return jogador;
-  }
+  private static final String TIME = "time";
+  @Autowired
+  private TimeRepository timeRepository;
+  @Autowired
+  private JogoRepository jogoRepository;
 
+  private Time time;
+  private List<Jogo> jogos;
+
+  @Transactional
   public Time getTime() {
-    final Time time = new Time(1, "Bartira FC");
-    for (int numero = 1; numero <= 10; numero++) {
-      time.adicionarJogador(getJogador(numero));
+    if (time == null) {
+      final String timeUrl = getURLParameterValue(TIME);
+      time = timeRepository.comURL(timeUrl);
     }
     return time;
+  }
+
+  @Transactional
+  public List<Jogo> getJogos() {
+    if (jogos == null) {
+      jogos = jogoRepository.jogos(getTime());
+    }
+    return jogos;
   }
 
 }

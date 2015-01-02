@@ -8,4 +8,6 @@ public interface TimeRepository {
 
   Time comNumero(int numero);
 
+  Time comURL(String url);
+
 }

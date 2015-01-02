@@ -44,4 +44,12 @@
 
   <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
+  <bean id="timeRepository" class="copapc.infrastructure.time.TimeRepositoryImpl">
+    <constructor-arg name="factory" ref="sessionFactory" />
+  </bean>
+
+  <bean id="jogoRepository" class="copapc.infrastructure.jogo.JogoRepositoryImpl">
+    <constructor-arg name="factory" ref="sessionFactory" />
+  </bean>
+
 </beans>

@@ -1,14 +1,7 @@
-/* Global Styles */
-html, body {
-  height: 100%;
-}
-
-body {
-  padding-top: 50px; /* body padding for fixed top nav */
-}
-
-.img-home-portfolio, .img-customer, .portfolio-item {
-  margin-bottom: 30px;
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
 }
 
 .tab-pane {
@@ -36,7 +29,8 @@ body {
 
 /* Half Page Height Carousel Customization */
 .carousel {
-  height: 50%;
+  height: 30%;
+  background-color: #eee;
 }
 
 .item, .active, .carousel-inner {
@@ -101,14 +95,157 @@ body {
   font-style: italic;
 }
 
-/* Footer Styles */
-footer {
-  margin: 50px 0;
-}
-
 /* Responsive Styles */
 @media ( max-width : 767px) {
   .carousel {
-    height: 70%; /* increases the carousel height so it looks good on phones */
+    height: 30%; /* increases the carousel height so it looks good on phones */
   }
+}
+
+.carousel-img {
+  display: block;
+  margin: auto;
+  padding-top: 15px;
+}
+
+.lista-de-jogos-conteudo {
+  opacity: 1;
+  transition: opacity .35s;
+}
+
+.lista-de-jogos-conteudo {
+  list-style: none;
+}
+
+.lista-de-jogos-item {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.placar-jogo {
+  padding-bottom: 0px;
+  padding-top: 18px;
+  text-align: center;
+  font-family: verdana;
+  padding-top: 18px;
+}
+
+.placar-jogo-informacoes {
+  color: #666;
+  font-family: verdana;
+  font-size: 10px;
+  letter-spacing: -.3px;
+  text-transform: uppercase;
+}
+
+.placar-jogo-equipes {
+  color: #333;
+  display: table;
+  font-size: 18px;
+  padding: 5px 0 0px;
+  width: 100%;
+}
+
+.placar-jogo-equipes-item {
+  display: table-cell;
+  height: 30px;
+  vertical-align: middle;
+  width: 35%;
+}
+
+.placar-jogo-equipes-mandante {
+  text-align: right;
+}
+
+.placar-jogo-equipes-visitante {
+  text-align: left;
+}
+
+.placar-jogo-equipes-placar {
+  font-size: 24px;
+  font-weight: 900;
+  width: 30%;
+}
+
+.tabela-icone-versus {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.placar-jogo-equipes-placar-mandante, .placar-jogo-equipes-placar-visitante {
+  font-size: 21px;
+}
+
+.placar-jogo-equipes-sigla, .placar-jogo-equipes-nome {
+  line-height: 20px;
+  max-width: 100%;
+}
+
+@media ( min-width : 450px) {
+  .placar-jogo-equipes-nome {
+    display: inline-block
+  }
+  .placar-jogo-equipes-sigla {
+    display: none
+  }
+}
+
+@media ( max-width : 450px) {
+  .placar-jogo-equipes-nome {
+    display: none
+  }
+  .placar-jogo-equipes-sigla {
+    display: inline-block
+  }
+}
+
+.tabela-pontos {
+  width: 100%;
+}
+
+.tabela-pontos th {
+  padding: 0 16px;
+}
+
+.tabela-pontos thead {
+  color: gray;
+  font-size: 14px;
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  border-left-width: 0;
+  border-right-width: 0;
+  font-weight: normal;
+}
+
+.tabela-pontos tbody tr {
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.tabela-nome-time {
+  padding: 0 10px;
+}
+
+.tabela-nome-time:HOVER {
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabela-body-linha {
+  vertical-align: middle;
+  height: 40px;
+}
+
+.tabela-body-linha td {
+  padding: 0 16px;
+}
+
+.tabela-body-linha td:nth-child(odd) {
+  background-color: #f5f5f5;
 }

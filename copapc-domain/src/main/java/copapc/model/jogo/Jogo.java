@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
-import org.joda.time.LocalDateTime;
+import org.joda.time.DateTime;
 
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
@@ -12,12 +12,14 @@ import copapc.shared.Entity;
 
 public class Jogo extends Entity {
 
-  private LocalDateTime inicio;
-  private LocalDateTime encerramento;
+  private DateTime inicio;
+  private DateTime encerramento;
+  private DateTime horario;
   private Time mandante;
   private Time visitante;
-  private LocalDateTime horario;
   private List<Gol> gols = new ArrayList<>();
+
+  Jogo() {}
 
   public Jogo(Time mandante, Time visitante) {
     setVisitante(visitante);
@@ -25,18 +27,18 @@ public class Jogo extends Entity {
   }
 
   public void iniciar() {
-    inicio = new LocalDateTime();
+    inicio = DateTime.now();
   }
 
   public void encerrar() {
-    encerramento = new LocalDateTime();
+    encerramento = DateTime.now();
   }
 
-  public LocalDateTime getInicio() {
+  public DateTime getInicio() {
     return inicio;
   }
 
-  public LocalDateTime getEncerramento() {
+  public DateTime getEncerramento() {
     return encerramento;
   }
 
@@ -83,11 +85,11 @@ public class Jogo extends Entity {
     this.visitante = visitante;
   }
 
-  public LocalDateTime getHorario() {
+  public DateTime getHorario() {
     return horario;
   }
 
-  public void setHorario(LocalDateTime horario) {
+  public void setHorario(DateTime horario) {
     Validate.notNull(horario, "Horário do jogo inválido");
     this.horario = horario;
   }
@@ -157,7 +159,7 @@ public class Jogo extends Entity {
 
   public String getHorarioFormatado() {
     if (horario != null) {
-      return horario.toString("dd/MM/yy HH:mm");
+      return horario.toString("E dd/MM/yy HH:mm");
     } else {
       return "Não de definido";
     }

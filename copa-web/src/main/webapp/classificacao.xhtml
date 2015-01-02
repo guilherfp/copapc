@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+
+  <ui:define name="content">
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2>Classificação</h2>
+            <hr />
+          </div>
+          <div class="col-lg-12">
+            <h:dataTable styleClass="tabela-pontos">
+              <h:column>
+                <f:facet name="header">Time</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">P</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">J</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">V</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">E</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">D</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">GP</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">GC</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">SG</f:facet>
+              </h:column>
+              <h:column>
+                <f:facet name="header">%</f:facet>
+              </h:column>
+            </h:dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ui:define>
+
+</ui:composition>

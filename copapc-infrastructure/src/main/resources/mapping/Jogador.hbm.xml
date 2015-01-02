@@ -19,7 +19,16 @@
     </property>
 
     <property name="pontuacao">
-      <column name="pontuacao" length="1" />
+      <column name="pontuacao" not-null="true" length="1" default="0" />
+    </property>
+
+    <property name="posicao">
+      <column name="posicao" length="20" not-null="false" />
+      <type name="org.hibernate.type.EnumType">
+        <param name="useNamed">true</param>
+        <param name="enumClass">copapc.model.jogador.Posicao</param>
+        <param name="type">12</param>
+      </type>
     </property>
 
   </class>

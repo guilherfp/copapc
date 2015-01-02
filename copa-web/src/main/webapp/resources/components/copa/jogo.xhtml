@@ -9,24 +9,40 @@
 </composite:interface>
 
 <composite:implementation>
-  <table style="width: 100%;">
-    <tbody>
-      <tr style="font-weight: bold; font-size: 14px;">
-        <td style="text-align: center;">#{cc.attrs.jogo.mandante.nome}</td>
-        <td style="text-align: center; font-size: 24px">#{cc.attrs.jogo.totalDeGolsDoMandante}</td>
-        <td style="font-weight: bolder; font-size: 20px; text-align: center;">X</td>
-        <td style="text-align: center; font-size: 24px">#{cc.attrs.jogo.totalDeGolsDoVisitante}</td>
-        <td style="text-align: center;">#{cc.attrs.jogo.visitante.nome}</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="5" style="text-align: center;">
-          <h:outputText value="#{cc.attrs.jogo.horarioFormatado}" />
-        </td>
-      </tr>
-    </tfoot>
-  </table>
+  <li class="lista-de-jogos-item">
+    <div class="placar-jogo">
+      <div class="placar-jogo-informacoes">
+        <h:outputText value="#{cc.attrs.jogo.horarioFormatado}" />
+      </div>
+      <div class="placar-jogo-equipes">
+        <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
+          <span class="placar-jogo-equipes-sigla">
+            <h:outputText value="#{cc.attrs.jogo.mandante.sigla}" title="#{cc.attrs.jogo.mandante.nome}" />
+          </span>
+          <span class="placar-jogo-equipes-nome">
+            <h:outputText value="#{cc.attrs.jogo.mandante.nome}" title="#{cc.attrs.jogo.mandante.nome}" />
+          </span>
+        </span>
+        <span class="placar-jogo-equipes-item placar-jogo-equipes-placar">
+          <span class="placar-jogo-equipes-placar-mandante">
+            <h:outputText value="#{cc.attrs.jogo.totalDeGolsDoMandante}" />
+          </span>
+          <span class="tabela-icone-versus">X</span>
+          <span class="placar-jogo-equipes-placar-visitante">
+            <h:outputText value="#{cc.attrs.jogo.totalDeGolsDoVisitante}" />
+          </span>
+        </span>
+        <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+          <span class="placar-jogo-equipes-sigla">
+            <h:outputText value="#{cc.attrs.jogo.visitante.sigla}" title="#{cc.attrs.jogo.visitante.nome}" />
+          </span>
+          <span class="placar-jogo-equipes-nome">
+            <h:outputText value="#{cc.attrs.jogo.visitante.nome}" title="#{cc.attrs.jogo.visitante.nome}" />
+          </span>
+        </span>
+      </div>
+    </div>
+  </li>
 </composite:implementation>
 
 </html>

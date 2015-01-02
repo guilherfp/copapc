@@ -15,7 +15,15 @@
 
   <name>CopaPC</name>
 
+  <properties>
+    <rewrite.servlet.version>2.0.11.Final</rewrite.servlet.version>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>copapc</groupId>
+      <artifactId>copapc-domain</artifactId>
+    </dependency>
     <dependency>
       <groupId>copapc</groupId>
       <artifactId>copapc-infrastructure</artifactId>
@@ -52,6 +60,16 @@
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ocpsoft.rewrite</groupId>
+      <artifactId>rewrite-servlet</artifactId>
+      <version>${rewrite.servlet.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ocpsoft.rewrite</groupId>
+      <artifactId>rewrite-config-prettyfaces</artifactId>
+      <version>${rewrite.servlet.version}</version>
     </dependency>
   </dependencies>
 

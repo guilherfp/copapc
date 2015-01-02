@@ -10,30 +10,30 @@
       <generator class="org.hibernate.id.IdentityGenerator" />
     </id>
 
-    <property name="inicio">
-      <column name="inicio" not-null="true" />
-      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
-    </property>
-
-    <property name="encerramento">
-      <column name="encerramento" not-null="true" />
-      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
-    </property>
-
     <property name="horario">
       <column name="horario" not-null="true" />
       <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
     </property>
 
-    <many-to-one name="mandante" entity-name="Time" foreign-key="fk_jogo_time_mandante">
+    <many-to-one name="mandante" entity-name="Time" foreign-key="fk_jogo_time_mandante" lazy="false">
       <column name="mandante_id" not-null="true" />
     </many-to-one>
 
-    <many-to-one name="visitante" entity-name="Time" foreign-key="fk_jogo_time_visitante">
+    <many-to-one name="visitante" entity-name="Time" foreign-key="fk_jogo_time_visitante" lazy="false">
       <column name="visitante_id" not-null="true" />
     </many-to-one>
 
-    <bag name="gols" table="jogo_gols">
+    <property name="inicio">
+      <column name="inicio" not-null="false" />
+      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
+    </property>
+
+    <property name="encerramento">
+      <column name="encerramento" not-null="false" />
+      <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
+    </property>
+
+    <bag name="gols" table="jogo_gols" lazy="false">
       <key foreign-key="fk_jogo_gols_jogo">
         <column name="jogo_id" not-null="true" unique-key="uk_jogo_gol" />
       </key>
