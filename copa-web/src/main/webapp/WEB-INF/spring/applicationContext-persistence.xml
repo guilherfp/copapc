@@ -52,4 +52,8 @@
     <constructor-arg name="factory" ref="sessionFactory" />
   </bean>
 
+  <bean id="jogadorRepository" class="copapc.infrastructure.jogador.JogadorRepositoryImpl">
+    <constructor-arg name="factory" ref="sessionFactory" />
+  </bean>
+
 </beans>

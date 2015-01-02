@@ -16,12 +16,14 @@
       </div>
       <div class="placar-jogo-equipes">
         <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
-          <span class="placar-jogo-equipes-sigla">
-            <h:outputText value="#{cc.attrs.jogo.mandante.sigla}" title="#{cc.attrs.jogo.mandante.nome}" />
-          </span>
-          <span class="placar-jogo-equipes-nome">
-            <h:outputText value="#{cc.attrs.jogo.mandante.nome}" title="#{cc.attrs.jogo.mandante.nome}" />
-          </span>
+          <a href="#{request.contextPath}/time/#{cc.attrs.jogo.mandante.url}">
+            <span class="placar-jogo-equipes-sigla">
+              <h:outputText value="#{cc.attrs.jogo.mandante.sigla}" title="#{cc.attrs.jogo.mandante.nome}" />
+            </span>
+            <span class="placar-jogo-equipes-nome">
+              <h:outputText value="#{cc.attrs.jogo.mandante.nome}" title="#{cc.attrs.jogo.mandante.nome}" />
+            </span>
+          </a>
         </span>
         <span class="placar-jogo-equipes-item placar-jogo-equipes-placar">
           <span class="placar-jogo-equipes-placar-mandante">
@@ -32,14 +34,16 @@
             <h:outputText value="#{cc.attrs.jogo.totalDeGolsDoVisitante}" />
           </span>
         </span>
-        <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
-          <span class="placar-jogo-equipes-sigla">
-            <h:outputText value="#{cc.attrs.jogo.visitante.sigla}" title="#{cc.attrs.jogo.visitante.nome}" />
+        <a href="#{request.contextPath}/time/#{cc.attrs.jogo.visitante.url}">
+          <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+            <span class="placar-jogo-equipes-sigla">
+              <h:outputText value="#{cc.attrs.jogo.visitante.sigla}" title="#{cc.attrs.jogo.visitante.nome}" />
+            </span>
+            <span class="placar-jogo-equipes-nome">
+              <h:outputText value="#{cc.attrs.jogo.visitante.nome}" title="#{cc.attrs.jogo.visitante.nome}" />
+            </span>
           </span>
-          <span class="placar-jogo-equipes-nome">
-            <h:outputText value="#{cc.attrs.jogo.visitante.nome}" title="#{cc.attrs.jogo.visitante.nome}" />
-          </span>
-        </span>
+        </a>
       </div>
     </div>
   </li>

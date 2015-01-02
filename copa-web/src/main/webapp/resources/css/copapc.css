@@ -29,8 +29,8 @@ ul {
 
 /* Half Page Height Carousel Customization */
 .carousel {
-  height: 30%;
-  background-color: #eee;
+  height: 250px;
+  background-color: #ddd;
 }
 
 .item, .active, .carousel-inner {

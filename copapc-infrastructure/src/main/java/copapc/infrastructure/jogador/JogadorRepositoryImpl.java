@@ -19,7 +19,8 @@ public class JogadorRepositoryImpl extends HibernateRepository implements Jogado
   @Override
   @SuppressWarnings("unchecked")
   public List<Jogador> jogadores() {
-    return getSession().createCriteria(Jogador.class).list();
+    final Query query = getSession().createQuery("from Jogador order by nome");
+    return query.list();
   }
 
   @SuppressWarnings("unchecked")

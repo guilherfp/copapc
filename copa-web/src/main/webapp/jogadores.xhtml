@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+
+  <ui:define name="content">
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2>Jogadores</h2>
+            <hr />
+          </div>
+          <div class="col-lg-12">
+            <h:dataTable value="#{jogadorMB.jogadores}" var="jodador"
+              styleClass="table table-striped table-hover table-condensed">
+              <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{jodador.nome}" />
+              </h:column>
+              <h:column>
+                <f:facet name="header">E-mail</f:facet>
+                <h:outputText value="#{jodador.email}" />
+              </h:column>
+              <h:column>
+                <f:facet name="header">Pontuação</f:facet>
+                <h:outputText value="#{jodador.pontuacao}" />
+              </h:column>
+              <h:column>
+                <f:facet name="header">Posição</f:facet>
+                <h:outputText value="#{jodador.posicao}" />
+              </h:column>
+            </h:dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ui:define>
+
+</ui:composition>
