@@ -8,6 +8,7 @@ import copapc.model.time.Time;
 import copapc.shared.Entity;
 
 public class Gol extends Entity {
+  private static final long serialVersionUID = 1L;
 
   private int minuto;
   private int numero;

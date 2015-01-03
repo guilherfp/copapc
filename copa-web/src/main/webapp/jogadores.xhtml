@@ -16,27 +16,27 @@
             <hr />
           </div>
           <div class="col-lg-12">
-            <h:dataTable value="#{jogadorMB.jogadores}" var="jodador"
+            <h:dataTable value="#{jogadorMB.jogadores}" var="jogador"
               styleClass="table table-striped table-hover table-condensed">
               <h:column>
                 <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{jodador.nome}" />
+                <h:outputText value="#{jogador.nome}" />
               </h:column>
               <h:column>
                 <f:facet name="header">E-mail</f:facet>
-                <h:outputText value="#{jodador.email}" />
+                <h:outputText value="#{jogador.email}" />
               </h:column>
               <h:column>
                 <f:facet name="header">Pontuação</f:facet>
-                <h:outputText value="#{jodador.pontuacao}" />
+                <h:outputText value="#{jogador.pontuacao}" />
               </h:column>
               <h:column>
                 <f:facet name="header">Posição</f:facet>
-                <h:outputText value="#{jodador.posicao}" />
+                <h:outputText value="#{jogador.posicao}" />
               </h:column>
               <h:column>
                 <f:facet name="header">Gols</f:facet>
-                <h:outputText value="#{jodador.totalDeGols}" />
+                <h:outputText value="#{jogador.totalDeGols}" />
               </h:column>
             </h:dataTable>
           </div>

@@ -1,5 +1,6 @@
 package copapc.copa.web.controllers;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,8 @@ import copapc.model.jogo.JogoRepository;
 // @ManagedBean(name = "jogoMB")
 @Scope("request")
 @Controller("jogoMB")
-public class JogoManagedBean {
+public class JogoManagedBean implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   @Autowired
   private JogoRepository jogoRepository;

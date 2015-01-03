@@ -3,10 +3,16 @@
 
   <defaultCache maxElementsInMemory="1000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" />
 
-  <cache name="br.com.devsource.domain.model.produto.Produto" maxElementsInMemory="1000" eternal="false"
-    timeToIdleSeconds="300" timeToLiveSeconds="28800" />
+  <cache name="copapc.model.jogador.Jogador" maxElementsInMemory="200" eternal="false" timeToIdleSeconds="3000"
+    timeToLiveSeconds="28800" />
 
-  <cache name="br.com.devsource.pdv.domain.model.campanhadebrinde.CampanhaDeBrinde" maxElementsInMemory="100"
-    eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="28800" />
+  <cache name="copapc.model.time.Time" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="3000"
+    timeToLiveSeconds="28800" />
+
+  <cache name="copapc.model.jogo.Jogo" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="3000"
+    timeToLiveSeconds="28800" />
+
+  <cache name="copapc.model.gol.Gol" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="3000"
+    timeToLiveSeconds="28800" />
 
 </ehcache>

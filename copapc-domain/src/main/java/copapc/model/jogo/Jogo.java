@@ -11,6 +11,7 @@ import copapc.model.time.Time;
 import copapc.shared.Entity;
 
 public class Jogo extends Entity {
+  private static final long serialVersionUID = 1L;
 
   private DateTime inicio;
   private DateTime encerramento;

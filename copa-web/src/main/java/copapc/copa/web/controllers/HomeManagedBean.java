@@ -1,5 +1,6 @@
 package copapc.copa.web.controllers;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import copapc.model.time.TimeRepository;
 
 // @ManagedBean(name = "homeMB")
 @Controller("homeMB")
-public class HomeManagedBean {
+public class HomeManagedBean implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   @Autowired
   private TimeRepository timeRepository;

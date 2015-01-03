@@ -19,4 +19,6 @@ public interface JogadorRepository {
     return jogadores;
   }
 
+  void salvar(Jogador jogador);
+
 }

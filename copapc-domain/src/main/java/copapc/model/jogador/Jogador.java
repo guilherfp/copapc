@@ -10,6 +10,7 @@ import copapc.model.time.Time;
 import copapc.shared.Entity;
 
 public class Jogador extends Entity implements Comparable<Jogador> {
+  private static final long serialVersionUID = 1L;
 
   private String nome;
   private String email;
@@ -48,7 +49,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public void setPontuacao(int pontuacao) {
-    Validate.isTrue(pontuacao > 0, "Pontuação inválida");
+    Validate.isTrue(pontuacao >= 0, "Pontuação inválida");
     this.pontuacao = pontuacao;
   }
 
@@ -57,7 +58,6 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public void setPosicao(Posicao posicao) {
-    Validate.notNull(posicao, "Posição inválida");
     this.posicao = posicao;
   }
 

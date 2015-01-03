@@ -70,29 +70,9 @@ ul {
   color: #d14836;
 }
 
-/* Service Page Styles */
-.service-icon {
-  font-size: 50px;
-}
-
 /* 404 Page Styles */
 .error-404 {
   font-size: 8em;
-}
-
-/* Pricing Page Styles */
-.price {
-  font-size: 4em;
-}
-
-.price-cents {
-  vertical-align: super;
-  font-size: 50%;
-}
-
-.price-month {
-  font-size: 35%;
-  font-style: italic;
 }
 
 /* Responsive Styles */
@@ -248,4 +228,27 @@ ul {
 
 .tabela-body-linha td:nth-child(odd) {
   background-color: #f5f5f5;
+}
+
+#back-to-top {
+  position: fixed;
+  right: 7px;
+  bottom: 7px;
+  z-index: 9999;
+  width: 45px;
+  height: 45px;
+  display: block;
+  background: #222;
+  font-size: 16px;
+  text-align: center;
+  line-height: 45px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#back-to-top:hover {
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.45);
 }

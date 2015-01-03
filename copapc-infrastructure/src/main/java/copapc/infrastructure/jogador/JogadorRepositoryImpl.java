@@ -35,7 +35,12 @@ public class JogadorRepositoryImpl extends HibernateRepository implements Jogado
 
   @Override
   public void atualizar(Jogador jogador) {
-    getSession().update(jogador);
+    getSession().update("Jogador", jogador);
+  }
+
+  @Override
+  public void salvar(Jogador jogador) {
+    getSession().save("Jogador", jogador);
   }
 
 }

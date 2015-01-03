@@ -1,8 +1,11 @@
 package copapc.copa.web.controllers;
 
+import java.io.Serializable;
+
 import javax.faces.context.FacesContext;
 
-public abstract class AbstractManagedBean {
+public abstract class AbstractManagedBean implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   protected static FacesContext getContext() {
     return FacesContext.getCurrentInstance();

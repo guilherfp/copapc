@@ -6,6 +6,7 @@
     <groupId>copapc</groupId>
     <artifactId>copapc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../copapc/pom.xml</relativePath>
   </parent>
 
   <artifactId>copapc-infrastructure</artifactId>

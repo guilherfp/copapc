@@ -10,16 +10,17 @@
 
   <title>Copa PC <ui:insert name="title">Home</ui:insert></title>
 
-  <h:outputStylesheet name="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
   <h:outputStylesheet name="css/copapc.css" />
-  <h:outputStylesheet name="font-awesome/css/font-awesome.min.css" />
   <link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/favicon.ico" />
 
   <ui:insert name="header" />
 </h:head>
 
 <h:body>
-
+  <a id="back-to-top" href="#">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">

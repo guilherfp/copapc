@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="author" content="guilherfp@gmail.com" />
 
   <title>Admin Copa PC</title>
@@ -13,6 +13,14 @@
 </h:head>
 
 <h:body>
-  <ui:insert name="content" />
+  <p:menubar>
+    <p:menuitem value="Jogador" url="/adm/cadastro/jogador.jsf" />
+    <p:menuitem value="Time" url="/adm/cadastro/time.jsf" />
+    <p:menuitem value="Jogos" url="/adm/cadastro/jogos.jsf" />
+    <f:facet name="options">
+      <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+    </f:facet>
+  </p:menubar>
+  <ui:insert name="content">Main Content</ui:insert>
 </h:body>
 </html>

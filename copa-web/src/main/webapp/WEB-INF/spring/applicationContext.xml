@@ -13,4 +13,8 @@
     <constructor-arg name="golRepository" ref="golRepository" />
   </bean>
 
+  <bean id="jogadorService" class="copapc.service.jogador.JogadorService">
+    <constructor-arg name="jogadorRepository" ref="jogadorRepository" />
+  </bean>
+
 </beans>

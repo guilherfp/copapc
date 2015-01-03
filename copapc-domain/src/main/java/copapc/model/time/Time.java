@@ -12,6 +12,7 @@ import copapc.shared.Entity;
 import copapc.util.UrlUtil;
 
 public class Time extends Entity implements Comparable<Time> {
+  private static final long serialVersionUID = 1L;
 
   private int numero;
   private String nome;
