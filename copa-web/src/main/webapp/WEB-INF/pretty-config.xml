@@ -27,6 +27,11 @@
     <pattern value="/regulamento" />
     <view-id value="/regulamento.jsf" />
   </url-mapping>
+  
+  <url-mapping id="local">
+    <pattern value="/local" />
+    <view-id value="/local.jsf" />
+  </url-mapping>
 
   <url-mapping id="jogadores">
     <pattern value="/jogadores" />

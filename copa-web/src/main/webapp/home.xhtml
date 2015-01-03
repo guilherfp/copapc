@@ -4,65 +4,10 @@
   template="/WEB-INF/templates/template.xhtml">
 
   <ui:define name="body">
-    <div id="myCarousel" class="carousel slide" style="margin-top: 50px;">
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <div class="fill">
-            <a href="http://www.pcsist.com.br/" target="_blank">
-              <h:graphicImage library="images" name="pc-sistemas.png" styleClass="carousel-img img-responsive" />
-            </a>
-          </div>
-          <div class="carousel-caption">
-            <h2>PC Sistemas</h2>
-          </div>
-        </div>
-        <div class="item">
-          <div class="fill">
-            <a href="http://www.maximasistemas.com.br/" target="_blank">
-              <h:graphicImage library="images" name="maxima.png" styleClass="carousel-img img-responsive" />
-            </a>
-          </div>
-          <div class="carousel-caption">
-            <h2>Máxima Sistemas</h2>
-          </div>
-        </div>
-        <div class="item">
-          <div class="fill">
-            <a href="http://maisdados.com.br/" target="_blank">
-              <h:graphicImage library="images" name="mais-dados.png" styleClass="carousel-img img-responsive" />
-            </a>
-          </div>
-          <div class="carousel-caption">
-            <h2>Mais Dados</h2>
-          </div>
-        </div>
-        <div class="item">
-          <div class="fill">
-            <a href="http://www.reposit.com.br/" target="_blank">
-              <h:graphicImage library="images" name="reposit.png" styleClass="carousel-img img-responsive" />
-            </a>
-          </div>
-          <div class="carousel-caption">
-            <h2>Reposit</h2>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="icon-prev"></span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="icon-next"></span>
-      </a>
-    </div>
   </ui:define>
 
   <ui:define name="content">
+    <h:graphicImage library="images" name="banner_copapc.png" styleClass="img-responsive" style="margin-top: 50px;" />
     <div class="section">
       <div class="container">
         <div class="row">
@@ -74,12 +19,28 @@
         </div>
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2>Localização</h2>
+            <h2>Patrocinadores</h2>
             <hr />
           </div>
-          <div class="col-lg-12">
-            <iframe width="100%" height="350px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-              src="http://maps.google.com/maps?hl=pt&amp;q=-16.641116,-49.247772&amp;t=h&amp;z=15&amp;output=embed"></iframe>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <a href="http://www.reposit.com.br/" target="_blank">
+              <h:graphicImage library="images/patrocinadores" name="reposit.png" styleClass="img-responsive" />
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <a href="http://www.pcsist.com.br/" target="_blank">
+              <h:graphicImage library="images/patrocinadores" name="pc-sistemas.png" styleClass="img-responsive" />
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <a href="http://www.maximasistemas.com.br/" target="_blank">
+              <h:graphicImage library="images/patrocinadores" name="maxima.png" styleClass="img-responsive" />
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <a href="http://maisdados.com.br/" target="_blank">
+              <h:graphicImage library="images/patrocinadores" name="mais-dados.png" styleClass="img-responsive" />
+            </a>
           </div>
         </div>
       </div>
