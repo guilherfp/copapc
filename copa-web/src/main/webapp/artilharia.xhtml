@@ -12,7 +12,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2>Jogadores</h2>
+            <h2>Artilharia</h2>
             <hr />
           </div>
           <div class="col-lg-12">
@@ -23,16 +23,19 @@
                 <h:outputText value="#{jodador.nome}" />
               </h:column>
               <h:column>
-                <f:facet name="header">E-mail</f:facet>
-                <h:outputText value="#{jodador.email}" />
+                <f:facet name="header">Time</f:facet>
+                <a href="#{request.contextPath}/time/#{jodador.time.url}">
+                  <span class="placar-jogo-equipes-sigla">
+                    <h:outputText value="#{jodador.time.sigla}" title="#{jodador.time.sigla}" />
+                  </span>
+                  <span class="placar-jogo-equipes-nome">
+                    <h:outputText value="#{jodador.time.nome}" title="#{jodador.time.nome}" />
+                  </span>
+                </a>
               </h:column>
               <h:column>
-                <f:facet name="header">Pontuação</f:facet>
-                <h:outputText value="#{jodador.pontuacao}" />
-              </h:column>
-              <h:column>
-                <f:facet name="header">Posição</f:facet>
-                <h:outputText value="#{jodador.posicao}" />
+                <f:facet name="header">Gols</f:facet>
+                <h:outputText value="#{jodador.totalDeGols}" style="font-weight: bold;" />
               </h:column>
             </h:dataTable>
           </div>

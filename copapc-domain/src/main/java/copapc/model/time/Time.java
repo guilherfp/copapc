@@ -19,6 +19,7 @@ public class Time extends Entity implements Comparable<Time> {
   private Jogador responsavel;
   private String url;
   private String sigla;
+  private Time time;
 
   Time() {}
 
@@ -63,6 +64,10 @@ public class Time extends Entity implements Comparable<Time> {
   public void setResponsavel(Jogador responsavel) {
     Validate.notNull(responsavel, "Responsável inválido");
     this.responsavel = responsavel;
+  }
+
+  public Time getTime() {
+    return time;
   }
 
   public String getUrl() {
@@ -110,7 +115,7 @@ public class Time extends Entity implements Comparable<Time> {
 
   @Override
   public String toString() {
-    return nome;
+    return String.format("%s (%S)", nome, sigla);
   }
 
   @Override

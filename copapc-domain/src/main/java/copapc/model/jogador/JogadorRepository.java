@@ -15,7 +15,7 @@ public interface JogadorRepository {
 
   default List<Jogador> artilharia() {
     final List<Jogador> jogadores = jogadores();
-    jogadores.sort(Comparator.comparingInt(Jogador::getTotalDeGols));
+    jogadores.sort(Comparator.comparingInt(Jogador::getTotalDeGols).reversed());
     return jogadores;
   }
 

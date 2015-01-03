@@ -22,6 +22,10 @@
       <column name="pontuacao" not-null="true" length="1" default="0" />
     </property>
 
+    <many-to-one name="time" entity-name="Time" foreign-key="fk_time_jogador" lazy="false">
+      <column name="time_id" not-null="false" />
+    </many-to-one>
+
     <property name="posicao">
       <column name="posicao" length="20" not-null="false" />
       <type name="org.hibernate.type.EnumType">

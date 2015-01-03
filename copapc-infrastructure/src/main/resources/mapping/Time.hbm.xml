@@ -30,13 +30,9 @@
       <column name="responsavel_id" />
     </many-to-one>
 
-    <set name="jogadores" table="time_jogadores" lazy="false">
-      <key foreign-key="fk_time_jogador">
-        <column name="time_id" not-null="true" unique-key="uk_jogador_time" />
-      </key>
-      <many-to-many entity-name="Jogador" foreign-key="fk_time_jogador" order-by="nome">
-        <column name="jogador_id" not-null="true" unique-key="uk_jogador_time" />
-      </many-to-many>
+    <set name="jogadores" table="time_jogadores" inverse="true" lazy="false">
+      <key column="time_id" />
+      <one-to-many entity-name="Jogador" />
     </set>
 
   </class>

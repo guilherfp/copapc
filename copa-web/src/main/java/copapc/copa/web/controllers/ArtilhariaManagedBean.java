@@ -19,7 +19,7 @@ public class ArtilhariaManagedBean {
   private JogadorRepository jogadorRepository;
 
   @Transactional
-  public List<Jogador> artilheiros() {
+  public List<Jogador> getArtilheiros() {
     return jogadorRepository.artilharia();
   }
 
