@@ -23,6 +23,7 @@ public class Time extends Entity implements Comparable<Time> {
   private String url;
   private String sigla;
   private Time time;
+  private char grupo = ' ';
 
   Time() {}
 
@@ -96,6 +97,14 @@ public class Time extends Entity implements Comparable<Time> {
 
   private Optional<Jogador> artilheiro() {
     return getJogadores().stream().max(Comparator.comparingInt(Jogador::getTotalDeGols));
+  }
+
+  public char getGrupo() {
+    return Character.toUpperCase(grupo);
+  }
+
+  public void setGrupo(char grupo) {
+    this.grupo = grupo;
   }
 
   @Override

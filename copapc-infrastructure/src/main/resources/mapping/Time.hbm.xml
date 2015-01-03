@@ -26,6 +26,10 @@
       <column name="sigla" length="3" unique-key="uk_sigla_time" />
     </property>
 
+    <property name="grupo">
+      <column name="grupo" length="1" />
+    </property>
+
     <many-to-one name="responsavel" entity-name="Jogador" foreign-key="fk_time_responsavel" lazy="false">
       <column name="responsavel_id" />
     </many-to-one>

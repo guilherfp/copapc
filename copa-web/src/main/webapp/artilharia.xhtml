@@ -25,6 +25,9 @@
               <h:column>
                 <f:facet name="header">Time</f:facet>
                 <a href="#{request.contextPath}/time/#{jodador.time.url}">
+                  <span>
+                    <h:graphicImage library="images/time" name="#{jodador.time.url}.png" styleClass="escudo" />
+                  </span>
                   <span class="placar-jogo-equipes-sigla">
                     <h:outputText value="#{jodador.time.sigla}" title="#{jodador.time.sigla}" />
                   </span>

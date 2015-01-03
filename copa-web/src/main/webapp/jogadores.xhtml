@@ -15,7 +15,7 @@
             <h2>Jogadores</h2>
             <hr />
           </div>
-          <div class="col-lg-12">
+          <div class="col-lg-12 table-responsive">
             <h:dataTable value="#{jogadorMB.jogadores}" var="jogador"
               styleClass="table table-striped table-hover table-condensed">
               <h:column>
@@ -24,7 +24,9 @@
               </h:column>
               <h:column>
                 <f:facet name="header">E-mail</f:facet>
-                <h:outputText value="#{jogador.email}" />
+                <a href="mailto:#{jogador.email}" target="_top">
+                  <h:outputText value="#{jogador.email}" />
+                </a>
               </h:column>
               <h:column>
                 <f:facet name="header">Pontuação</f:facet>
@@ -33,10 +35,6 @@
               <h:column>
                 <f:facet name="header">Posição</f:facet>
                 <h:outputText value="#{jogador.posicao}" />
-              </h:column>
-              <h:column>
-                <f:facet name="header">Gols</f:facet>
-                <h:outputText value="#{jogador.totalDeGols}" />
               </h:column>
             </h:dataTable>
           </div>

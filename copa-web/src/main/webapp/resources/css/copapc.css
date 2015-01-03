@@ -107,16 +107,11 @@ ul {
 }
 
 .lista-de-jogos-item {
-  padding-bottom: 15px;
-  border-bottom: 1px solid #e3e3e3;
 }
 
 .placar-jogo {
-  padding-bottom: 0px;
-  padding-top: 18px;
   text-align: center;
   font-family: verdana;
-  padding-top: 18px;
 }
 
 .placar-jogo-informacoes {
