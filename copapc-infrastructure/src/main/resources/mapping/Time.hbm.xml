@@ -34,7 +34,7 @@
       <key foreign-key="fk_time_jogador">
         <column name="time_id" not-null="true" unique-key="uk_jogador_time" />
       </key>
-      <many-to-many entity-name="Jogador" foreign-key="fk_time_jogador">
+      <many-to-many entity-name="Jogador" foreign-key="fk_time_jogador" order-by="nome">
         <column name="jogador_id" not-null="true" unique-key="uk_jogador_time" />
       </many-to-many>
     </set>

@@ -8,6 +8,31 @@
     <view-id value="/home.jsf" />
   </url-mapping>
 
+  <url-mapping id="jogos">
+    <pattern value="/jogos" />
+    <view-id value="/jogos.jsf" />
+  </url-mapping>
+
+  <url-mapping id="classificacao">
+    <pattern value="/classificacao" />
+    <view-id value="/classificacao.jsf" />
+  </url-mapping>
+
+  <url-mapping id="regulamento">
+    <pattern value="/regulamento" />
+    <view-id value="/regulamento.jsf" />
+  </url-mapping>
+
+  <url-mapping id="jogadores">
+    <pattern value="/jogadores" />
+    <view-id value="/jogadores.jsf" />
+  </url-mapping>
+
+  <url-mapping id="artilharia">
+    <pattern value="/artilharia" />
+    <view-id value="/artilharia.jsf" />
+  </url-mapping>
+
   <url-mapping id="campeonato-view">
     <pattern value="/time/#{time}" />
     <view-id value="/time.jsf" />

@@ -3,7 +3,7 @@
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-  <class name="copapc.model.jogo.Gol" entity-name="Gol" table="gol">
+  <class name="copapc.model.gol.Gol" entity-name="Gol" table="gol">
     <cache usage="read-only" />
 
     <id name="id" column="id" unsaved-value="none">

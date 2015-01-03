@@ -3,41 +3,34 @@ package copapc.service.jogo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import copapc.model.gol.Gol;
+import copapc.model.gol.GolRepository;
 import copapc.model.jogador.Jogador;
-import copapc.model.jogador.JogadorRepository;
-import copapc.model.jogo.Gol;
 import copapc.model.jogo.Jogo;
 
 public class JogoService {
 
-  private JogadorRepository jogadorRepository;
-  // private CampeonatoRepository campeonatoRepository;
+  private final GolRepository golRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(JogoService.class);
 
-  public void marcarGol(Jogador jogador, Jogo jogo) {
-    final Gol gol = jogo.adicionarGol(jogador);
+  public JogoService(GolRepository golRepository) {
+    this.golRepository = golRepository;
+  }
+
+  public void marcarGol(final Jogador jogador, final Jogo jogo) {
+    final Gol gol = new Gol(jogador, jogo);
+    jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
-    jogadorRepository.atualizar(jogador);
+    golRepository.salvar(gol);
     LOGGER.info("Gol marcado: {}", gol);
   }
 
   public void iniciarJogo(Jogo jogo) {
     jogo.iniciar();
-    // jogoRepository.atualizar(jogo);
   }
 
   public void encerrarJogo(Jogo jogo) {
     jogo.encerrar();
-    // jogoRepository.atualizar(jogo);
   }
-
-  public void setJogadorRepository(JogadorRepository jogadorRepository) {
-    this.jogadorRepository = jogadorRepository;
-  }
-
-  // public void setJogoRepository(JogoRepository jogoRepository) {
-  // this.jogoRepository = jogoRepository;
-  // }
-
 }

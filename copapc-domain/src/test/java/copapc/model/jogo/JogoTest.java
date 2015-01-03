@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import copapc.model.gol.Gol;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 
@@ -35,19 +36,19 @@ public class JogoTest {
   @Test
   public void testAdicionarGol() throws Exception {
     assertEquals(0, jogo.getTotalDeGols());
-    jogo.adicionarGol(jogadoresMandante.get(0));
+    jogo.adicionarGol(new Gol(jogadoresMandante.get(0), jogo));
     assertEquals(1, jogo.getTotalDeGols());
     assertEquals(mandante, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
     assertEquals(0, jogo.getTotalDeGolsDoVisitante());
 
-    jogo.adicionarGol(jogadoresVisitante.get(0));
+    jogo.adicionarGol(new Gol(jogadoresVisitante.get(0), jogo));
     assertEquals(2, jogo.getTotalDeGols());
     assertEquals(null, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
     assertEquals(1, jogo.getTotalDeGolsDoVisitante());
 
-    jogo.adicionarGol(jogadoresVisitante.get(0));
+    jogo.adicionarGol(new Gol(jogadoresVisitante.get(0), jogo));
     assertEquals(3, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());

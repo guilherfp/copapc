@@ -31,5 +31,10 @@
       </type>
     </property>
 
+    <bag name="gols" inverse="true" lazy="false">
+      <key column="jogador_id" />
+      <one-to-many entity-name="Gol" />
+    </bag>
+
   </class>
 </hibernate-mapping>

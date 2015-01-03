@@ -3,6 +3,10 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
   template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
+  <ui:define name="title">
+    <h:outputText value="- Artilharia" />
+  </ui:define>
+
   <ui:define name="content">
     <div class="section">
       <div class="container">
@@ -12,7 +16,7 @@
             <hr />
           </div>
           <div class="col-lg-12">
-            <h:dataTable value="#{jogadorMB.jogadores}" var="jodador"
+            <h:dataTable value="#{artilhariaMB.artilheiros}" var="jodador"
               styleClass="table table-striped table-hover table-condensed">
               <h:column>
                 <f:facet name="header">Nome</f:facet>

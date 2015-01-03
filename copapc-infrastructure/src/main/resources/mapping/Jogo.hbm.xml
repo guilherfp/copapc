@@ -33,13 +33,9 @@
       <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
     </property>
 
-    <bag name="gols" table="jogo_gols" lazy="false">
-      <key foreign-key="fk_jogo_gols_jogo">
-        <column name="jogo_id" not-null="true" unique-key="uk_jogo_gol" />
-      </key>
-      <many-to-many entity-name="Gol" foreign-key="fk_jogo_gol">
-        <column name="gol_id" not-null="true" unique-key="uk_jogo_gol" />
-      </many-to-many>
+    <bag name="gols" inverse="true" lazy="false">
+      <key column="jogo_id" />
+      <one-to-many entity-name="Gol" />
     </bag>
 
   </class>

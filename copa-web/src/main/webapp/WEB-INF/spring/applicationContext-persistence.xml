@@ -56,4 +56,8 @@
     <constructor-arg name="factory" ref="sessionFactory" />
   </bean>
 
+  <bean id="golRepository" class="copapc.infrastructure.gol.GolRepositoryImpl">
+    <constructor-arg name="factory" ref="sessionFactory" />
+  </bean>
+
 </beans>

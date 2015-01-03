@@ -1,8 +1,9 @@
-package copapc.model.jogo;
+package copapc.model.gol;
 
 import org.apache.commons.lang3.Validate;
 
 import copapc.model.jogador.Jogador;
+import copapc.model.jogo.Jogo;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
@@ -16,13 +17,12 @@ public class Gol extends Entity {
 
   Gol() {}
 
-  public Gol(Jogador jogador, Time time, Jogo jogo) {
+  public Gol(final Jogador jogador, final Jogo jogo) {
     Validate.notNull(jogador);
-    Validate.notNull(time);
     Validate.notNull(jogo);
     this.jogador = jogador;
-    this.time = time;
     this.jogo = jogo;
+    time = jogador.getTime();
     numero = jogo.getTotalDeGols() + 1;
   }
 

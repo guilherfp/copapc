@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 import org.joda.time.DateTime;
 
-import copapc.model.jogador.Jogador;
+import copapc.model.gol.Gol;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
@@ -46,9 +46,8 @@ public class Jogo extends Entity {
     return encerramento != null;
   }
 
-  public Gol adicionarGol(Jogador jogador) {
+  public Gol adicionarGol(Gol gol) {
     Validate.isTrue(isEncerrado() == false, "Jogo já foi encerrado");
-    final Gol gol = new Gol(jogador, jogador.getTime(), this);
     gols.add(gol);
     return gol;
   }

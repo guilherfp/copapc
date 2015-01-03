@@ -98,7 +98,7 @@ ul {
 /* Responsive Styles */
 @media ( max-width : 767px) {
   .carousel {
-    height: 30%; /* increases the carousel height so it looks good on phones */
+    height: 150px; /* increases the carousel height so it looks good on phones */
   }
 }
 

@@ -2,6 +2,8 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,7 @@ import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
 
-// @ManagedBean(name = "timeMB")
+@ManagedBean(name = "timeMB")
 @Scope("request")
 @Controller("timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
@@ -25,6 +27,7 @@ public class TimeManagedBean extends AbstractManagedBean {
 
   private Time time;
   private List<Jogo> jogos;
+  private List<Time> times;
 
   @Transactional
   public Time getTime() {
@@ -41,6 +44,14 @@ public class TimeManagedBean extends AbstractManagedBean {
       jogos = jogoRepository.jogos(getTime());
     }
     return jogos;
+  }
+
+  @Transactional
+  public List<Time> getTimes() {
+    if (times == null) {
+      times = timeRepository.times();
+    }
+    return times;
   }
 
 }

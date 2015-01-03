@@ -20,7 +20,8 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
   @Override
   @SuppressWarnings("unchecked")
   public List<Time> times() {
-    return getSession().createCriteria(Time.class).list();
+    final Query query = getSession().createQuery("from Time order by nome");
+    return query.list();
   }
 
   @Override

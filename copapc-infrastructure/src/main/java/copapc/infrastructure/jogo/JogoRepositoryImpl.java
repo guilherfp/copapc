@@ -21,13 +21,16 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
   @Override
   @SuppressWarnings("unchecked")
   public List<Jogo> jogos() {
-    return getSession().createCriteria(Jogo.class).list();
+    final String queryString = "from Jogo order by horario";
+    final Query query = getSession().createQuery(queryString);
+    return query.list();
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public List<Jogo> jogos(Time time) {
-    final Query query = getSession().createQuery("from Jogo where mandante = :time or visitante = :time");
+    final String queryString = "from Jogo where mandante = :time or visitante = :time order by horario";
+    final Query query = getSession().createQuery(queryString);
     query.setParameter("time", time);
     return query.list();
   }

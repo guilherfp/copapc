@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 
-import copapc.model.jogo.Gol;
+import copapc.model.gol.Gol;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
@@ -16,7 +16,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   private int pontuacao;
   private Posicao posicao;
   private Time time;
-  private List<Gol> golsMarcados = new ArrayList<>();
+  private List<Gol> gols = new ArrayList<>();
 
   Jogador() {}
 
@@ -71,11 +71,16 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public void adicionarGol(Gol gol) {
-    golsMarcados.add(gol);
+    Validate.notNull(gol);
+    gols.add(gol);
   }
 
-  public int getTotalDeGolsMarcados() {
-    return golsMarcados.size();
+  public int getTotalDeGols() {
+    return gols.size();
+  }
+
+  public List<Gol> getGols() {
+    return gols;
   }
 
   @Override

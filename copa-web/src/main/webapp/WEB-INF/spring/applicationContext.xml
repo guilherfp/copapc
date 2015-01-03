@@ -9,4 +9,8 @@
 
   <context:component-scan base-package="copapc.copa.web.controllers" />
 
+  <bean id="jogoService" class="copapc.service.jogo.JogoService">
+    <constructor-arg name="golRepository" ref="golRepository" />
+  </bean>
+
 </beans>
