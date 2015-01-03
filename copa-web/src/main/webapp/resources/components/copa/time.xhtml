@@ -9,13 +9,17 @@
 </composite:interface>
 
 <composite:implementation>
-  <h2>
-    <h:outputText value="#{cc.attrs.time.toString()}" />
-  </h2>
-  <h5>
-    Responsável:
-    <h:outputText value="#{cc.attrs.time.responsavel}" />
-  </h5>
+  <div class="col-sm-5 col-xs-12 text-center">
+    <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="escudo-time" />
+  </div>
+  <div class="col-sm-7 col-xs-12 text-center">
+    <h2>
+      <h:outputText value="#{cc.attrs.time.toString()}" />
+    </h2>
+    <h5>
+      <h:outputText value="Responsável: #{cc.attrs.time.responsavel}" />
+    </h5>
+  </div>
   <h:dataTable value="#{cc.attrs.time.jogadores}" var="jogador"
     styleClass="table table-striped table-hover table-condensed">
     <h:column>
@@ -25,6 +29,10 @@
     <h:column>
       <f:facet name="header">Posição</f:facet>
       <h:outputText value="#{jogador.posicao}" />
+    </h:column>
+    <h:column>
+      <f:facet name="header">Cartões</f:facet>
+      <h:graphicImage library="images/cartao" name="#{jogador.cartao}.png" rendered="#{jogador.possuiCartao}" />
     </h:column>
   </h:dataTable>
 </composite:implementation>

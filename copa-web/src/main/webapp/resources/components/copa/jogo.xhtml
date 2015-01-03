@@ -16,12 +16,15 @@
       </div>
       <div class="placar-jogo-equipes">
         <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
-          <a href="#{request.contextPath}/time/#{cc.attrs.jogo.mandante.url}">
+          <a href="#{request.contextPath}/time/#{cc.attrs.jogo.mandante.url}" style="color: black;">
             <span class="placar-jogo-equipes-sigla">
               <h:outputText value="#{cc.attrs.jogo.mandante.sigla}" title="#{cc.attrs.jogo.mandante.nome}" />
             </span>
             <span class="placar-jogo-equipes-nome">
               <h:outputText value="#{cc.attrs.jogo.mandante.nome}" title="#{cc.attrs.jogo.mandante.nome}" />
+            </span>
+            <span>
+              <h:graphicImage library="images/time" name="#{cc.attrs.jogo.mandante.url}.png" styleClass="escudo" />
             </span>
           </a>
         </span>
@@ -34,8 +37,11 @@
             <h:outputText value="#{cc.attrs.jogo.totalDeGolsDoVisitante}" />
           </span>
         </span>
-        <a href="#{request.contextPath}/time/#{cc.attrs.jogo.visitante.url}">
+        <a href="#{request.contextPath}/time/#{cc.attrs.jogo.visitante.url}" style="color: black;">
           <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+            <span>
+              <h:graphicImage library="images/time" name="#{cc.attrs.jogo.visitante.url}.png" styleClass="escudo" />
+            </span>
             <span class="placar-jogo-equipes-sigla">
               <h:outputText value="#{cc.attrs.jogo.visitante.sigla}" title="#{cc.attrs.jogo.visitante.nome}" />
             </span>

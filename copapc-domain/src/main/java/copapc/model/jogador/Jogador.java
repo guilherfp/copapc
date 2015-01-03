@@ -18,6 +18,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   private Posicao posicao;
   private Time time;
   private List<Gol> gols = new ArrayList<>();
+  private Cartao cartao = Cartao.SEM_CARTAO;
 
   Jogador() {}
 
@@ -81,6 +82,21 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   public List<Gol> getGols() {
     return gols;
+  }
+
+  public Cartao getCartao() {
+    return cartao;
+  }
+
+  public void setCartao(Cartao cartao) {
+    if (cartao == null) {
+      cartao = Cartao.SEM_CARTAO;
+    }
+    this.cartao = cartao;
+  }
+
+  public boolean isPossuiCartao() {
+    return (cartao != null) && (cartao != Cartao.SEM_CARTAO);
   }
 
   @Override

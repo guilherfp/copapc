@@ -2,7 +2,9 @@ package copapc.model.time;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -82,6 +84,18 @@ public class Time extends Entity implements Comparable<Time> {
   public void setSigla(String sigla) {
     Validate.notNull(sigla, "Sigla inválida");
     this.sigla = sigla;
+  }
+
+  public boolean isPossuiArtilheiro() {
+    return artilheiro().get().getTotalDeGols() > 0;
+  }
+
+  public Jogador getArtilheiro() {
+    return artilheiro().get();
+  }
+
+  private Optional<Jogador> artilheiro() {
+    return getJogadores().stream().max(Comparator.comparingInt(Jogador::getTotalDeGols));
   }
 
   @Override

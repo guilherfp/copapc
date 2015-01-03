@@ -40,5 +40,14 @@
       <one-to-many entity-name="Gol" />
     </bag>
 
+    <property name="cartao">
+      <column name="cartao" length="20" not-null="false" />
+      <type name="org.hibernate.type.EnumType">
+        <param name="useNamed">true</param>
+        <param name="enumClass">copapc.model.jogador.Cartao</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+
   </class>
 </hibernate-mapping>
