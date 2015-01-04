@@ -27,7 +27,7 @@
     <pattern value="/regulamento" />
     <view-id value="/regulamento.jsf" />
   </url-mapping>
-  
+
   <url-mapping id="local">
     <pattern value="/local" />
     <view-id value="/local.jsf" />
@@ -43,9 +43,14 @@
     <view-id value="/artilharia.jsf" />
   </url-mapping>
 
-  <url-mapping id="campeonato-view">
+  <url-mapping id="time">
     <pattern value="/time/#{time}" />
     <view-id value="/time.jsf" />
+  </url-mapping>
+
+  <url-mapping id="jogador">
+    <pattern value="/jogador/#{jogador}" />
+    <view-id value="/jogador.jsf" />
   </url-mapping>
 
 </pretty-config>

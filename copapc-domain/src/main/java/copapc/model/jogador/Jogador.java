@@ -8,6 +8,7 @@ import org.apache.commons.lang3.Validate;
 import copapc.model.gol.Gol;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
+import copapc.util.UrlUtil;
 
 public class Jogador extends Entity implements Comparable<Jogador> {
   private static final long serialVersionUID = 1L;
@@ -19,6 +20,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   private Time time;
   private List<Gol> gols = new ArrayList<>();
   private Cartao cartao = Cartao.SEM_CARTAO;
+  private String url;
 
   Jogador() {}
 
@@ -31,9 +33,10 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     return nome;
   }
 
-  public void setNome(String nome) {
+  public void setNome(final String nome) {
     Validate.notBlank(nome, "Nome inválido");
     this.nome = nome;
+    url = UrlUtil.formatURL(nome);
   }
 
   public String getEmail() {
@@ -67,8 +70,11 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public void setTime(Time time) {
-    Validate.notNull(time, "Time inválido");
     this.time = time;
+  }
+
+  public boolean isPossuiTime() {
+    return time != null;
   }
 
   public void adicionarGol(Gol gol) {
@@ -97,6 +103,10 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   public boolean isPossuiCartao() {
     return (cartao != null) && (cartao != Cartao.SEM_CARTAO);
+  }
+
+  public String getUrl() {
+    return url;
   }
 
   @Override

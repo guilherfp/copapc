@@ -1,7 +1,8 @@
 package copapc.copa.web.controllers;
 
-import java.io.Serializable;
 import java.util.List;
+
+import javax.faces.bean.ManagedBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,16 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogador.JogadorRepository;
 
-// @ManagedBean(name = "jogadorMB")
 @Scope("request")
 @Controller("jogadorMB")
-public class JogadorManagedBean implements Serializable {
+@ManagedBean(name = "jogadorMB")
+public class JogadorManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
+
+  private static final String JOGADOR = "jogador";
 
   @Autowired
   private JogadorRepository jogadorRepository;
 
   private List<Jogador> jogadores;
+  private Jogador jogador;
 
   @Transactional
   public List<Jogador> getJogadores() {
@@ -28,6 +32,15 @@ public class JogadorManagedBean implements Serializable {
       jogadores = jogadorRepository.jogadores();
     }
     return jogadores;
+  }
+
+  @Transactional
+  public Jogador getJogador() {
+    if (jogador == null) {
+      final String jogadorUrl = getURLParameterValue(JOGADOR);
+      jogador = jogadorRepository.comUrl(jogadorUrl);
+    }
+    return jogador;
   }
 
 }

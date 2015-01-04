@@ -22,9 +22,13 @@
       <column name="pontuacao" not-null="true" length="1" default="0" />
     </property>
 
-    <many-to-one name="time" entity-name="Time" foreign-key="fk_time_jogador" lazy="false">
+    <many-to-one name="time" entity-name="Time" foreign-key="fk_time_jogador">
       <column name="time_id" not-null="false" />
     </many-to-one>
+
+    <property name="url">
+      <column name="url" length="80" unique-key="uk-url-jogador" />
+    </property>
 
     <property name="posicao">
       <column name="posicao" length="20" not-null="false" />
@@ -35,7 +39,7 @@
       </type>
     </property>
 
-    <bag name="gols" inverse="true" lazy="false">
+    <bag name="gols" inverse="true">
       <key column="jogador_id" />
       <one-to-many entity-name="Gol" />
     </bag>

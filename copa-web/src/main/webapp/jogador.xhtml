@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+
+  <ui:define name="title">
+    <h:outputText value="- #{jogadorMB.jogador.nome}" />
+  </ui:define>
+
+  <ui:define name="content">
+    <div class="section" style="margin-top: 20px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-5">
+            <div class="col-lg-12 text-center">
+              <h2>
+                <h:outputText value="#{jogadorMB.jogador.nome}" />
+              </h2>
+              <h:panelGroup rendered="#{jogadorMB.jogador.possuiTime}">
+                <div class="col-md-5 col-sm-12 col-xs-12 text-center">
+                  <h:graphicImage library="images/time" name="#{jogadorMB.jogador.time.url}.png"
+                    styleClass="escudo-time" />
+                </div>
+                <h:outputLink value="#{request.contextPath}/time/#{jogadorMB.jogador.time.url}">
+                  <div class="col-md-7 col-sm-12 col-xs-12 text-center" style="vertical-align: middle;">
+                    <h2>
+                      <h:outputText value="#{jogadorMB.jogador.time}" />
+                    </h2>
+                  </div>
+                </h:outputLink>
+              </h:panelGroup>
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-7">
+            <div class="col-lg-12 text-center">
+              <h3>Gols</h3>
+            </div>
+            <div class="col-lg-12 table-responsive">
+              <h:dataTable value="#{jogadorMB.jogador.gols}" var="gol"
+                styleClass="table table-striped table-hover table-condensed">
+                <h:column>
+                  <f:facet name="header">Nº</f:facet>
+                  <span style="vertical-align: middle; height: 15px;">
+                    <h:outputText value="#{gol.numero}" />
+                  </span>
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Jogo</f:facet>
+                  <copa:resumoTime time="#{gol.jogo.mandante}" escutoRight="true" />
+                  <span style="vertical-align: middle; height: 15px; font-weight: bold;">X</span>
+                  <copa:resumoTime time="#{gol.jogo.visitante}" escutoLeft="true" />
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Dia</f:facet>
+                  <h:outputText value="#{gol.jogo.horario.toString('dd/MM/yy')}" />
+                </h:column>
+              </h:dataTable>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ui:define>
+</ui:composition>

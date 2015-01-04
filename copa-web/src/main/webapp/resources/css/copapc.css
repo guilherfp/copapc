@@ -21,10 +21,15 @@ ul {
   margin: auto;
 }
 
+.min-escudo {
+  display: inline-block;
+  height: 20px;
+  max-width: 100%;
+  width: 20px;
+  vertical-align: middle;
+}
+
 .escudo {
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-  cursor: auto;
   display: inline-block;
   height: 30px;
   max-width: 100%;
@@ -33,9 +38,6 @@ ul {
 }
 
 .escudo-time {
-  -webkit-font-smoothing: antialiased;
-  cursor: auto;
-  margin: auto;
   display: inline-block;
   height: 100px;
   max-width: 100%;

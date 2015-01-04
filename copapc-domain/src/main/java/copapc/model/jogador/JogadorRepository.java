@@ -21,4 +21,6 @@ public interface JogadorRepository {
 
   void salvar(Jogador jogador);
 
+  Jogador comUrl(String url);
+
 }

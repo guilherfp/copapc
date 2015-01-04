@@ -43,4 +43,11 @@ public class JogadorRepositoryImpl extends HibernateRepository implements Jogado
     getSession().save("Jogador", jogador);
   }
 
+  @Override
+  public Jogador comUrl(String url) {
+    final Query query = getSession().createQuery("from Jogador where url = :url");
+    query.setParameter("url", url);
+    return (Jogador) query.uniqueResult();
+  }
+
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://java.sun.com/jsf/composite"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html">
+
+<composite:interface>
+  <composite:attribute name="time" required="true" type="copapc.model.time.Time" />
+  <composite:attribute name="escutoLeft" required="false" default="false" type="boolean" />
+  <composite:attribute name="escutoRight" required="false" default="false" type="boolean" />
+</composite:interface>
+
+<composite:implementation>
+  <h:outputLink value="#{request.contextPath}/time/#{cc.attrs.time.url}">
+    <span style="margin: 3px;">
+      <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="min-escudo"
+        rendered="#{cc.attrs.escutoLeft}" />
+    </span>
+    <span class="placar-jogo-equipes-sigla">
+      <h:outputText value="#{cc.attrs.time.sigla}" title="#{cc.attrs.time.nome}" />
+    </span>
+    <span class="placar-jogo-equipes-nome">
+      <h:outputText value="#{cc.attrs.time.nome}" title="#{cc.attrs.time.nome}" />
+    </span>
+    <span style="margin: 3px;">
+      <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="min-escudo"
+        rendered="#{cc.attrs.escutoRight}" />
+    </span>
+  </h:outputLink>
+</composite:implementation>
+
+</html>

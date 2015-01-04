@@ -15,11 +15,11 @@
       <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
     </property>
 
-    <many-to-one name="mandante" entity-name="Time" foreign-key="fk_jogo_time_mandante" lazy="false">
+    <many-to-one name="mandante" entity-name="Time" foreign-key="fk_jogo_time_mandante">
       <column name="mandante_id" not-null="true" />
     </many-to-one>
 
-    <many-to-one name="visitante" entity-name="Time" foreign-key="fk_jogo_time_visitante" lazy="false">
+    <many-to-one name="visitante" entity-name="Time" foreign-key="fk_jogo_time_visitante">
       <column name="visitante_id" not-null="true" />
     </many-to-one>
 
@@ -33,7 +33,7 @@
       <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
     </property>
 
-    <bag name="gols" inverse="true" lazy="false">
+    <bag name="gols" inverse="true">
       <key column="jogo_id" />
       <one-to-many entity-name="Gol" />
     </bag>

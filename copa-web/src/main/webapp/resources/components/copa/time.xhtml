@@ -24,7 +24,9 @@
     styleClass="table table-striped table-hover table-condensed">
     <h:column>
       <f:facet name="header">Nome</f:facet>
-      <h:outputText value="#{jogador.nome}" />
+      <h:outputLink value="#{request.contextPath}/jogador/#{jogador.url}">
+        <h:outputText value="#{jogador.nome}" />
+      </h:outputLink>
     </h:column>
     <h:column>
       <f:facet name="header">Posição</f:facet>
