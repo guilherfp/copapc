@@ -2,12 +2,11 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import copapc.model.jogo.Jogo;
 import copapc.model.resumoclassificacao.Classificacao;
@@ -16,7 +15,7 @@ import copapc.service.classificacao.ClassificacaoService;
 
 @Scope("request")
 @Controller("classificacaoMB")
-@ManagedBean(name = "classificacaoMB")
+// @ManagedBean(name = "classificacaoMB")
 public class ClassificacaoManagedBean {
 
   private List<Classificacao> classificacoesFase1GrupoA;
@@ -31,6 +30,7 @@ public class ClassificacaoManagedBean {
   @Autowired
   private ClassificacaoService classificacaoService;
 
+  @Transactional
   public List<Classificacao> getClassificacoesFase1GrupoA() {
     if (classificacoesFase1GrupoA == null) {
       classificacoesFase1GrupoA = classificacaoService.classificacao(1, 'A');
@@ -38,6 +38,7 @@ public class ClassificacaoManagedBean {
     return classificacoesFase1GrupoA;
   }
 
+  @Transactional
   public List<Classificacao> getClassificacoesFase1GrupoB() {
     if (classificacoesFase1GrupoB == null) {
       classificacoesFase1GrupoB = classificacaoService.classificacao(1, 'B');
@@ -45,6 +46,7 @@ public class ClassificacaoManagedBean {
     return classificacoesFase1GrupoB;
   }
 
+  @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoA() {
     if (classificacoesFase2GrupoA == null) {
       classificacoesFase2GrupoA = classificacaoService.classificacao(2, 'A');
@@ -52,6 +54,7 @@ public class ClassificacaoManagedBean {
     return classificacoesFase2GrupoA;
   }
 
+  @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoB() {
     if (classificacoesFase2GrupoB == null) {
       classificacoesFase2GrupoB = classificacaoService.classificacao(2, 'B');

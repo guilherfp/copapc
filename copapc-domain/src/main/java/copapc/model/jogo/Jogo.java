@@ -54,8 +54,8 @@ public class Jogo extends Entity {
   }
 
   public Time getVencedor() {
-    int golsMandante = getTotalDeGolsDoMandante();
-    int golsVisitante = getTotalDeGolsDoVisitante();
+    final int golsMandante = getTotalDeGolsDoMandante();
+    final int golsVisitante = getTotalDeGolsDoVisitante();
     if (golsMandante > golsVisitante) {
       return mandante;
     } else if (golsVisitante > golsMandante) {
@@ -63,6 +63,18 @@ public class Jogo extends Entity {
     } else {
       return null;
     }
+  }
+
+  public boolean isVencedor(Time time) {
+    return (estaNoJogo(time) == true) && time.equals(getVencedor());
+  }
+
+  public boolean isDerrotado(Time time) {
+    return (estaNoJogo(time) == true) && (isEmpate() == false) && (time.equals(getVencedor()) == false);
+  }
+
+  public boolean isEmpate() {
+    return getVencedor() == null;
   }
 
   public Time getMandante() {

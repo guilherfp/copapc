@@ -12,6 +12,10 @@
   <div class="table-responsive">
     <h:dataTable styleClass="table table-striped table-hover table-condensed" value="#{cc.attrs.value}" var="c">
       <h:column>
+        <f:facet name="header">#</f:facet>
+        <h:outputText value="#{c.posicao}" />
+      </h:column>
+      <h:column>
         <f:facet name="header">Time</f:facet>
         <h:outputText value="#{c.nomeDoTime}" />
       </h:column>

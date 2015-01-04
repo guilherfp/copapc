@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 
-// @ManagedBean(name = "jogoMB")
 @Scope("request")
 @Controller("jogoMB")
+// @ManagedBean(name = "jogoMB")
 public class JogoManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 

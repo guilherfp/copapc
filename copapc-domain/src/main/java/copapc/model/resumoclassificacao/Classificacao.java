@@ -82,4 +82,10 @@ public class Classificacao {
     return fmt.format(aproveitamento) + " %";
   }
 
+  @Override
+  public String toString() {
+    return String.format(
+      "Classificacao = posicao: %s, time: %s, vitorias: %s, empates: %s, derrotas: %s, golsPros: %s, golsContra: %s",
+      posicao, nomeDoTime, vitorias, empates, derrotas, golsPros, golsContra);
+  }
 }

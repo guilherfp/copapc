@@ -35,8 +35,8 @@ public class ClassificacaoService {
   }
 
   private List<Classificacao> classificar(final List<Classificacao> classificacoes) {
-    classificacoes.sort(Comparator.comparingInt(Classificacao::getGolsPros));
-    classificacoes.sort(Comparator.comparingInt(Classificacao::getPontos));
+    classificacoes.sort(Comparator.comparingInt(Classificacao::getGolsPros).reversed());
+    classificacoes.sort(Comparator.comparingInt(Classificacao::getPontos).reversed());
     int posicao = 1;
     for (Classificacao classificacao : classificacoes) {
       classificacao.setPosicao(posicao++);
@@ -55,27 +55,33 @@ public class ClassificacaoService {
   }
 
   private int vitorias(final Time time, final List<Jogo> jogos) {
-    return (int) jogos.stream().filter(j -> time.equals(j.getVencedor())).count();
+    int vitorias = 0;
+    for (Jogo jogo : jogos) {
+      if (jogo.isEncerrado() && jogo.isVencedor(time)) {
+        vitorias++;
+      }
+    }
+    return vitorias;
   }
 
   private int empates(final Time time, final List<Jogo> jogos) {
-    return (int) jogos.stream().filter(j -> {
-      if (j.isEncerrado() == true) {
-        return j.getVencedor() == null;
-      } else {
-        return false;
+    int empates = 0;
+    for (Jogo jogo : jogos) {
+      if (jogo.isEncerrado() && jogo.isEmpate()) {
+        empates++;
       }
-    }).count();
+    }
+    return empates;
   }
 
   private int derrotas(final Time time, final List<Jogo> jogos) {
-    return (int) jogos.stream().filter(j -> {
-      if (j.getVencedor() != null) {
-        return j.getVencedor().equals(time) == false;
-      } else {
-        return false;
+    int derrotas = 0;
+    for (Jogo jogo : jogos) {
+      if (jogo.isEncerrado() && jogo.isDerrotado(time)) {
+        derrotas++;
       }
-    }).count();
+    }
+    return derrotas;
   }
 
   private int golsPros(final Time time, final List<Jogo> jogos) {

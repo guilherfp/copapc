@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
 
-// @ManagedBean(name = "homeMB")
 @Controller("homeMB")
+// @ManagedBean(name = "homeMB")
 public class HomeManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
