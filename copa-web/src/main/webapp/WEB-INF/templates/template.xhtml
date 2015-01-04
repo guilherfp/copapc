@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="guilherfp@gmail.com" />
 
-  <title>Copa PC <ui:insert name="title">Home</ui:insert></title>
+  <title>V COPA <ui:insert name="title">Home</ui:insert></title>
 
   <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
   <h:outputStylesheet name="css/copapc.css" />
@@ -18,8 +18,7 @@
 </h:head>
 
 <h:body>
-  <a id="back-to-top" href="#">
-    <span class="glyphicon glyphicon-chevron-up"></span>
+  <a id="back-to-top" href="#"> <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -30,14 +29,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#{request.contextPath}">Copa PC Sistemas</a>
+      <a class="navbar-brand" href="#{request.contextPath}">V COPA INTEGRAÇÃO</a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Times
-            <b class="caret"></b>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Times <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <ui:repeat var="time" value="#{homeMB.times}">
@@ -60,9 +57,7 @@
           <a href="#{request.contextPath}/artilharia">Artilharia</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Outros
-            <b class="caret"></b>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Outros <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li>
