@@ -7,15 +7,18 @@ import copapc.model.gol.Gol;
 import copapc.model.gol.GolRepository;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogo.Jogo;
+import copapc.model.jogo.JogoRepository;
 
 public class JogoService {
 
   private final GolRepository golRepository;
+  private final JogoRepository jogoRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(JogoService.class);
 
-  public JogoService(GolRepository golRepository) {
+  public JogoService(GolRepository golRepository, JogoRepository jogoRepository) {
     this.golRepository = golRepository;
+    this.jogoRepository = jogoRepository;
   }
 
   public void marcarGol(final Jogador jogador, final Jogo jogo) {
@@ -28,9 +31,13 @@ public class JogoService {
 
   public void iniciarJogo(Jogo jogo) {
     jogo.iniciar();
+    jogoRepository.atualizar(jogo);
+    LOGGER.info("Jogo iniciado: {}", jogo);
   }
 
   public void encerrarJogo(Jogo jogo) {
     jogo.encerrar();
+    jogoRepository.atualizar(jogo);
+    LOGGER.info("Jogo encerrado: {}", jogo);
   }
 }

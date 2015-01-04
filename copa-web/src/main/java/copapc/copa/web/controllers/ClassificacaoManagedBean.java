@@ -1,5 +1,6 @@
 package copapc.copa.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -50,7 +51,8 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoA() {
     if (classificacoesFase2GrupoA == null) {
-      classificacoesFase2GrupoA = classificacaoService.classificacaoFase2GrupoA();
+      classificacoesFase2GrupoA = new ArrayList<>();
+      // classificacoesFase2GrupoA = classificacaoService.classificacaoFase2GrupoA();
     }
     return classificacoesFase2GrupoA;
   }
@@ -58,7 +60,8 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoB() {
     if (classificacoesFase2GrupoB == null) {
-      classificacoesFase2GrupoB = classificacaoService.classificacaoFase2GrupoB();
+      classificacoesFase2GrupoB = new ArrayList<>();
+      // classificacoesFase2GrupoB = classificacaoService.classificacaoFase2GrupoB();
     }
     return classificacoesFase2GrupoB;
   }

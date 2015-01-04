@@ -10,4 +10,6 @@ public interface JogoRepository {
 
   List<Jogo> jogos(Time time);
 
+  void atualizar(Jogo jogo);
+
 }

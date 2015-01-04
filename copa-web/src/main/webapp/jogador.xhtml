@@ -11,31 +11,30 @@
     <div class="section" style="margin-top: 20px;">
       <div class="container">
         <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-5">
+          <div class="col-md-5 col-sm-5 col-xs-12">
             <div class="col-lg-12 text-center">
               <h2>
                 <h:outputText value="#{jogadorMB.jogador.nome}" />
               </h2>
-              <h:panelGroup rendered="#{jogadorMB.jogador.possuiTime}">
-                <div class="col-md-5 col-sm-12 col-xs-12 text-center">
+              <h:outputLink value="#{request.contextPath}/time/#{jogadorMB.jogador.time.url}"
+                rendered="#{jogadorMB.jogador.possuiTime}">
+                <div class="col-xs-12 text-center">
                   <h:graphicImage library="images/time" name="#{jogadorMB.jogador.time.url}.png"
                     styleClass="escudo-time" />
                 </div>
-                <h:outputLink value="#{request.contextPath}/time/#{jogadorMB.jogador.time.url}">
-                  <div class="col-md-7 col-sm-12 col-xs-12 text-center" style="vertical-align: middle;">
-                    <h2>
-                      <h:outputText value="#{jogadorMB.jogador.time}" />
-                    </h2>
-                  </div>
-                </h:outputLink>
-              </h:panelGroup>
+                <div class="col-xs-12 text-center">
+                  <h2>
+                    <h:outputText value="#{jogadorMB.jogador.time}" />
+                  </h2>
+                </div>
+              </h:outputLink>
             </div>
           </div>
-          <div class="col-lg-7 col-md-7 col-sm-7">
+          <div class="col-md-7 col-sm-7 col-xs-12">
             <div class="col-lg-12 text-center">
               <h3>Gols</h3>
             </div>
-            <div class="col-lg-12 table-responsive">
+            <div class="table-responsive">
               <h:dataTable value="#{jogadorMB.jogador.golsPorJogo.entrySet()}" var="gol"
                 styleClass="table table-striped table-hover table-condensed">
                 <h:column>

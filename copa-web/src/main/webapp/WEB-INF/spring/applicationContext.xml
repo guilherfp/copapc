@@ -11,6 +11,7 @@
 
   <bean id="jogoService" class="copapc.service.jogo.JogoService">
     <constructor-arg name="golRepository" ref="golRepository" />
+    <constructor-arg name="jogoRepository" ref="jogoRepository" />
   </bean>
 
   <bean id="jogadorService" class="copapc.service.jogador.JogadorService">

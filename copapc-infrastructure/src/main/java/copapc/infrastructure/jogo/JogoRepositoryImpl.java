@@ -35,4 +35,9 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
     return query.list();
   }
 
+  @Override
+  public void atualizar(Jogo jogo) {
+    getSession().update("Jogo", jogo);
+  }
+
 }

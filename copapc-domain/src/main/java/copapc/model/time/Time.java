@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -88,11 +89,18 @@ public class Time extends Entity implements Comparable<Time> {
   }
 
   public boolean isPossuiArtilheiro() {
-    return artilheiro().get().getTotalDeGols() > 0;
+    return getArtilheiros().size() > 0;
   }
 
-  public Jogador getArtilheiro() {
-    return artilheiro().get();
+  public List<Jogador> getArtilheiros() {
+    final List<Jogador> artilheiros = new ArrayList<>(3);
+    final int totalDeGols = artilheiro().get().getTotalDeGols();
+    for (Jogador jogador : getJogadores()) {
+      if ((jogador.getTotalDeGols() > 0) && (jogador.getTotalDeGols() >= totalDeGols)) {
+        artilheiros.add(jogador);
+      }
+    }
+    return artilheiros;
   }
 
   private Optional<Jogador> artilheiro() {
