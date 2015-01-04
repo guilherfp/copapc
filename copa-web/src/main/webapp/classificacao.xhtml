@@ -23,21 +23,21 @@
             <h4 class="text-center">Grupo A</h4>
             <copa:classificacao value="#{classificacaoMB.classificacoesFase1GrupoA}" />
           </div>
-          <div class="col-md-6 col-xs-12 text-center">
+          <div class="col-md-6 col-xs-12">
             <h4 class="text-center">Grupo B</h4>
             <copa:classificacao value="#{classificacaoMB.classificacoesFase1GrupoB}" />
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h3>2ª Fase</h3>
+            <h3 class="text-center">2ª Fase</h3>
             <hr />
           </div>
-          <div class="col-md-6 col-xs-12 text-center">
+          <div class="col-md-6 col-xs-12">
             <h4 class="text-center">Grupo A</h4>
             <copa:classificacao value="#{classificacaoMB.classificacoesFase2GrupoA}" />
           </div>
-          <div class="col-md-6 col-xs-12 text-center">
+          <div class="col-md-6 col-xs-12">
             <h4 class="text-center">Grupo B</h4>
             <copa:classificacao value="#{classificacaoMB.classificacoesFase2GrupoB}" />
           </div>
@@ -64,6 +64,42 @@
               <copa:jogo jogo="#{classificacaoMB.jogoFinalA}" escudo="#{classificacaoMB.showEscudoFinalA}" />
               <copa:jogo jogo="#{classificacaoMB.jogoFinalB}" escudo="#{classificacaoMB.showEscudoFinalB}" />
             </ul>
+          </div>
+        </div>
+        <div class="row">
+          <hr />
+          <div class="col-lg-12 text-center">
+            <h1>Campeão</h1>
+          </div>
+          <div class="col-xs-12 text-center">
+            <h:graphicImage library="images/time" name="#{classificacaoMB.campeao.url}.png" styleClass="escudo-time" />
+          </div>
+          <div class="col-xs-12 text-center">
+            <h3>
+              <h:outputText value="#{classificacaoMB.campeao.nome}" />
+            </h3>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-center">
+          <h2>2º Colocado</h2>
+          <div class="col-xs-12 text-center">
+            <h:graphicImage library="images/time" name="#{classificacaoMB.campeao.url}.png" styleClass="escudo-time" />
+          </div>
+          <div class="col-xs-12 text-center">
+            <h3>
+              <h:outputText value="#{classificacaoMB.campeao.nome}" />
+            </h3>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-center">
+          <h2>3º Colocado</h2>
+          <div class="col-xs-12 text-center">
+            <h:graphicImage library="images/time" name="#{classificacaoMB.campeao.url}.png" styleClass="escudo-time" />
+          </div>
+          <div class="col-xs-12 text-center">
+            <h3>
+              <h:outputText value="#{classificacaoMB.campeao.nome}" />
+            </h3>
           </div>
         </div>
       </div>

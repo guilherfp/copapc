@@ -26,12 +26,8 @@
       <column name="sigla" length="3" unique-key="uk_sigla_time" />
     </property>
 
-    <property name="grupoFase1">
-      <column name="grupo_fase_1" length="1" default=" " not-null="true" />
-    </property>
-
-    <property name="grupoFase2">
-      <column name="grupo_fase_2" length="1" default=" " not-null="true" />
+    <property name="grupo">
+      <column name="grupo" length="1" default=" " not-null="true" />
     </property>
 
     <many-to-one name="responsavel" entity-name="Jogador" foreign-key="fk_time_responsavel">

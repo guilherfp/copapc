@@ -26,12 +26,38 @@ public class ClassificacaoService {
     return classificar(times.stream().map(this::classificacao).collect(Collectors.toList()));
   }
 
-  public List<Classificacao> classificacao(final int fase, final char grupo) {
-    List<Time> times = timeRepository.timesPorGrupo(fase, grupo);
+  public List<Classificacao> classificacaoFase1(final char grupo) {
+    List<Time> times = timeRepository.timesPorGrupo(grupo);
     if (times == null) {
       times = new ArrayList<>();
     }
     return classificar(times.stream().map(this::classificacao).collect(Collectors.toList()));
+  }
+
+  public List<Classificacao> classificacaoFase2GrupoA() {
+    final List<Classificacao> classificacoesFase1GrupoA = classificacaoFase1('A');
+    final List<Classificacao> classificacoesFase1GrupoB = classificacaoFase1('B');
+    final List<Classificacao> classificacoesFase2 = new ArrayList<>(4);
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoA, 1));
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoB, 1));
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoA, 3));
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoB, 3));
+    return classificacoesFase2;
+  }
+
+  public List<Classificacao> classificacaoFase2GrupoB() {
+    final List<Classificacao> classificacoesFase1GrupoA = classificacaoFase1('A');
+    final List<Classificacao> classificacoesFase1GrupoB = classificacaoFase1('B');
+    final List<Classificacao> classificacoesFase2 = new ArrayList<>(4);
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoA, 2));
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoB, 2));
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoA, 4));
+    classificacoesFase2.add(posicao(classificacoesFase1GrupoB, 4));
+    return classificacoesFase2;
+  }
+
+  private Classificacao posicao(final List<Classificacao> classificacoes, final int posicao) {
+    return classificacoes.stream().filter(c -> c.getPosicao() == posicao).findFirst().get();
   }
 
   private List<Classificacao> classificar(final List<Classificacao> classificacoes) {

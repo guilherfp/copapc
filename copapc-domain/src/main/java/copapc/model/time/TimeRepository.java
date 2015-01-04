@@ -6,7 +6,7 @@ public interface TimeRepository {
 
   List<Time> times();
 
-  List<Time> timesPorGrupo(int fase, char grupo);
+  List<Time> timesPorGrupo(char grupo);
 
   Time comNumero(int numero);
 

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import copapc.model.jogo.Jogo;
 import copapc.model.resumoclassificacao.Classificacao;
 import copapc.model.time.Time;
+import copapc.model.time.TimeBuilder;
 import copapc.service.classificacao.ClassificacaoService;
 
 @Scope("request")
@@ -33,7 +34,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase1GrupoA() {
     if (classificacoesFase1GrupoA == null) {
-      classificacoesFase1GrupoA = classificacaoService.classificacao(1, 'A');
+      classificacoesFase1GrupoA = classificacaoService.classificacaoFase1('A');
     }
     return classificacoesFase1GrupoA;
   }
@@ -41,7 +42,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase1GrupoB() {
     if (classificacoesFase1GrupoB == null) {
-      classificacoesFase1GrupoB = classificacaoService.classificacao(1, 'B');
+      classificacoesFase1GrupoB = classificacaoService.classificacaoFase1('B');
     }
     return classificacoesFase1GrupoB;
   }
@@ -49,7 +50,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoA() {
     if (classificacoesFase2GrupoA == null) {
-      classificacoesFase2GrupoA = classificacaoService.classificacao(2, 'A');
+      classificacoesFase2GrupoA = classificacaoService.classificacaoFase2GrupoA();
     }
     return classificacoesFase2GrupoA;
   }
@@ -57,7 +58,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoB() {
     if (classificacoesFase2GrupoB == null) {
-      classificacoesFase2GrupoB = classificacaoService.classificacao(2, 'B');
+      classificacoesFase2GrupoB = classificacaoService.classificacaoFase2GrupoB();
     }
     return classificacoesFase2GrupoB;
   }
@@ -108,5 +109,9 @@ public class ClassificacaoManagedBean {
 
   public boolean isShowEscudoFinalB() {
     return false;
+  }
+
+  public Time getCampeao() {
+    return TimeBuilder.timeNaoDefinido(1);
   }
 }

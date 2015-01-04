@@ -40,10 +40,8 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
 
   @Override
   @SuppressWarnings("unchecked")
-  public List<Time> timesPorGrupo(int fase, char grupo) {
-    final String grupoParam = String.format("grupoFase%s", fase);
-    final String queryString = String.format("from Time where %s = :grupo order by nome", grupoParam);
-    final Query query = getSession().createQuery(queryString);
+  public List<Time> timesPorGrupo(char grupo) {
+    final Query query = getSession().createQuery("from Time where grupo = :grupo order by nome");
     query.setParameter("grupo", grupo);
     return query.list();
   }
