@@ -26,16 +26,26 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
 
   @Override
   public Time comNumero(int numero) {
-    Query query = getSession().createQuery("from Time where numero = :numero");
+    final Query query = getSession().createQuery("from Time where numero = :numero");
     query.setParameter("numero", numero);
     return (Time) query.uniqueResult();
   }
 
   @Override
   public Time comURL(String url) {
-    Query query = getSession().createQuery("from Time where url = :url");
+    final Query query = getSession().createQuery("from Time where url = :url");
     query.setParameter("url", url);
     return (Time) query.uniqueResult();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<Time> timesPorGrupo(int fase, char grupo) {
+    final String grupoParam = String.format("grupoFase%s", fase);
+    final String queryString = String.format("from Time where %s = :grupo order by nome", grupoParam);
+    final Query query = getSession().createQuery(queryString);
+    query.setParameter("grupo", grupo);
+    return query.list();
   }
 
 }

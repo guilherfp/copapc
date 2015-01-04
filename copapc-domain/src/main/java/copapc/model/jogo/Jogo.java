@@ -43,7 +43,7 @@ public class Jogo extends Entity {
     return encerramento;
   }
 
-  private boolean isEncerrado() {
+  public boolean isEncerrado() {
     return encerramento != null;
   }
 
@@ -106,6 +106,32 @@ public class Jogo extends Entity {
     return getTotalDeGolsDoMandante() + getTotalDeGolsDoVisitante();
   }
 
+  public int getGols(Time time) {
+    if (mandante.equals(time)) {
+      return getTotalDeGolsDoMandante();
+    } else if (visitante.equals(time)) {
+      return getTotalDeGolsDoVisitante();
+    } else {
+      return 0;
+    }
+  }
+
+  public int getGolsContra(Time time) {
+    if (estaNoJogo(time) == true) {
+      if (mandante.equals(time)) {
+        return getTotalDeGolsDoVisitante();
+      } else {
+        return getTotalDeGolsDoMandante();
+      }
+    } else {
+      return 0;
+    }
+  }
+
+  public boolean estaNoJogo(Time time) {
+    return visitante.equals(time) || mandante.equals(time);
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -164,5 +190,4 @@ public class Jogo extends Entity {
       return "Não de definido";
     }
   }
-
 }

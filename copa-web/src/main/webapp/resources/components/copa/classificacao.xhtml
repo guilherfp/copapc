@@ -5,40 +5,51 @@
   xmlns:h="http://java.sun.com/jsf/html">
 
 <composite:interface>
+  <composite:attribute name="value" type="java.util.List" required="true" />
 </composite:interface>
 
 <composite:implementation>
   <div class="table-responsive">
-    <h:dataTable styleClass="table table-striped table-hover table-condensed">
+    <h:dataTable styleClass="table table-striped table-hover table-condensed" value="#{cc.attrs.value}" var="c">
       <h:column>
         <f:facet name="header">Time</f:facet>
+        <h:outputText value="#{c.nomeDoTime}" />
       </h:column>
       <h:column>
         <f:facet name="header">P</f:facet>
+        <h:outputText value="#{c.pontos}" />
       </h:column>
       <h:column>
         <f:facet name="header">J</f:facet>
+        <h:outputText value="#{c.jogos}" />
       </h:column>
       <h:column>
         <f:facet name="header">V</f:facet>
+        <h:outputText value="#{c.vitorias}" />
       </h:column>
       <h:column>
         <f:facet name="header">E</f:facet>
+        <h:outputText value="#{c.empates}" />
       </h:column>
       <h:column>
         <f:facet name="header">D</f:facet>
+        <h:outputText value="#{c.derrotas}" />
       </h:column>
       <h:column>
         <f:facet name="header">GP</f:facet>
+        <h:outputText value="#{c.golsPros}" />
       </h:column>
       <h:column>
         <f:facet name="header">GC</f:facet>
+        <h:outputText value="#{c.golsContra}" />
       </h:column>
       <h:column>
         <f:facet name="header">SG</f:facet>
+        <h:outputText value="#{c.saldoDeGols}" />
       </h:column>
       <h:column>
         <f:facet name="header">%</f:facet>
+        <h:outputText value="#{c.aproveitamento}" />
       </h:column>
     </h:dataTable>
   </div>

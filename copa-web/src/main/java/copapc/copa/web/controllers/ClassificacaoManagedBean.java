@@ -1,26 +1,63 @@
 package copapc.copa.web.controllers;
 
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import copapc.model.jogo.Jogo;
+import copapc.model.resumoclassificacao.Classificacao;
 import copapc.model.time.Time;
-import copapc.model.time.TimeRepository;
+import copapc.service.classificacao.ClassificacaoService;
 
 @Scope("request")
 @Controller("classificacaoMB")
-// @ManagedBean(name = "classificacaoMB")
+@ManagedBean(name = "classificacaoMB")
 public class ClassificacaoManagedBean {
 
+  private List<Classificacao> classificacoesFase1GrupoA;
+  private List<Classificacao> classificacoesFase1GrupoB;
+  private List<Classificacao> classificacoesFase2GrupoA;
+  private List<Classificacao> classificacoesFase2GrupoB;
   private Jogo semifinalA;
   private Jogo semifinalB;
   private Jogo jogoFinalA;
   private Jogo jogoFinalB;
 
   @Autowired
-  private TimeRepository timeRepository;
+  private ClassificacaoService classificacaoService;
+
+  public List<Classificacao> getClassificacoesFase1GrupoA() {
+    if (classificacoesFase1GrupoA == null) {
+      classificacoesFase1GrupoA = classificacaoService.classificacao(1, 'A');
+    }
+    return classificacoesFase1GrupoA;
+  }
+
+  public List<Classificacao> getClassificacoesFase1GrupoB() {
+    if (classificacoesFase1GrupoB == null) {
+      classificacoesFase1GrupoB = classificacaoService.classificacao(1, 'B');
+    }
+    return classificacoesFase1GrupoB;
+  }
+
+  public List<Classificacao> getClassificacoesFase2GrupoA() {
+    if (classificacoesFase2GrupoA == null) {
+      classificacoesFase2GrupoA = classificacaoService.classificacao(2, 'A');
+    }
+    return classificacoesFase2GrupoA;
+  }
+
+  public List<Classificacao> getClassificacoesFase2GrupoB() {
+    if (classificacoesFase2GrupoB == null) {
+      classificacoesFase2GrupoB = classificacaoService.classificacao(2, 'B');
+    }
+    return classificacoesFase2GrupoB;
+  }
 
   public Jogo getSemifinalA() {
     if (semifinalA == null) {
