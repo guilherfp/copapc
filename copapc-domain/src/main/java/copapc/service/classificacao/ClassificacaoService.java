@@ -35,7 +35,7 @@ public class ClassificacaoService {
   }
 
   private List<Classificacao> classificar(final List<Classificacao> classificacoes) {
-    classificacoes.sort(Comparator.comparingInt(Classificacao::getGolsPros).reversed());
+    classificacoes.sort(Comparator.comparingInt(Classificacao::getSaldoDeGols).reversed());
     classificacoes.sort(Comparator.comparingInt(Classificacao::getPontos).reversed());
     int posicao = 1;
     for (Classificacao classificacao : classificacoes) {
@@ -51,7 +51,7 @@ public class ClassificacaoService {
     final int derrotas = derrotas(time, jogos);
     final int golsPros = golsPros(time, jogos);
     final int golsContra = golsContra(time, jogos);
-    return new Classificacao(0, time.getNome(), vitorias, empates, derrotas, golsPros, golsContra);
+    return new Classificacao(time, vitorias, empates, derrotas, golsPros, golsContra);
   }
 
   private int vitorias(final Time time, final List<Jogo> jogos) {

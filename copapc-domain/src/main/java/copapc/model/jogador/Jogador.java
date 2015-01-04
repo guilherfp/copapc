@@ -1,11 +1,14 @@
 package copapc.model.jogador;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
 import copapc.model.gol.Gol;
+import copapc.model.jogo.Jogo;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 import copapc.util.UrlUtil;
@@ -88,6 +91,14 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   public List<Gol> getGols() {
     return gols;
+  }
+
+  public Map<Jogo, Integer> getGolsPorJogo() {
+    final Map<Jogo, Integer> golsPorJogo = new HashMap<>();
+    for (Gol gol : getGols()) {
+      golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + 1);
+    }
+    return golsPorJogo;
   }
 
   public Cartao getCartao() {

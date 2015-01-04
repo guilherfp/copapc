@@ -20,9 +20,7 @@
               styleClass="table table-striped table-hover table-condensed">
               <h:column>
                 <f:facet name="header">Nome</f:facet>
-                <h:outputLink value="#{request.contextPath}/jogador/#{jogador.url}">
-                  <h:outputText value="#{jogador.nome}" />
-                </h:outputLink>
+                <copa:jogadorNome jogador="#{jogador}" />
               </h:column>
               <h:column>
                 <f:facet name="header">Time</f:facet>

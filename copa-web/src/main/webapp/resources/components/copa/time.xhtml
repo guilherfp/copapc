@@ -2,7 +2,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://java.sun.com/jsf/composite"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-  xmlns:h="http://java.sun.com/jsf/html">
+  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
 <composite:interface>
   <composite:attribute name="time" required="true" type="copapc.model.time.Time" />
@@ -24,9 +25,7 @@
     styleClass="table table-striped table-hover table-condensed">
     <h:column>
       <f:facet name="header">Nome</f:facet>
-      <h:outputLink value="#{request.contextPath}/jogador/#{jogador.url}">
-        <h:outputText value="#{jogador.nome}" />
-      </h:outputLink>
+      <copa:jogadorNome jogador="#{jogador}" />
     </h:column>
     <h:column>
       <f:facet name="header">Posição</f:facet>

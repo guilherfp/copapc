@@ -20,12 +20,11 @@
               styleClass="table table-striped table-hover table-condensed">
               <h:column>
                 <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{jogador.nome}" />
+                <copa:jogadorNome jogador="#{jogador}" />
               </h:column>
               <h:column>
                 <f:facet name="header">E-mail</f:facet>
-                <a href="mailto:#{jogador.email}" target="_top">
-                  <h:outputText value="#{jogador.email}" />
+                <a href="mailto:#{jogador.email}" target="_top"> <h:outputText value="#{jogador.email}" />
                 </a>
               </h:column>
               <h:column>

@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://java.sun.com/jsf/composite"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-  xmlns:h="http://java.sun.com/jsf/html">
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
 <composite:interface>
   <composite:attribute name="value" type="java.util.List" required="true" />
@@ -10,18 +10,21 @@
 
 <composite:implementation>
   <div class="table-responsive">
-    <h:dataTable styleClass="table table-striped table-hover table-condensed" value="#{cc.attrs.value}" var="c">
+    <h:dataTable styleClass="table table-hover table-condensed tabela-pontos" value="#{cc.attrs.value}"
+      var="c">
       <h:column>
         <f:facet name="header">#</f:facet>
         <h:outputText value="#{c.posicao}" />
       </h:column>
       <h:column>
         <f:facet name="header">Time</f:facet>
-        <h:outputText value="#{c.nomeDoTime}" />
+        <span class="tabela-nome-time">
+          <copa:resumoTime escutoLeft="true" time="#{c.time}" />
+        </span>
       </h:column>
       <h:column>
         <f:facet name="header">P</f:facet>
-        <h:outputText value="#{c.pontos}" />
+        <h:outputText value="#{c.pontos}" style="font-weight: bold;" />
       </h:column>
       <h:column>
         <f:facet name="header">J</f:facet>

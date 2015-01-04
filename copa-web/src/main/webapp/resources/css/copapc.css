@@ -4,6 +4,10 @@ ul {
   margin: 0px;
 }
 
+a:HOVER {
+  text-decoration: none;
+}
+
 .tab-pane {
   margin-top: 15px;
 }
@@ -187,6 +191,9 @@ ul {
 
 .tabela-pontos {
   width: 100%;
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
 }
 
 .tabela-pontos th {
@@ -196,11 +203,6 @@ ul {
 .tabela-pontos thead {
   color: gray;
   font-size: 14px;
-  border-style: solid;
-  border-color: #999;
-  border-width: 1px;
-  border-left-width: 0;
-  border-right-width: 0;
   font-weight: normal;
 }
 
@@ -213,26 +215,13 @@ ul {
   border-right-width: 0;
 }
 
-.tabela-nome-time {
-  padding: 0 10px;
-}
-
 .tabela-nome-time:HOVER {
   color: green;
   font-weight: bold;
   cursor: pointer;
 }
 
-.tabela-body-linha {
-  vertical-align: middle;
-  height: 40px;
-}
-
-.tabela-body-linha td {
-  padding: 0 16px;
-}
-
-.tabela-body-linha td:nth-child(odd) {
+.tabela-pontos td:nth-child(odd) {
   background-color: #f5f5f5;
 }
 

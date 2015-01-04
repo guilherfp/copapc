@@ -1,25 +1,29 @@
 package copapc.model.resumoclassificacao;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 
-public class Classificacao {
-  private int posicao;
-  private String nomeDoTime;
-  private int vitorias;
-  private int empates;
-  private int derrotas;
-  private int golsPros;
-  private int golsContra;
-  private final NumberFormat fmt = NumberFormat.getInstance();
+import copapc.model.time.Time;
 
-  {
-    fmt.setMaximumFractionDigits(1);
-    fmt.setMinimumFractionDigits(0);
+public class Classificacao implements Serializable {
+  private static final long serialVersionUID = 1L;
+
+  private int posicao = 0;
+  private final Time time;
+  private final int vitorias;
+  private final int empates;
+  private final int derrotas;
+  private final int golsPros;
+  private final int golsContra;
+  private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance();
+
+  static {
+    NUMBER_FORMAT.setMaximumFractionDigits(1);
+    NUMBER_FORMAT.setMinimumFractionDigits(0);
   }
 
-  public Classificacao(int posicao, String nome, int vitorias, int empates, int derrotas, int golsPros, int golsContra) {
-    this.posicao = posicao;
-    nomeDoTime = nome;
+  public Classificacao(Time time, int vitorias, int empates, int derrotas, int golsPros, int golsContra) {
+    this.time = time;
     this.vitorias = vitorias;
     this.empates = empates;
     this.derrotas = derrotas;
@@ -35,8 +39,12 @@ public class Classificacao {
     return posicao;
   }
 
+  public Time getTime() {
+    return time;
+  }
+
   public String getNomeDoTime() {
-    return nomeDoTime;
+    return time.getNome();
   }
 
   public int getPontos() {
@@ -79,13 +87,13 @@ public class Classificacao {
     if (getJogos() > 0) {
       aproveitamento = ((double) getPontos() / (getJogos() * 3)) * 100;
     }
-    return fmt.format(aproveitamento) + " %";
+    return NUMBER_FORMAT.format(aproveitamento) + " %";
   }
 
   @Override
   public String toString() {
     return String.format(
       "Classificacao = posicao: %s, time: %s, vitorias: %s, empates: %s, derrotas: %s, golsPros: %s, golsContra: %s",
-      posicao, nomeDoTime, vitorias, empates, derrotas, golsPros, golsContra);
+      posicao, getNomeDoTime(), vitorias, empates, derrotas, golsPros, golsContra);
   }
 }
