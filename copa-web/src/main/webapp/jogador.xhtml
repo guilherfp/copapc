@@ -16,6 +16,11 @@
               <h2>
                 <h:outputText value="#{jogadorMB.jogador.nome}" />
               </h2>
+              <h:panelGroup rendered="#{jogadorMB.jogador.possuiPosicao}">
+                <h3>
+                  <h:outputText value="#{jogadorMB.jogador.posicao.toString()}" />
+                </h3>
+              </h:panelGroup>
               <h:outputLink value="#{request.contextPath}/time/#{jogadorMB.jogador.time.url}"
                 rendered="#{jogadorMB.jogador.possuiTime}">
                 <div class="col-xs-12 text-center">

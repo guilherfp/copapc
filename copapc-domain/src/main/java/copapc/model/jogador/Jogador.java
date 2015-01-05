@@ -68,6 +68,10 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     this.posicao = posicao;
   }
 
+  public boolean isPossuiPosicao() {
+    return posicao != null;
+  }
+
   public Time getTime() {
     return time;
   }
