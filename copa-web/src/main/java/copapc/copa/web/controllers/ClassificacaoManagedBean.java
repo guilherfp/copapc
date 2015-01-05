@@ -68,7 +68,7 @@ public class ClassificacaoManagedBean {
 
   public Jogo getSemifinalA() {
     if (semifinalA == null) {
-      semifinalA = new Jogo(new Time(1, "1º Grupo A"), new Time(2, "2º Grupo B"));
+      semifinalA = new Jogo(1, new Time(1, "1º Grupo A"), new Time(2, "2º Grupo B"));
       semifinalA.setHorario(DateTime.parse("2015-02-11T20:00"));
     }
     return semifinalA;
@@ -76,7 +76,7 @@ public class ClassificacaoManagedBean {
 
   public Jogo getSemifinalB() {
     if (semifinalB == null) {
-      semifinalB = new Jogo(new Time(1, "1º Grupo B"), new Time(2, "2º Grupo A"));
+      semifinalB = new Jogo(1, new Time(1, "1º Grupo B"), new Time(2, "2º Grupo A"));
       semifinalB.setHorario(DateTime.parse("2015-02-11T21:00"));
     }
     return semifinalB;
@@ -84,7 +84,7 @@ public class ClassificacaoManagedBean {
 
   public Jogo getJogoFinalA() {
     if (jogoFinalA == null) {
-      jogoFinalA = new Jogo(new Time(1, "Perd jogo 1"), new Time(2, "Perd jogo 2"));
+      jogoFinalA = new Jogo(1, new Time(1, "Perd jogo 1"), new Time(2, "Perd jogo 2"));
       jogoFinalA.setHorario(DateTime.parse("2015-02-21T09:00"));
     }
     return jogoFinalA;
@@ -92,7 +92,7 @@ public class ClassificacaoManagedBean {
 
   public Jogo getJogoFinalB() {
     if (jogoFinalB == null) {
-      jogoFinalB = new Jogo(new Time(1, "Venc jogo 1"), new Time(2, "Venc jogo 2"));
+      jogoFinalB = new Jogo(1, new Time(1, "Venc jogo 1"), new Time(2, "Venc jogo 2"));
       jogoFinalB.setHorario(DateTime.parse("2015-02-21T11:00"));
     }
     return jogoFinalB;

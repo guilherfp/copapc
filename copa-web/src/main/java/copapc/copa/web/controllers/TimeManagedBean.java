@@ -2,8 +2,6 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import copapc.model.time.TimeRepository;
 
 @Scope("request")
 @Controller("timeMB")
-@ManagedBean(name = "timeMB")
+// @ManagedBean(name = "timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
