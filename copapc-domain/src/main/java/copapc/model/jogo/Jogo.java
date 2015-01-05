@@ -13,6 +13,7 @@ import copapc.shared.Entity;
 public class Jogo extends Entity {
   private static final long serialVersionUID = 1L;
 
+  private int numero;
   private DateTime inicio;
   private DateTime encerramento;
   private DateTime horario;
@@ -22,9 +23,14 @@ public class Jogo extends Entity {
 
   Jogo() {}
 
-  public Jogo(Time mandante, Time visitante) {
+  public Jogo(int numero, Time mandante, Time visitante) {
     setVisitante(visitante);
     setMandante(mandante);
+    this.numero = numero;
+  }
+
+  public int getNumero() {
+    return numero;
   }
 
   public void iniciar() {
@@ -148,9 +154,7 @@ public class Jogo extends Entity {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + ((horario == null) ? 0 : horario.hashCode());
-    result = (prime * result) + ((mandante == null) ? 0 : mandante.hashCode());
-    result = (prime * result) + ((visitante == null) ? 0 : visitante.hashCode());
+    result = (prime * result) + numero;
     return result;
   }
 
@@ -166,25 +170,7 @@ public class Jogo extends Entity {
       return false;
     }
     Jogo other = (Jogo) obj;
-    if (horario == null) {
-      if (other.horario != null) {
-        return false;
-      }
-    } else if (!horario.equals(other.horario)) {
-      return false;
-    }
-    if (mandante == null) {
-      if (other.mandante != null) {
-        return false;
-      }
-    } else if (!mandante.equals(other.mandante)) {
-      return false;
-    }
-    if (visitante == null) {
-      if (other.visitante != null) {
-        return false;
-      }
-    } else if (!visitante.equals(other.visitante)) {
+    if (numero != other.numero) {
       return false;
     }
     return true;

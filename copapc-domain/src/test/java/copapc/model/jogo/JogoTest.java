@@ -22,7 +22,7 @@ public class JogoTest {
 
   @Before
   public void setUp() throws Exception {
-    jogo = new Jogo(mandante, visitante);
+    jogo = new Jogo(1, mandante, visitante);
     for (int i = 0; i < 5; i++) {
       final Jogador jogadorMandante = new Jogador("Nome " + i, i + "@email.com");
       jogadoresMandante.add(jogadorMandante);
