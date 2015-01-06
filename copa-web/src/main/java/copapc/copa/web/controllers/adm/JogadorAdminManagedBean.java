@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import copapc.copa.web.dto.JogadorDTO;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogador.JogadorRepository;
 import copapc.service.jogador.JogadorService;
@@ -34,14 +35,14 @@ public class JogadorAdminManagedBean implements Serializable {
 
   public JogadorDTO getJogador() {
     if (jogadorDTO == null) {
-      jogadorDTO = new JogadorDTO();
+      // jogadorDTO = new JogadorDTO();
     }
     return jogadorDTO;
   }
 
   @Transactional
   public void salvar() {
-    jogadorRepository.salvar(jogadorDTO.toJogador());
+    // jogadorRepository.salvar(jogadorDTO.toJogador());
     jogadorDTO = null;
     jogadores = null;
   }

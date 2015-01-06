@@ -12,4 +12,8 @@ public interface JogoRepository {
 
   void atualizar(Jogo jogo);
 
+  List<Jogo> jogosEmAberto();
+
+  Jogo jogoComNumero(int numero);
+
 }

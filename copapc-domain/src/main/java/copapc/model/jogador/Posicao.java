@@ -5,7 +5,8 @@ public enum Posicao {
   GOLEIRO("Goleiro"),
   ALA("Ala"),
   FIXO("Fixo"),
-  PIVO("Pivô");
+  PIVO("Pivô"),
+  LINHA("Linha");
 
   private Posicao(String nome) {
     this.nome = nome;

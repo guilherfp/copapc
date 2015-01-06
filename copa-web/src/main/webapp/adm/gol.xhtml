@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="guilherfp@gmail.com" />
+
+  <title>V COPA</title>
+
+  <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
+  <h:outputStylesheet name="css/copapc.css" />
+  <link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/favicon.ico" />
+</h:head>
+
+<h:body>
+  <div id="wrapper">
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <h:form>
+            <div class="form-group">
+              <label>Jogo</label>
+              <h:selectOneMenu id="jogo" value="#{golMB.jogoSelecionado}" styleClass="form-control">
+                <f:selectItems value="#{golMB.jogosEmAberto}" var="j" itemLabel="#{j.toString()}" />
+                <f:ajax event="change" immediate="true" execute="@this" render="jogadores" />
+              </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+              <label>Jogador</label>
+              <h:selectOneMenu id="jogadores" value="#{golMB.jogadorSelecionado}" styleClass="form-control"
+                required="true" requiredMessage="Selecion o jogador">
+                <f:selectItems value="#{golMB.jogadores}" var="j" itemLabel="#{j.nome}" />
+              </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+              <h:commandButton value="Inserrir Gol" action="#{golMB.inserirGol}"
+                styleClass="btn btn-success btn-lg btn-block" />
+              <h:button value="Inserir gol" styleClass="btn btn-success btn-lg btn-block">
+                <f:ajax event="click" listener="#{golMB.inserirGol}" immediate="true" execute="@form" render="@form" />
+              </h:button>
+            </div>
+          </h:form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h:outputScript name="js/jquery.min.js" />
+  <h:outputScript name="js/bootstrap.min.js" />
+  <h:outputScript name="js/copapc.js" />
+
+</h:body>
+</html>

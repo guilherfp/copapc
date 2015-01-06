@@ -40,4 +40,20 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
     getSession().update("Jogo", jogo);
   }
 
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<Jogo> jogosEmAberto() {
+    final String queryString = "from Jogo where encerramento is null order by horario";
+    final Query query = getSession().createQuery(queryString);
+    return query.list();
+  }
+
+  @Override
+  public Jogo jogoComNumero(int numero) {
+    final String queryString = "from Jogo where numero = :numero";
+    final Query query = getSession().createQuery(queryString);
+    query.setParameter("numero", numero);
+    return (Jogo) query.uniqueResult();
+  }
+
 }

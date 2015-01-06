@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 import org.joda.time.DateTime;
 
 import copapc.model.gol.Gol;
+import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
@@ -113,15 +114,27 @@ public class Jogo extends Entity {
   }
 
   public int getTotalDeGolsDoMandante() {
-    return (int) gols.stream().filter(j -> j.getTime().equals(mandante)).count();
+    return (int) gols.stream().filter(g -> {
+      if ((g.isContra() == true) && g.getTime().equals(visitante)) {
+        return true;
+      } else {
+        return (g.isContra() == false) && g.getTime().equals(mandante);
+      }
+    }).count();
   }
 
   public int getTotalDeGolsDoVisitante() {
-    return (int) gols.stream().filter(j -> j.getTime().equals(visitante)).count();
+    return (int) gols.stream().filter(g -> {
+      if ((g.isContra() == true) && g.getTime().equals(mandante)) {
+        return true;
+      } else {
+        return (g.isContra() == false) && g.getTime().equals(visitante);
+      }
+    }).count();
   }
 
   public int getTotalDeGols() {
-    return getTotalDeGolsDoMandante() + getTotalDeGolsDoVisitante();
+    return gols.size();
   }
 
   public int getGols(Time time) {
@@ -148,6 +161,13 @@ public class Jogo extends Entity {
 
   public boolean estaNoJogo(Time time) {
     return visitante.equals(time) || mandante.equals(time);
+  }
+
+  public List<Jogador> getJogadores() {
+    final List<Jogador> jogadores = new ArrayList<>();
+    jogadores.addAll(mandante.getJogadores());
+    jogadores.addAll(visitante.getJogadores());
+    return jogadores;
   }
 
   @Override

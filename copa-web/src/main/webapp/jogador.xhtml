@@ -40,12 +40,12 @@
               <h3>Gols</h3>
             </div>
             <div class="table-responsive">
-              <h:dataTable value="#{jogadorMB.jogador.golsPorJogo.entrySet()}" var="gol"
+              <h:dataTable value="#{jogadorMB.jogador.golsAFavorPorJogo.entrySet()}" var="gol"
                 styleClass="table table-striped table-hover table-condensed">
                 <h:column>
                   <f:facet name="header">Gol(s)</f:facet>
                   <span style="vertical-align: middle; height: 15px;">
-                    <h:outputText value="#{gol.value}" />
+                    <h:outputText value="#{gol.value} (#{jogadorMB.jogador.getGolsContra(gol.key)})" />
                   </span>
                 </h:column>
                 <h:column>

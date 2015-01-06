@@ -50,4 +50,11 @@ public class JogadorRepositoryImpl extends HibernateRepository implements Jogado
     return (Jogador) query.uniqueResult();
   }
 
+  @Override
+  public Jogador comEmail(String email) {
+    final Query query = getSession().createQuery("from Jogador where email = :email");
+    query.setParameter("email", email);
+    return (Jogador) query.uniqueResult();
+  }
+
 }

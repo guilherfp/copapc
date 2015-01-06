@@ -4,7 +4,7 @@
 
 <hibernate-mapping default-access="field">
   <class name="copapc.model.jogador.Jogador" entity-name="Jogador" table="jogador">
-    <cache usage="read-only" />
+    <cache usage="read-write" />
 
     <id name="id" column="id" unsaved-value="none">
       <generator class="org.hibernate.id.IdentityGenerator" />
@@ -16,10 +16,6 @@
 
     <property name="email">
       <column name="email" length="80" not-null="true" unique-key="uk-jogador-email" />
-    </property>
-
-    <property name="pontuacao">
-      <column name="pontuacao" not-null="true" length="1" default="0" />
     </property>
 
     <many-to-one name="time" entity-name="Time" foreign-key="fk_time_jogador">

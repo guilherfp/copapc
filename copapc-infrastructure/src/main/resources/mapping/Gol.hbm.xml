@@ -26,5 +26,9 @@
       <column name="jogo_id" not-null="true" unique-key="uk_gol" />
     </many-to-one>
 
+    <property name="contra">
+      <column name="contra" not-null="true" default="false" />
+    </property>
+
   </class>
 </hibernate-mapping>

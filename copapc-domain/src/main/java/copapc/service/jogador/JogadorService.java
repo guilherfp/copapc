@@ -15,7 +15,6 @@ public class JogadorService {
 
   public void cadastrar(String nome, String email, int pontuacao, Posicao posicao, Time time) {
     final Jogador jogador = new Jogador(nome, email);
-    jogador.setPontuacao(pontuacao);
     jogador.setPosicao(posicao);
     jogador.setTime(time);
     jogadorRepository.salvar(jogador);

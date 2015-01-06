@@ -23,10 +23,10 @@
     <property name="password" value="${hibernate.connection.password}" />
     <property name="numHelperThreads" value="2" />
     <property name="acquireIncrement" value="2" />
-    <property name="minPoolSize" value="10" />
-    <property name="maxPoolSize" value="30" />
+    <property name="minPoolSize" value="30" />
+    <property name="maxPoolSize" value="100" />
     <property name="maxIdleTime" value="10000" />
-    <property name="maxStatements" value="5" />
+    <property name="maxStatements" value="10" />
   </bean>
 
   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" destroy-method="destroy">

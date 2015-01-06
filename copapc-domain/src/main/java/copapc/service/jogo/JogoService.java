@@ -22,7 +22,15 @@ public class JogoService {
   }
 
   public void marcarGol(final Jogador jogador, final Jogo jogo) {
-    final Gol gol = new Gol(jogador, jogo);
+    final Gol gol = Gol.gol(jogador, jogo);
+    jogo.adicionarGol(gol);
+    jogador.adicionarGol(gol);
+    golRepository.salvar(gol);
+    LOGGER.info("Gol marcado: {}", gol);
+  }
+
+  public void marcarGolContra(final Jogador jogador, final Jogo jogo) {
+    final Gol gol = Gol.golContra(jogador, jogo);
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
     golRepository.salvar(gol);

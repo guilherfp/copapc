@@ -18,7 +18,6 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   private String nome;
   private String email;
-  private int pontuacao;
   private Posicao posicao;
   private Time time;
   private List<Gol> gols = new ArrayList<>();
@@ -51,15 +50,6 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     this.email = email;
   }
 
-  public int getPontuacao() {
-    return pontuacao;
-  }
-
-  public void setPontuacao(int pontuacao) {
-    Validate.isTrue(pontuacao >= 0, "Pontuação inválida");
-    this.pontuacao = pontuacao;
-  }
-
   public Posicao getPosicao() {
     return posicao;
   }
@@ -90,19 +80,33 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public int getTotalDeGols() {
-    return gols.size();
+    return (int) gols.stream().filter(g -> g.isContra() == false).count();
   }
 
   public List<Gol> getGols() {
     return gols;
   }
 
-  public Map<Jogo, Integer> getGolsPorJogo() {
+  public Map<Jogo, Integer> getGolsAFavorPorJogo() {
     final Map<Jogo, Integer> golsPorJogo = new HashMap<>();
     for (Gol gol : getGols()) {
-      golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + 1);
+      if (gol.isContra() == false) {
+        golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + 1);
+      }
     }
     return golsPorJogo;
+  }
+
+  public int getGolsContra(Jogo jogo) {
+    int gols = 0;
+    for (Gol gol : getGols()) {
+      if (gol.getJogo().getNumero() == jogo.getNumero()) {
+        if (gol.isContra() == true) {
+          gols++;
+        }
+      }
+    }
+    return gols;
   }
 
   public Cartao getCartao() {

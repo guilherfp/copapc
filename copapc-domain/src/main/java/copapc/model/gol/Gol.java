@@ -15,16 +15,18 @@ public class Gol extends Entity {
   private Jogador jogador;
   private Time time;
   private Jogo jogo;
+  private boolean contra = false;
 
   Gol() {}
 
-  public Gol(final Jogador jogador, final Jogo jogo) {
-    Validate.notNull(jogador);
+  public Gol(final Jogador jogador, final Jogo jogo, boolean contra) {
     Validate.notNull(jogo);
+    Validate.notNull(jogador);
     this.jogador = jogador;
     this.jogo = jogo;
     time = jogador.getTime();
     numero = jogo.getTotalDeGols() + 1;
+    this.contra = contra;
   }
 
   public int getMinuto() {
@@ -45,6 +47,18 @@ public class Gol extends Entity {
 
   public Jogo getJogo() {
     return jogo;
+  }
+
+  public boolean isContra() {
+    return contra;
+  }
+
+  public static Gol gol(Jogador jogador, Jogo jogo) {
+    return new Gol(jogador, jogo, false);
+  }
+
+  public static Gol golContra(Jogador jogador, Jogo jogo) {
+    return new Gol(jogador, jogo, true);
   }
 
   @Override

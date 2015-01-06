@@ -23,4 +23,6 @@ public interface JogadorRepository {
 
   Jogador comUrl(String url);
 
+  Jogador comEmail(String email);
+
 }

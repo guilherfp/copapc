@@ -4,7 +4,7 @@
 
 <hibernate-mapping default-access="field">
   <class name="copapc.model.jogo.Jogo" entity-name="Jogo" table="jogo">
-    <cache usage="read-only" />
+    <cache usage="read-write" />
 
     <id name="id" column="id" unsaved-value="none">
       <generator class="org.hibernate.id.IdentityGenerator" />
@@ -37,7 +37,7 @@
       <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />
     </property>
 
-    <bag name="gols" inverse="true">
+    <bag name="gols" inverse="true" lazy="false">
       <key column="jogo_id" />
       <one-to-many entity-name="Gol" />
     </bag>

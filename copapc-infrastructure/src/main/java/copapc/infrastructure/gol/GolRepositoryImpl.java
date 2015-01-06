@@ -24,7 +24,7 @@ public class GolRepositoryImpl extends HibernateRepository implements GolReposit
 
   @Override
   public void salvar(Gol gol) {
-    getSession().saveOrUpdate("Gol", gol);
+    getSession().save("Gol", gol);
   }
 
 }

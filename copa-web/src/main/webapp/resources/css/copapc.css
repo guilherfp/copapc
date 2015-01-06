@@ -27,25 +27,15 @@ a:HOVER {
 
 .min-escudo {
   display: inline-block;
-  height: 20px;
+  height: 25px;
   max-width: 100%;
-  width: 20px;
-  vertical-align: middle;
-}
-
-.escudo {
-  display: inline-block;
-  height: 30px;
-  max-width: 100%;
-  width: 30px;
+  width: 25px;
   vertical-align: middle;
 }
 
 .escudo-time {
   display: inline-block;
-  height: 100px;
   max-width: 100%;
-  width: 100px;
   vertical-align: middle;
 }
 
@@ -113,6 +103,7 @@ a:HOVER {
 }
 
 .lista-de-jogos-item {
+  
 }
 
 .placar-jogo {
@@ -178,6 +169,13 @@ a:HOVER {
   .placar-jogo-equipes-sigla {
     display: none
   }
+  .escudo {
+    display: inline-block;
+    height: 55px;
+    max-width: 100%;
+    width: 55px;
+    vertical-align: middle;
+  }
 }
 
 @media ( max-width : 550px) {
@@ -186,6 +184,13 @@ a:HOVER {
   }
   .placar-jogo-equipes-sigla {
     display: inline-block
+  }
+  .escudo {
+    display: inline-block;
+    height: 40px;
+    max-width: 100%;
+    width: 40px;
+    vertical-align: middle;
   }
 }
 
