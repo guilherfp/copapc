@@ -18,7 +18,7 @@ a:HOVER {
 }
 
 .section-colored {
-  background-color: #e1e1e1; /* change this to change the background color of a colored section */
+  background-color: #e1e1e1;
 }
 
 .img-responsive {
@@ -39,10 +39,13 @@ a:HOVER {
   vertical-align: middle;
 }
 
-/* Half Page Height Carousel Customization */
-.carousel {
-  height: 250px;
-  background-color: #efefef;
+.transparent-bg {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  margin: 0px auto 0px auto;
+  position: relative;
+  height: auto;
+  padding: 30px;
 }
 
 .item, .active, .carousel-inner {
@@ -79,18 +82,9 @@ a:HOVER {
   font-size: 8em;
 }
 
-/* Responsive Styles */
-@media ( max-width : 767px) {
-  .carousel {
-    height: 210px; /* increases the carousel height so it looks good on phones */
-    padding: 0 20px;
-  }
-}
-
 .carousel-img {
   display: block;
   margin: auto;
-  padding-top: 15px;
 }
 
 .lista-de-jogos-conteudo {

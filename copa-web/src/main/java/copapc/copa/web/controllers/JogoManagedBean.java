@@ -21,6 +21,7 @@ public class JogoManagedBean implements Serializable {
   private JogoRepository jogoRepository;
 
   private List<Jogo> jogos;
+  private List<Jogo> proximos;
 
   @Transactional
   public List<Jogo> getJogos() {
@@ -28,6 +29,13 @@ public class JogoManagedBean implements Serializable {
       jogos = jogoRepository.jogos();
     }
     return jogos;
+  }
+
+  public List<Jogo> getProximos() {
+    if (proximos == null) {
+      proximos = jogoRepository.jogosEmAberto();
+    }
+    return proximos;
   }
 
 }
