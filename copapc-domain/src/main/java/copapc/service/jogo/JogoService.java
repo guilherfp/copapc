@@ -1,5 +1,6 @@
 package copapc.service.jogo;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,14 +39,26 @@ public class JogoService {
   }
 
   public void iniciarJogo(Jogo jogo) {
+    Validate.isTrue(jogo.isIniciado() == false, "Jogo já foi iniciado");
+    Validate.isTrue(jogo.isEncerrado() == false, "Jogo já foi encerrado");
     jogo.iniciar();
     jogoRepository.atualizar(jogo);
     LOGGER.info("Jogo iniciado: {}", jogo);
   }
 
   public void encerrarJogo(Jogo jogo) {
+    Validate.isTrue(jogo.isEncerrado() == false, "Jogo já foi encerrado");
+    Validate.isTrue(jogo.isIniciado(), "O Jogo não iniciado");
     jogo.encerrar();
     jogoRepository.atualizar(jogo);
     LOGGER.info("Jogo encerrado: {}", jogo);
+  }
+
+  public void adicionarCartaoAmarelo(Jogador jogador) {
+
+  }
+
+  public void adicionarCartaoVermelho(Jogador jogador) {
+
   }
 }

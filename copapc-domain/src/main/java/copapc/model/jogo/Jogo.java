@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 import org.joda.time.DateTime;
 
 import copapc.model.gol.Gol;
+import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
@@ -52,6 +53,10 @@ public class Jogo extends Entity {
 
   public boolean isEncerrado() {
     return encerramento != null;
+  }
+
+  public boolean isIniciado() {
+    return inicio != null;
   }
 
   public Gol adicionarGol(Gol gol) {
@@ -168,6 +173,10 @@ public class Jogo extends Entity {
     jogadores.addAll(mandante.getJogadores());
     jogadores.addAll(visitante.getJogadores());
     return jogadores;
+  }
+
+  public void adicionarCartao(Jogador jogador, Cartao cartao) {
+
   }
 
   @Override

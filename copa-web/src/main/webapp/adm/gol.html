@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 20px;">
       <div class="col-lg-12">
         <div class="control-group form-group">
           <div class="controls">
@@ -30,6 +30,9 @@
           <li class="">
             <a href="#service-two" data-toggle="tab">CARTÃO</a>
           </li>
+          <li class="">
+            <a href="#service-three" data-toggle="tab">HORÁRIO</a>
+          </li>
         </ul>
         <div id="myTabContent" class="tab-content">
           <div class="tab-pane fade active in" id="service-one">
@@ -40,27 +43,29 @@
                 </label>
               </div>
             </div>
-            <div class="form-group">
-              <div class="controls">
-                <button id="gol" type="submit" class="btn btn-success btn-lg btn-block">GOL</button>
-              </div>
+            <div class="form-group controls">
+              <button id="gol" type="submit" class="btn btn-success btn-lg btn-block">GOL</button>
             </div>
           </div>
           <div class="tab-pane fade" id="service-two">
             <div class="form-group" style="margin-top: 20px;">
-              <div id="cartoes" class="controls" style="margin: 30px 0px;">
-                <select class="form-control">
+              <div class="controls" style="margin: 30px 0px;">
+                <select id="cartoes" class="form-control">
                   <option value="AMARELO">Amarelo</option>
                   <option value="VERMELHO">Vermelho</option>
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <div class="form-group">
-                <div class="controls">
-                  <button id="cartao" type="submit" class="btn btn-danger btn-lg btn-block">Confirmar</button>
-                </div>
-              </div>
+            <div class="form-group controls">
+              <button id="cartao" type="submit" class="btn btn-danger btn-lg btn-block">Confirmar</button>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="service-three">
+            <div class="form-group controls" style="margin-top: 20px;">
+              <button id="iniciar" type="submit" class="btn btn-success btn-lg btn-block">INICIAR</button>
+            </div>
+            <div class="form-group controls">
+              <button id="encerrar" type="submit" class="btn btn-danger btn-lg btn-block">ENCERRAR</button>
             </div>
           </div>
         </div>
@@ -81,6 +86,7 @@
                   contentType:"application/json",
                   success: function(data, status, jqXHR){
                     alert(data);
+                    $("#contra").attr("checked", false);
                   },
                   error: function(jqXHR, status, error) {
                 	alert(status);
@@ -101,9 +107,7 @@
 			}
 		});
 		$("#jogos").change(function() {
-			var jogo = $("#jogos").val();
-			var url = "/copa-web/rest/jogos/".concat(jogo);
-			$.get(url, function(data){
+			$.get("/copa-web/rest/jogos/".concat($("#jogos").val()), function(data){
 				$("#jogadores option").remove();
 				$.each(data, function(index, j) {
 					$("#jogadores").append('<option value=' + j.email + '>' + j.nome + ' (' + j.time + ')</option>');
@@ -112,7 +116,26 @@
 				alert("Não foi possível obter os jogadores!");
 			});
 		});
-		$(document).ready(function() {
+		$("#iniciar").click(function() {
+			if (confirm("Deseja realmente iniciar o jogo?")) {
+    			$.get("/copa-web/rest/jogos/".concat($("#jogos").val()).concat("/iniciar"), function(data){
+    				alert(data);
+    			}).fail(function() {
+    				alert("Não foi possível obter os jogadores!");
+    			});
+			}
+		});
+		$("#encerrar").click(function() {
+			if (confirm("Deseja realmente encerrar o jogo?")) {
+    			$.get("/copa-web/rest/jogos/".concat($("#jogos").val()).concat("/encerrar"), function(data){
+    				alert(data);
+    				loadJogos();
+    			}).fail(function() {
+    				alert("Não foi possível obter os jogadores!");
+    			});
+			}
+		});
+		var loadJogos = function() {
 			$.get("/copa-web/rest/jogos/abertos", function(data){
 				$("#jogos option").remove();
 				$.each(data, function(index, j) {
@@ -124,6 +147,10 @@
 			}).fail(function() {
 				alert("Não foi possível obter os jogos!");
 			});
+		}
+		
+		$(document).ready(function() {
+  			loadJogos();
 		});
 	</script>
 </body>

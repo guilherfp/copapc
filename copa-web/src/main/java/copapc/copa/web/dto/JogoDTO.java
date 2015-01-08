@@ -8,12 +8,18 @@ public class JogoDTO {
   private TimeDTO mandante;
   private TimeDTO visitante;
   private String horario;
+  private boolean iniciado;
 
-  public JogoDTO(int numero, TimeDTO mandante, TimeDTO visitante, String horario) {
+  public JogoDTO(boolean iniciado, int numero, TimeDTO mandante, TimeDTO visitante, String horario) {
+    this.iniciado = iniciado;
     this.numero = numero;
     this.mandante = mandante;
     this.visitante = visitante;
     this.horario = horario;
+  }
+
+  public boolean isIniciado() {
+    return iniciado;
   }
 
   public int getNumero() {
@@ -34,7 +40,9 @@ public class JogoDTO {
 
   public static JogoDTO fromJogo(Jogo j) {
     final String horario = j.getHorario().toString("dd/MM HH:mm");
-    return new JogoDTO(j.getNumero(), TimeDTO.fromTime(j.getMandante()), TimeDTO.fromTime(j.getVisitante()), horario);
+    final TimeDTO mandante = TimeDTO.fromTime(j.getMandante());
+    final TimeDTO visitante = TimeDTO.fromTime(j.getVisitante());
+    return new JogoDTO(j.isIniciado(), j.getNumero(), mandante, visitante, horario);
   }
 
 }

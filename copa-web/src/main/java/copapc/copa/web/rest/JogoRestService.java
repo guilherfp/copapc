@@ -6,16 +6,15 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import copapc.copa.web.dto.CartaoDTO;
 import copapc.copa.web.dto.GolDTO;
 import copapc.copa.web.dto.JogadorDTO;
 import copapc.copa.web.dto.JogoDTO;
@@ -50,7 +49,6 @@ public class JogoRestService {
   @ResponseBody
   @Transactional
   @RequestMapping("/abertos")
-  @ResponseStatus(HttpStatus.OK)
   public List<JogoDTO> emAberto() {
     return jogoRepository.jogosEmAberto().stream().map(JogoDTO::fromJogo).collect(Collectors.toList());
   }
@@ -69,6 +67,50 @@ public class JogoRestService {
       } else {
         jogoService.marcarGolContra(jogador, jogo);
       }
+      return "Sucesso";
+    } catch (Exception ex) {
+      return ex.getMessage();
+    }
+  }
+
+  @ResponseBody
+  @Transactional
+  @RequestMapping(value = "/cartao", method = RequestMethod.POST)
+  public String aplicarCartao(@RequestBody CartaoDTO cartaoDTO) {
+    try {
+      final Jogador jogador = jogadorRepository.comEmail(cartaoDTO.getJogador());
+      Validate.notNull(jogador, "Jogador inválido");
+      final Jogo jogo = jogoRepository.jogoComNumero(cartaoDTO.getJogo());
+      Validate.notNull(jogo, "Jogo inválido");
+      jogo.adicionarCartao(jogador, cartaoDTO.getCartao());
+      return "Sucesso";
+    } catch (Exception ex) {
+      return ex.getMessage();
+    }
+  }
+
+  @ResponseBody
+  @Transactional
+  @RequestMapping("{jogo}/iniciar")
+  public String iniciarJogo(@PathVariable("jogo") int numeroDoJogo) {
+    try {
+      final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
+      Validate.notNull(jogo, "Jogo inválido");
+      jogoService.iniciarJogo(jogo);
+      return "Sucesso";
+    } catch (Exception ex) {
+      return ex.getMessage();
+    }
+  }
+
+  @ResponseBody
+  @Transactional
+  @RequestMapping("{jogo}/encerrar")
+  public String encerrarJogo(@PathVariable("jogo") int numeroDoJogo) {
+    try {
+      final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
+      Validate.notNull(jogo, "Jogo inválido");
+      jogoService.encerrarJogo(jogo);
       return "Sucesso";
     } catch (Exception ex) {
       return ex.getMessage();

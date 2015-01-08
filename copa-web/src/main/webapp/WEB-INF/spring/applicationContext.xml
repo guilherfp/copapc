@@ -27,6 +27,4 @@
     <constructor-arg name="timeRepository" ref="timeRepository" />
   </bean>
 
-  <bean class="copapc.copa.web.rest.SimpleCORSFilter" />
-
 </beans>
