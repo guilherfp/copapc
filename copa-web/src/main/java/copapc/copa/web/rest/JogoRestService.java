@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import copapc.copa.web.dto.GolDTO;
@@ -48,21 +50,28 @@ public class JogoRestService {
   @ResponseBody
   @Transactional
   @RequestMapping("/abertos")
+  @ResponseStatus(HttpStatus.OK)
   public List<JogoDTO> emAberto() {
     return jogoRepository.jogosEmAberto().stream().map(JogoDTO::fromJogo).collect(Collectors.toList());
   }
 
-  @Transactional(readOnly = false)
+  @ResponseBody
+  @Transactional
   @RequestMapping(value = "/gol", method = RequestMethod.POST)
-  public void adicionarGol(@RequestBody GolDTO golDTO) {
-    final Jogador jogador = jogadorRepository.comEmail(golDTO.getEmailDoJogador());
-    Validate.notNull(jogador, "Jogador inválido");
-    final Jogo jogo = jogoRepository.jogoComNumero(golDTO.getNumeroDoJogo());
-    Validate.notNull(jogo, "Jogo inválido");
-    if (golDTO.isContra() == false) {
-      jogoService.marcarGol(jogador, jogo);
-    } else {
-      jogoService.marcarGolContra(jogador, jogo);
+  public String adicionarGol(@RequestBody GolDTO golDTO) {
+    try {
+      final Jogador jogador = jogadorRepository.comEmail(golDTO.getJogador());
+      Validate.notNull(jogador, "Jogador inválido");
+      final Jogo jogo = jogoRepository.jogoComNumero(golDTO.getJogo());
+      Validate.notNull(jogo, "Jogo inválido");
+      if (golDTO.isContra() == false) {
+        jogoService.marcarGol(jogador, jogo);
+      } else {
+        jogoService.marcarGolContra(jogador, jogo);
+      }
+      return "Sucesso";
+    } catch (Exception ex) {
+      return ex.getMessage();
     }
   }
 

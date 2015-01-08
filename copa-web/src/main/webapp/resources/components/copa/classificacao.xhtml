@@ -10,15 +10,14 @@
 
 <composite:implementation>
   <div class="table-responsive">
-    <h:dataTable styleClass="table table-hover table-condensed tabela-pontos" value="#{cc.attrs.value}"
-      var="c">
+    <h:dataTable styleClass="table table-hover table-condensed tabela-pontos" value="#{cc.attrs.value}" var="c">
       <h:column>
         <f:facet name="header">#</f:facet>
         <h:outputText value="#{c.posicao}" />
       </h:column>
       <h:column>
         <f:facet name="header">Time</f:facet>
-        <span class="tabela-nome-time">
+        <span class="tabela-nome-time" style="margin-right: 13px; margin-left: -2px;">
           <copa:resumoTime escutoLeft="true" time="#{c.time}" />
         </span>
       </h:column>

@@ -7,11 +7,13 @@ public class JogoDTO {
   private int numero;
   private TimeDTO mandante;
   private TimeDTO visitante;
+  private String horario;
 
-  public JogoDTO(int numero, TimeDTO mandante, TimeDTO visitante) {
+  public JogoDTO(int numero, TimeDTO mandante, TimeDTO visitante, String horario) {
     this.numero = numero;
     this.mandante = mandante;
     this.visitante = visitante;
+    this.horario = horario;
   }
 
   public int getNumero() {
@@ -26,8 +28,13 @@ public class JogoDTO {
     return visitante;
   }
 
+  public String getHorario() {
+    return horario;
+  }
+
   public static JogoDTO fromJogo(Jogo j) {
-    return new JogoDTO(j.getNumero(), TimeDTO.fromTime(j.getMandante()), TimeDTO.fromTime(j.getVisitante()));
+    final String horario = j.getHorario().toString("dd/MM HH:mm");
+    return new JogoDTO(j.getNumero(), TimeDTO.fromTime(j.getMandante()), TimeDTO.fromTime(j.getVisitante()), horario);
   }
 
 }
