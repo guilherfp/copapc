@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <class name="copapc.model.usuario.Usuario" entity-name="Usuario" table="usuario">
+    <cache usage="read-only" />
+
+    <id name="id" column="id" unsaved-value="none">
+      <generator class="org.hibernate.id.IdentityGenerator" />
+    </id>
+
+    <property name="login">
+      <column name="login" not-null="true" length="50" unique-key="uk_login_usuario" />
+    </property>
+
+    <property name="senha">
+      <column name="senha" not-null="true" />
+    </property>
+
+  </class>
+</hibernate-mapping>

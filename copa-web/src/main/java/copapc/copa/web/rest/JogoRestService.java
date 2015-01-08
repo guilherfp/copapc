@@ -2,6 +2,8 @@ package copapc.copa.web.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
@@ -41,7 +43,9 @@ public class JogoRestService {
   public List<JogadorDTO> jogadoresDoJogo(@PathVariable("numero") int numero) {
     final Jogo jogo = jogoRepository.jogoComNumero(numero);
     if (jogo != null) {
-      return jogo.getJogadores().stream().map(JogadorDTO::fromJogador).collect(Collectors.toList());
+      final Predicate<Jogador> naoSuspensos = j -> j.isSuspenso() == false;
+      final Function<Jogador, JogadorDTO> mapper = JogadorDTO::fromJogador;
+      return jogo.getJogadores().stream().filter(naoSuspensos).map(mapper).collect(Collectors.toList());
     }
     return new ArrayList<>();
   }
@@ -82,7 +86,7 @@ public class JogoRestService {
       Validate.notNull(jogador, "Jogador inválido");
       final Jogo jogo = jogoRepository.jogoComNumero(cartaoDTO.getJogo());
       Validate.notNull(jogo, "Jogo inválido");
-      jogo.adicionarCartao(jogador, cartaoDTO.getCartao());
+      jogoService.adicionarCartao(jogo, jogador, cartaoDTO.getCartao());
       return "Sucesso";
     } catch (Exception ex) {
       return ex.getMessage();

@@ -128,6 +128,10 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     return url;
   }
 
+  public boolean isSuspenso() {
+    return Cartao.VERMELHO.equals(cartao);
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;

@@ -42,5 +42,20 @@
       <one-to-many entity-name="Gol" />
     </bag>
 
+    <bag name="cartoesDoJogo" lazy="false" table="jogo_cartoes">
+      <key column="jogo_id" />
+      <composite-element class="copapc.model.jogo.CartaoDoJogo">
+        <property name="cartao">
+          <column name="cartao" length="20" not-null="false" />
+          <type name="org.hibernate.type.EnumType">
+            <param name="useNamed">true</param>
+            <param name="enumClass">copapc.model.jogador.Cartao</param>
+            <param name="type">12</param>
+          </type>
+        </property>
+        <many-to-one name="jogador" entity-name="Jogador" />
+      </composite-element>
+    </bag>
+
   </class>
 </hibernate-mapping>

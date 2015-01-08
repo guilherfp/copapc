@@ -2,6 +2,8 @@ package copapc.model.jogo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
 import org.joda.time.DateTime;
@@ -22,6 +24,7 @@ public class Jogo extends Entity {
   private Time mandante;
   private Time visitante;
   private List<Gol> gols = new ArrayList<>();
+  private List<CartaoDoJogo> cartoesDoJogo = new ArrayList<>();
 
   Jogo() {}
 
@@ -37,6 +40,10 @@ public class Jogo extends Entity {
 
   public void iniciar() {
     inicio = DateTime.now();
+  }
+
+  public void iniciarNoHorario() {
+    inicio = horario;
   }
 
   public void encerrar() {
@@ -176,7 +183,26 @@ public class Jogo extends Entity {
   }
 
   public void adicionarCartao(Jogador jogador, Cartao cartao) {
+    Validate.isTrue(jogador.isSuspenso() == false, "Jogador está suspenso");
+    if (cartoesDoJogador(jogador).contains(Cartao.AMARELO)) {
+      jogador.setCartao(Cartao.VERMELHO);
+    } else if (jogador.getCartao().equals(Cartao.AMARELO_1)) {
+      jogador.setCartao(Cartao.AMARELO_2);
+    } else if (cartao.equals(Cartao.VERMELHO)) {
+      jogador.setCartao(Cartao.VERMELHO);
+    } else {
+      jogador.setCartao(Cartao.AMARELO_1);
+    }
+    cartoesDoJogo.add(new CartaoDoJogo(cartao, jogador));
+  }
 
+  public List<CartaoDoJogo> getCartoesDoJogo() {
+    return cartoesDoJogo;
+  }
+
+  private List<Cartao> cartoesDoJogador(Jogador jogador) {
+    final Predicate<? super CartaoDoJogo> mesmoJogador = c -> c.getJogador().equals(jogador);
+    return cartoesDoJogo.stream().filter(mesmoJogador).map(CartaoDoJogo::getCartao).collect(Collectors.toList());
   }
 
   @Override

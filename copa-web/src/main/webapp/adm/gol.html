@@ -76,9 +76,9 @@
   <script src="/copa-web/resources/js/bootstrap.min.js"></script>
   <script>
 		$("#gol").click(function() {
-            var msg = 'Confimar gol de: ' + $("#jogadores option:selected").text();
+            var msg = "Confimar gol de: " + $("#jogadores option:selected").text();
 			if (confirm(msg)) {
-                var gol = {"jogador": $('#jogadores').val(), "jogo": $('#jogos').val(), "contra": $('#contra').is(':checked')};
+                var gol = {jogador: $("#jogadores").val(), jogo: $("#jogos").val(), contra: $("#contra").is(":checked")};
                 $.ajax({
                   url:"/copa-web/rest/jogos/gol",
                   type:"post",
@@ -95,26 +95,25 @@
 			}
 		});
 		$("#cartao").click(function() {
-			var msg = 'Confimar cartão (' + $("#cartoes option:selected").text() + ') de: ' + $("#jogadores option:selected").text();
+			var msg = "Confimar cartão (" + $("#cartoes option:selected").text() + ") de: " + $("#jogadores option:selected").text();
 			if (confirm(msg)) {
-				$.post("/copa-web/rest/jogos/cartao", { jogador: $("#jogadores").val(), cartao: $("#cartoes").val() })
-				.done(function() {
-					alert("Ação realizada com sucesso!");
-				})
-				.fail(function() {
-					alert("Erro ao realizar operação!");
-				});
+                $.ajax({
+                  url:"/copa-web/rest/jogos/cartao",
+                  type:"post",
+                  data: JSON.stringify({jogador: $("#jogadores").val(), jogo: $("#jogos").val(), cartao: $("#cartoes").val()}),
+                  contentType:"application/json",
+                  success: function(data, status, jqXHR){
+                    alert(data);
+                    loadJogadores();
+                  },
+                  error: function(jqXHR, status, error) {
+                	alert(status);
+                  }
+                });
 			}
 		});
 		$("#jogos").change(function() {
-			$.get("/copa-web/rest/jogos/".concat($("#jogos").val()), function(data){
-				$("#jogadores option").remove();
-				$.each(data, function(index, j) {
-					$("#jogadores").append('<option value=' + j.email + '>' + j.nome + ' (' + j.time + ')</option>');
-				});
-			}).fail(function() {
-				alert("Não foi possível obter os jogadores!");
-			});
+			loadJogadores();
 		});
 		$("#iniciar").click(function() {
 			if (confirm("Deseja realmente iniciar o jogo?")) {
@@ -140,15 +139,24 @@
 				$("#jogos option").remove();
 				$.each(data, function(index, j) {
 					$("#jogos").append(
-						$("<option></option>").text(j.mandante.nome + ' X ' + j.visitante.nome + ', ' + j.horario).val(j.numero)
+						$("<option></option>").text(j.mandante.nome + " X " + j.visitante.nome + ", " + j.horario).val(j.numero)
 					);
 				});
 				$("#jogos").change();
 			}).fail(function() {
 				alert("Não foi possível obter os jogos!");
 			});
-		}
-		
+		};
+		var loadJogadores = function() {
+			$.get("/copa-web/rest/jogos/".concat($("#jogos").val()), function(data){
+				$("#jogadores option").remove();
+				$.each(data, function(index, j) {
+					$("#jogadores").append("<option value=" + j.email + ">" + j.nome + " (" + j.time + ")</option>");
+				});
+			}).fail(function() {
+				alert("Não foi possível obter os jogadores!");
+			});
+		};
 		$(document).ready(function() {
   			loadJogos();
 		});

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import copapc.model.gol.Gol;
 import copapc.model.gol.GolRepository;
+import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
@@ -26,6 +27,7 @@ public class JogoService {
     final Gol gol = Gol.gol(jogador, jogo);
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
+    validarInicializacaoDoJogo(jogo);
     golRepository.salvar(gol);
     LOGGER.info("Gol marcado: {}", gol);
   }
@@ -34,6 +36,7 @@ public class JogoService {
     final Gol gol = Gol.golContra(jogador, jogo);
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
+    validarInicializacaoDoJogo(jogo);
     golRepository.salvar(gol);
     LOGGER.info("Gol marcado: {}", gol);
   }
@@ -46,6 +49,12 @@ public class JogoService {
     LOGGER.info("Jogo iniciado: {}", jogo);
   }
 
+  public void validarInicializacaoDoJogo(Jogo jogo) {
+    if (jogo.isIniciado() == false) {
+      jogo.iniciarNoHorario();
+    }
+  }
+
   public void encerrarJogo(Jogo jogo) {
     Validate.isTrue(jogo.isEncerrado() == false, "Jogo já foi encerrado");
     Validate.isTrue(jogo.isIniciado(), "O Jogo não iniciado");
@@ -54,11 +63,10 @@ public class JogoService {
     LOGGER.info("Jogo encerrado: {}", jogo);
   }
 
-  public void adicionarCartaoAmarelo(Jogador jogador) {
-
+  public void adicionarCartao(Jogo jogo, Jogador jogador, Cartao cartao) {
+    validarInicializacaoDoJogo(jogo);
+    jogo.adicionarCartao(jogador, cartao);
+    jogoRepository.atualizar(jogo);
   }
 
-  public void adicionarCartaoVermelho(Jogador jogador) {
-
-  }
 }
