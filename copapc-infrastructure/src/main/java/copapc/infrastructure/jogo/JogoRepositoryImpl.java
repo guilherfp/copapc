@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import copapc.infrastructure.shared.HibernateRepository;
+import copapc.model.jogo.CartaoDoJogo;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
@@ -54,6 +55,11 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
     final Query query = getSession().createQuery(queryString);
     query.setParameter("numero", numero);
     return (Jogo) query.uniqueResult();
+  }
+
+  @Override
+  public void salvarCartao(CartaoDoJogo cartaoDoJogo) {
+    getSession().save("CartaoDoJogo", cartaoDoJogo);
   }
 
 }

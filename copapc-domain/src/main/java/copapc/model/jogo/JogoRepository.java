@@ -16,4 +16,6 @@ public interface JogoRepository {
 
   Jogo jogoComNumero(int numero);
 
+  void salvarCartao(CartaoDoJogo cartaoDoJogo);
+
 }

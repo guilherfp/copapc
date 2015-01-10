@@ -60,7 +60,31 @@
                 </h:column>
               </h:dataTable>
             </div>
-            <div class="col-lg-12 text-center">() - Gol(s) contra</div>
+            <div class="col-lg-12 text-center" style="font-size: 10px;">() - Gol(s) contra</div>
+            <div class="col-lg-12 text-center">
+              <h3>Cartões</h3>
+            </div>
+            <div class="table-responsive">
+              <h:dataTable value="#{jogadorMB.jogador.cartoesPorJogos}" var="c"
+                styleClass="table table-striped table-hover table-condensed">
+                <h:column>
+                  <f:facet name="header">Cartão</f:facet>
+                  <span style="vertical-align: middle; height: 15px;">
+                    <h:graphicImage library="images/cartao" name="#{c.cartao}.png" />
+                  </span>
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Dia</f:facet>
+                  <h:outputText value="#{c.jogo.horario.toString('dd/MM/yy')}" />
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Jogo</f:facet>
+                  <copa:resumoTime time="#{c.jogo.mandante}" escutoRight="true" />
+                  <span style="vertical-align: middle; height: 15px; font-weight: bold;">X</span>
+                  <copa:resumoTime time="#{c.jogo.visitante}" escutoLeft="true" />
+                </h:column>
+              </h:dataTable>
+            </div>
           </div>
         </div>
       </div>

@@ -42,20 +42,34 @@
       <one-to-many entity-name="Gol" />
     </bag>
 
-    <bag name="cartoesDoJogo" lazy="false" table="jogo_cartoes">
-      <key column="jogo_id" />
-      <composite-element class="copapc.model.jogo.CartaoDoJogo">
-        <property name="cartao">
-          <column name="cartao" length="20" not-null="false" />
-          <type name="org.hibernate.type.EnumType">
-            <param name="useNamed">true</param>
-            <param name="enumClass">copapc.model.jogador.Cartao</param>
-            <param name="type">12</param>
-          </type>
-        </property>
-        <many-to-one name="jogador" entity-name="Jogador" />
-      </composite-element>
+    <bag name="cartoesDoJogo" table="jogo_cartoes" inverse="true" cascade="all">
+      <key column="jogo_id" foreign-key="fk_jogo_jogo_cartoes" />
+      <one-to-many entity-name="CartaoDoJogo" />
     </bag>
 
+  </class>
+
+  <class name="copapc.model.jogo.CartaoDoJogo" entity-name="CartaoDoJogo" table="jogo_cartoes">
+
+    <id name="id" column="id" unsaved-value="none">
+      <generator class="org.hibernate.id.IdentityGenerator" />
+    </id>
+
+    <many-to-one name="jogador" entity-name="Jogador" foreign-key="fk_jogador_jogo_cartoes">
+      <column name="jogador_id" not-null="true" />
+    </many-to-one>
+
+    <many-to-one name="jogo" entity-name="Jogo" foreign-key="fk_cartao_jogo">
+      <column name="jogo_id" not-null="true" />
+    </many-to-one>
+
+    <property name="cartao">
+      <column name="cartao" length="20" not-null="true" />
+      <type name="org.hibernate.type.EnumType">
+        <param name="useNamed">true</param>
+        <param name="enumClass">copapc.model.jogador.Cartao</param>
+        <param name="type">12</param>
+      </type>
+    </property>
   </class>
 </hibernate-mapping>

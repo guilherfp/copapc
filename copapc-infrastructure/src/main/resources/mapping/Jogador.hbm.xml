@@ -40,6 +40,11 @@
       <one-to-many entity-name="Gol" />
     </bag>
 
+    <bag name="cartoesPorJogos" inverse="true" cascade="all">
+      <key column="jogador_id" />
+      <one-to-many entity-name="CartaoDoJogo" />
+    </bag>
+
     <property name="cartao">
       <column name="cartao" length="20" not-null="false" />
       <type name="org.hibernate.type.EnumType">

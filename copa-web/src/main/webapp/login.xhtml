@@ -17,17 +17,17 @@
             <h3 class="panel-title text-center">Controle de Acesso</h3>
           </div>
           <div class="panel-body">
-            <form action="#{request.contextPath}/j_spring_security_check" method="post">
+            <form id="login" method="post" action="#{request.contextPath}/login">
               <fieldset>
                 <div class="form-group">
                   <label for="usuario">Usuário</label>
-                  <input name="j_username" type="text" class="form-control" placeholder="Usuário" autofocus="autofocus" />
+                  <input id="username" name="username" type="text" class="form-control" autofocus="autofocus" />
                 </div>
                 <div class="form-group">
                   <label for="senha">Senha</label>
-                  <input name="j_password" type="password" class="form-control" placeholder="Senha" />
+                  <input id="password" name="password" type="password" class="form-control" />
                 </div>
-                <button name="submit" type="submit" class="btn btn-lg btn-success btn-block">Acessar</button>
+                <input type="submit" value="Entrar" title="Entrar" class="btn btn-lg btn-success btn-block" />
               </fieldset>
             </form>
           </div>

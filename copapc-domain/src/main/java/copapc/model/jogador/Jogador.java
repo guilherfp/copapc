@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import copapc.model.gol.Gol;
+import copapc.model.jogo.CartaoDoJogo;
 import copapc.model.jogo.Jogo;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
@@ -22,6 +23,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   private Time time;
   private List<Gol> gols = new ArrayList<>();
   private Cartao cartao = Cartao.SEM_CARTAO;
+  private List<CartaoDoJogo> cartoesPorJogos = new ArrayList<>();
   private String url;
 
   Jogador() {}
@@ -33,6 +35,14 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   public String getNome() {
     return nome;
+  }
+
+  public List<CartaoDoJogo> getCartoesPorJogos() {
+    return cartoesPorJogos;
+  }
+
+  public void addCartao(CartaoDoJogo cartaoDoJogo) {
+    cartoesPorJogos.add(cartaoDoJogo);
   }
 
   public void setNome(final String nome) {

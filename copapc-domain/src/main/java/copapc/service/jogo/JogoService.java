@@ -8,6 +8,7 @@ import copapc.model.gol.Gol;
 import copapc.model.gol.GolRepository;
 import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
+import copapc.model.jogo.CartaoDoJogo;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 
@@ -65,8 +66,19 @@ public class JogoService {
 
   public void adicionarCartao(Jogo jogo, Jogador jogador, Cartao cartao) {
     validarInicializacaoDoJogo(jogo);
-    jogo.adicionarCartao(jogador, cartao);
-    jogoRepository.atualizar(jogo);
+    Validate.isTrue(jogador.isSuspenso() == false, "Jogador está suspenso");
+    if (jogo.getCartoesDoJogador(jogador).contains(Cartao.AMARELO)) {
+      jogador.setCartao(Cartao.VERMELHO);
+    } else if (jogador.getCartao().equals(Cartao.AMARELO_1)) {
+      jogador.setCartao(Cartao.AMARELO_2);
+    } else if (cartao.equals(Cartao.VERMELHO)) {
+      jogador.setCartao(Cartao.VERMELHO);
+    } else {
+      jogador.setCartao(Cartao.AMARELO_1);
+    }
+    final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador);
+    jogoRepository.salvarCartao(cartaoDoJogo);
+    LOGGER.info("Cartão marcado: {}", cartaoDoJogo);
   }
 
 }

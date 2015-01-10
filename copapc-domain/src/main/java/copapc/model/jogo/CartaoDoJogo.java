@@ -4,18 +4,25 @@ import java.io.Serializable;
 
 import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
+import copapc.shared.Entity;
 
-public class CartaoDoJogo implements Serializable {
+public class CartaoDoJogo extends Entity implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  private Jogo jogo;
   private Cartao cartao;
   private Jogador jogador;
 
   CartaoDoJogo() {}
 
-  public CartaoDoJogo(Cartao cartao, Jogador jogador) {
-    this.cartao = cartao;
+  public CartaoDoJogo(Cartao cartao, Jogo jogo, Jogador jogador) {
     this.jogador = jogador;
+    this.cartao = cartao;
+    this.jogo = jogo;
+  }
+
+  public Jogo getJogo() {
+    return jogo;
   }
 
   public Cartao getCartao() {
@@ -32,6 +39,7 @@ public class CartaoDoJogo implements Serializable {
     int result = 1;
     result = (prime * result) + ((cartao == null) ? 0 : cartao.hashCode());
     result = (prime * result) + ((jogador == null) ? 0 : jogador.hashCode());
+    result = (prime * result) + ((jogo == null) ? 0 : jogo.hashCode());
     return result;
   }
 
@@ -57,7 +65,19 @@ public class CartaoDoJogo implements Serializable {
     } else if (!jogador.equals(other.jogador)) {
       return false;
     }
+    if (jogo == null) {
+      if (other.jogo != null) {
+        return false;
+      }
+    } else if (!jogo.equals(other.jogo)) {
+      return false;
+    }
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("CartaoDoJogo = jogo: %s, cartao: %s, jogador: %s", jogo, cartao, jogador);
   }
 
 }
