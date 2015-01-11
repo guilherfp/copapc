@@ -13,7 +13,7 @@
     <h:dataTable styleClass="table table-hover table-condensed tabela-pontos" value="#{cc.attrs.value}" var="c">
       <h:column>
         <f:facet name="header">#</f:facet>
-        <h:outputText value="#{c.posicao}" />
+        #{c.posicao}
       </h:column>
       <h:column>
         <f:facet name="header">Time</f:facet>
@@ -23,39 +23,39 @@
       </h:column>
       <h:column>
         <f:facet name="header">P</f:facet>
-        <h:outputText value="#{c.pontos}" style="font-weight: bold;" />
+        <span style="font-weight: bold;">#{c.pontos}</span>
       </h:column>
       <h:column>
         <f:facet name="header">J</f:facet>
-        <h:outputText value="#{c.jogos}" />
+        #{c.jogos}
       </h:column>
       <h:column>
         <f:facet name="header">V</f:facet>
-        <h:outputText value="#{c.vitorias}" />
+        #{c.vitorias}
       </h:column>
       <h:column>
         <f:facet name="header">E</f:facet>
-        <h:outputText value="#{c.empates}" />
+        #{c.empates}
       </h:column>
       <h:column>
         <f:facet name="header">D</f:facet>
-        <h:outputText value="#{c.derrotas}" />
+        #{c.derrotas}
       </h:column>
       <h:column>
         <f:facet name="header">GP</f:facet>
-        <h:outputText value="#{c.golsPros}" />
+        #{c.golsPros}
       </h:column>
       <h:column>
         <f:facet name="header">GC</f:facet>
-        <h:outputText value="#{c.golsContra}" />
+        #{c.golsContra}
       </h:column>
       <h:column>
         <f:facet name="header">SG</f:facet>
-        <h:outputText value="#{c.saldoDeGols}" />
+        #{c.saldoDeGols}
       </h:column>
       <h:column>
         <f:facet name="header">%</f:facet>
-        <h:outputText value="#{c.aproveitamento}" />
+        #{c.aproveitamento}
       </h:column>
     </h:dataTable>
   </div>

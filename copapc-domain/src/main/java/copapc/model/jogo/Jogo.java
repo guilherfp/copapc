@@ -17,6 +17,7 @@ import copapc.shared.Entity;
 public class Jogo extends Entity {
   private static final long serialVersionUID = 1L;
 
+  private int fase;
   private int numero;
   private DateTime inicio;
   private DateTime encerramento;
@@ -64,6 +65,14 @@ public class Jogo extends Entity {
 
   public boolean isIniciado() {
     return inicio != null;
+  }
+
+  public int getFase() {
+    return fase;
+  }
+
+  public void setFase(int fase) {
+    this.fase = fase;
   }
 
   public Gol adicionarGol(Gol gol) {

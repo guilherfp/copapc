@@ -1,6 +1,8 @@
 package copapc.infrastructure.time;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -46,4 +48,13 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
     return query.list();
   }
 
+  @Override
+  public int quantidadeDeGrupos() {
+    final List<Time> times = times();
+    final Set<Character> grupos = new HashSet<>();
+    for (Time time : times) {
+      grupos.add(time.getGrupo());
+    }
+    return times.size() / grupos.size();
+  }
 }

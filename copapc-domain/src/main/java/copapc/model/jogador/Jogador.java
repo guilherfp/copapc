@@ -10,6 +10,7 @@ import org.apache.commons.lang3.Validate;
 import copapc.model.gol.Gol;
 import copapc.model.jogo.CartaoDoJogo;
 import copapc.model.jogo.Jogo;
+import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 import copapc.util.UrlUtil;
@@ -140,6 +141,21 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   public boolean isSuspenso() {
     return Cartao.VERMELHO.equals(cartao);
+  }
+
+  public double getAproveitamento(JogoRepository jogoRepository) {
+    final double totalDeGols = getTotalDeGols();
+    final long totalDePartidasJogadas = getTotalDePartidasJogadas(jogoRepository);
+    if (totalDePartidasJogadas > 0) {
+      return totalDeGols / totalDePartidasJogadas;
+    } else {
+      return 0;
+    }
+  }
+
+  private long getTotalDePartidasJogadas(JogoRepository jogoRepository) {
+    final List<Jogo> jogos = jogoRepository.jogos(time);
+    return jogos.stream().filter(Jogo::isEncerrado).count();
   }
 
   @Override

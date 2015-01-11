@@ -16,12 +16,8 @@
       <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="min-escudo"
         rendered="#{cc.attrs.escutoLeft}" />
     </span>
-    <span class="placar-jogo-equipes-sigla">
-      <h:outputText value="#{cc.attrs.time.sigla}" title="#{cc.attrs.time.nome}" />
-    </span>
-    <span class="placar-jogo-equipes-nome">
-      <h:outputText value="#{cc.attrs.time.nome}" title="#{cc.attrs.time.nome}" />
-    </span>
+    <span class="placar-jogo-equipes-sigla" title="#{cc.attrs.time.nome}"> #{cc.attrs.time.sigla} </span>
+    <span class="placar-jogo-equipes-nome" title="#{cc.attrs.time.nome}"> #{cc.attrs.time.nome} </span>
     <span style="margin: 3px;">
       <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="min-escudo"
         rendered="#{cc.attrs.escutoRight}" />

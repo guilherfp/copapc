@@ -1,7 +1,8 @@
 package copapc.copa.web.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.bean.ManagedBean;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import copapc.service.classificacao.ClassificacaoService;
 
 @Scope("request")
 @Controller("classificacaoMB")
-// @ManagedBean(name = "classificacaoMB")
+@ManagedBean(name = "classificacaoMB")
 public class ClassificacaoManagedBean {
 
   private List<Classificacao> classificacoesFase1GrupoA;
@@ -35,7 +36,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase1GrupoA() {
     if (classificacoesFase1GrupoA == null) {
-      classificacoesFase1GrupoA = classificacaoService.classificacaoFase1('A');
+      classificacoesFase1GrupoA = classificacaoService.classificacaoFase1PorGrupo('A');
     }
     return classificacoesFase1GrupoA;
   }
@@ -43,7 +44,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase1GrupoB() {
     if (classificacoesFase1GrupoB == null) {
-      classificacoesFase1GrupoB = classificacaoService.classificacaoFase1('B');
+      classificacoesFase1GrupoB = classificacaoService.classificacaoFase1PorGrupo('B');
     }
     return classificacoesFase1GrupoB;
   }
@@ -51,8 +52,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoA() {
     if (classificacoesFase2GrupoA == null) {
-      classificacoesFase2GrupoA = new ArrayList<>();
-      // classificacoesFase2GrupoA = classificacaoService.classificacaoFase2GrupoA();
+      classificacoesFase2GrupoA = classificacaoService.classificacaoGrupoAFase2();
     }
     return classificacoesFase2GrupoA;
   }
@@ -60,8 +60,7 @@ public class ClassificacaoManagedBean {
   @Transactional
   public List<Classificacao> getClassificacoesFase2GrupoB() {
     if (classificacoesFase2GrupoB == null) {
-      classificacoesFase2GrupoB = new ArrayList<>();
-      // classificacoesFase2GrupoB = classificacaoService.classificacaoFase2GrupoB();
+      classificacoesFase2GrupoB = classificacaoService.classificacaoGrupoBFase2();
     }
     return classificacoesFase2GrupoB;
   }

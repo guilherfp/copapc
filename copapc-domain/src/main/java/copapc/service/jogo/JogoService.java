@@ -1,5 +1,8 @@
 package copapc.service.jogo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,17 +14,20 @@ import copapc.model.jogador.Jogador;
 import copapc.model.jogo.CartaoDoJogo;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
+import copapc.model.time.TimeRepository;
 
 public class JogoService {
 
   private final GolRepository golRepository;
   private final JogoRepository jogoRepository;
+  private final TimeRepository timeRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(JogoService.class);
 
-  public JogoService(GolRepository golRepository, JogoRepository jogoRepository) {
-    this.golRepository = golRepository;
+  public JogoService(GolRepository golRepository, JogoRepository jogoRepository, TimeRepository timeRepository) {
     this.jogoRepository = jogoRepository;
+    this.timeRepository = timeRepository;
+    this.golRepository = golRepository;
   }
 
   public void marcarGol(final Jogador jogador, final Jogo jogo) {
@@ -79,6 +85,25 @@ public class JogoService {
     final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador);
     jogoRepository.salvarCartao(cartaoDoJogo);
     LOGGER.info("Cartão marcado: {}", cartaoDoJogo);
+  }
+
+  public List<Rodada> getRodadas(int fase) {
+    final List<Jogo> jogos = jogoRepository.jogosPorFase(fase);
+    final int fases = jogos.size() / timeRepository.quantidadeDeGrupos();
+    final List<Rodada> rodadas = new ArrayList<>();
+    for (int i = 0; i < fases; i++) {
+      int end = 0 + fases;
+      if (end > jogos.size()) {
+        end = jogos.size() - 1;
+      }
+      rodadas.add(new Rodada(i + 1, jogos.subList(end * i, (end * i) + end)));
+    }
+    return rodadas;
+  }
+
+  public boolean faseFinalizada(int fase) {
+    final List<Jogo> jogos = jogoRepository.jogosPorFase(fase);
+    return jogos.stream().allMatch(Jogo::isEncerrado);
   }
 
 }

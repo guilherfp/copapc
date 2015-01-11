@@ -18,4 +18,6 @@ public interface JogoRepository {
 
   void salvarCartao(CartaoDoJogo cartaoDoJogo);
 
+  List<Jogo> jogosPorFase(int fase);
+
 }

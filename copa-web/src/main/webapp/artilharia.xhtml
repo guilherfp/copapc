@@ -3,9 +3,7 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
   template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
-  <ui:define name="title">
-    <h:outputText value="- Artilharia" />
-  </ui:define>
+  <ui:define name="title">- Artilharia</ui:define>
 
   <ui:define name="content">
     <div class="section">
@@ -16,19 +14,23 @@
             <hr />
           </div>
           <div class="col-lg-12">
-            <h:dataTable value="#{artilhariaMB.artilheiros}" var="jogador"
+            <h:dataTable value="#{artilhariaMB.artilheiros}" var="j"
               styleClass="table table-striped table-hover table-condensed">
               <h:column>
                 <f:facet name="header">Nome</f:facet>
-                <copa:jogadorNome jogador="#{jogador}" />
+                <copa:jogadorNome jogador="#{j}" />
               </h:column>
               <h:column>
                 <f:facet name="header">Time</f:facet>
-                <copa:resumoTime time="#{jogador.time}" escutoLeft="true" />
+                <copa:resumoTime time="#{j.time}" escutoLeft="true" />
               </h:column>
               <h:column>
                 <f:facet name="header">Gols</f:facet>
-                <h:outputText value="#{jogador.totalDeGols}" style="font-weight: bold;" />
+                <span style="font-weight: bold;">#{j.totalDeGols}</span>
+              </h:column>
+              <h:column>
+                <f:facet name="header">Gol(s)/Jogo</f:facet>
+                <span style="font-weight: bold;">#{artilhariaMB.aproveitamento(j)}</span>
               </h:column>
             </h:dataTable>
           </div>

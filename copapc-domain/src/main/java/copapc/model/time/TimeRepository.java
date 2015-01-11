@@ -12,4 +12,6 @@ public interface TimeRepository {
 
   Time comURL(String url);
 
+  int quantidadeDeGrupos();
+
 }

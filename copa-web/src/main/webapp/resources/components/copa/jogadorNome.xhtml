@@ -9,8 +9,8 @@
 </composite:interface>
 
 <composite:implementation>
-  <h:outputLink value="#{request.contextPath}/jogador/#{jogador.url}">
-    <h:outputText value="#{jogador.nome}" />
+  <h:outputLink value="#{request.contextPath}/jogador/#{cc.attrs.jogador.url}">
+    <span style="vertical-align: middle;">#{cc.attrs.jogador.nome}</span>
   </h:outputLink>
 </composite:implementation>
 

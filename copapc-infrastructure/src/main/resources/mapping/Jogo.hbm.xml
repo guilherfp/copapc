@@ -14,6 +14,10 @@
       <column name="numero" not-null="true" unique-key="uk_numero_jogo" />
     </property>
 
+    <property name="fase">
+      <column name="fase" />
+    </property>
+
     <property name="horario">
       <column name="horario" not-null="true" />
       <type name="org.jadira.usertype.dateandtime.joda.PersistentDateTime" />

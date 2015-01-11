@@ -12,20 +12,16 @@
 <composite:implementation>
   <li class="lista-de-jogos-item">
     <div class="placar-jogo">
-      <div class="placar-jogo-informacoes">
-        <h:outputText value="#{cc.attrs.jogo.horarioFormatado}" />
-      </div>
+      <div class="placar-jogo-informacoes">#{cc.attrs.jogo.horarioFormatado}</div>
       <div class="placar-jogo-equipes">
         <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
           <c:if test="#{cc.attrs.escudo eq true}">
-            <a href="#{request.contextPath}/time/#{cc.attrs.jogo.mandante.url}">
-              <span class="placar-jogo-equipes-sigla">
+            <a href="#{request.contextPath}/time/#{cc.attrs.jogo.mandante.url}"> <span
+                class="placar-jogo-equipes-sigla">
                 <h:outputText value="#{cc.attrs.jogo.mandante.sigla}" title="#{cc.attrs.jogo.mandante.nome}" />
-              </span>
-              <span class="placar-jogo-equipes-nome">
+              </span> <span class="placar-jogo-equipes-nome">
                 <h:outputText value="#{cc.attrs.jogo.mandante.nome}" title="#{cc.attrs.jogo.mandante.nome}" />
-              </span>
-              <span>
+              </span> <span>
                 <h:graphicImage library="images/time" name="#{cc.attrs.jogo.mandante.url}.png" styleClass="escudo" />
               </span>
             </a>
@@ -41,16 +37,16 @@
         </span>
         <span class="placar-jogo-equipes-item placar-jogo-equipes-placar">
           <span class="placar-jogo-equipes-placar-mandante">
-            <h:outputText value="#{cc.attrs.jogo.totalDeGolsDoMandante}" />
+            <span>#{cc.attrs.jogo.totalDeGolsDoMandante}</span>
           </span>
           <span class="tabela-icone-versus">X</span>
           <span class="placar-jogo-equipes-placar-visitante">
-            <h:outputText value="#{cc.attrs.jogo.totalDeGolsDoVisitante}" />
+            <span>#{cc.attrs.jogo.totalDeGolsDoVisitante}</span>
           </span>
         </span>
         <c:if test="#{cc.attrs.escudo eq true}">
-          <a href="#{request.contextPath}/time/#{cc.attrs.jogo.visitante.url}">
-            <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+          <a href="#{request.contextPath}/time/#{cc.attrs.jogo.visitante.url}"> <span
+              class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
               <span>
                 <h:graphicImage library="images/time" name="#{cc.attrs.jogo.visitante.url}.png" styleClass="escudo" />
               </span>

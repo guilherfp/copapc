@@ -22,8 +22,7 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
   @Override
   @SuppressWarnings("unchecked")
   public List<Jogo> jogos() {
-    final String queryString = "from Jogo order by horario";
-    final Query query = getSession().createQuery(queryString);
+    final Query query = getSession().createQuery("from Jogo order by horario");
     return query.list();
   }
 
@@ -44,15 +43,13 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
   @Override
   @SuppressWarnings("unchecked")
   public List<Jogo> jogosEmAberto() {
-    final String queryString = "from Jogo where encerramento is null order by horario";
-    final Query query = getSession().createQuery(queryString);
+    final Query query = getSession().createQuery("from Jogo where encerramento is null order by horario");
     return query.list();
   }
 
   @Override
   public Jogo jogoComNumero(int numero) {
-    final String queryString = "from Jogo where numero = :numero";
-    final Query query = getSession().createQuery(queryString);
+    final Query query = getSession().createQuery("from Jogo where numero = :numero");
     query.setParameter("numero", numero);
     return (Jogo) query.uniqueResult();
   }
@@ -60,6 +57,14 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
   @Override
   public void salvarCartao(CartaoDoJogo cartaoDoJogo) {
     getSession().save("CartaoDoJogo", cartaoDoJogo);
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<Jogo> jogosPorFase(int fase) {
+    final Query query = getSession().createQuery("from Jogo where fase = :fase order by horario");
+    query.setParameter("fase", fase);
+    return query.list();
   }
 
 }
