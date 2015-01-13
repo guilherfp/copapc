@@ -15,7 +15,7 @@
           </div>
           <div class="col-lg-12">
             <h:dataTable value="#{artilhariaMB.artilheiros}" var="j"
-              styleClass="table table-striped table-hover table-condensed">
+              styleClass="table table-striped table-hover table-condensed" columnClasses=",,text-center,text-center">
               <h:column>
                 <f:facet name="header">Nome</f:facet>
                 <copa:jogadorNome jogador="#{j}" />
@@ -24,11 +24,11 @@
                 <f:facet name="header">Time</f:facet>
                 <copa:resumoTime time="#{j.time}" escutoLeft="true" />
               </h:column>
-              <h:column>
+              <h:column headerClass="text-center">
                 <f:facet name="header">Gols</f:facet>
                 <span style="font-weight: bold;">#{j.totalDeGols}</span>
               </h:column>
-              <h:column>
+              <h:column headerClass="text-center">
                 <f:facet name="header">Gol(s)/Jogo</f:facet>
                 <span style="font-weight: bold;">#{artilhariaMB.aproveitamento(j)}</span>
               </h:column>

@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+
+  <ui:define name="content">
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="error-404">404</p>
+            <p class="lead">A página que você está procurando não pode ser encontrada.</p>
+            <p>Aqui estão alguns links úteis para ajudar você a encontrar o que você está procurando:</p>
+            <ul>
+              <li>
+                <a href="#{request.contextPath}/classificacao">CLASSIFICAÇÃO</a>
+              </li>
+              <li>
+                <a href="#{request.contextPath}/jogos">JOGOS</a>
+              </li>
+              <li>
+                <a href="#{request.contextPath}/artilharia">ARTILHARIA</a>
+              </li>
+              <li>
+                <a href="#{request.contextPath}/ataques">ATAQUES</a>
+              </li>
+              <li>
+                <a href="#{request.contextPath}/defesas">DEFESAS</a>
+              </li>
+              <li>
+                <a href="#{request.contextPath}/regulamento">REGULAMENTO</a>
+              </li>
+              <li>
+                <a href="#{request.contextPath}/local">LOCAL</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UC7-3JNvuNKj8jx65eJXfMtA" target="_blank">VÍDEOS DOS JOGOS</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ui:define>
+
+</ui:composition>
