@@ -2,11 +2,8 @@ package copapc.copa.web.controllers;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import javax.faces.bean.ManagedBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import copapc.model.jogador.Jogador;
-import copapc.model.jogador.JogadorRepository;
 import copapc.model.jogo.JogoRepository;
+import copapc.service.jogador.JogadorService;
 
 @Scope("request")
 @Controller("artilhariaMB")
-@ManagedBean(name = "artilhariaMB")
+// @ManagedBean(name = "artilhariaMB")
 public class ArtilhariaManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -31,9 +28,11 @@ public class ArtilhariaManagedBean implements Serializable {
   }
 
   @Autowired
-  private JogadorRepository jogadorRepository;
+  private JogadorService jogadorService;
   @Autowired
   private JogoRepository jogoRepository;
+
+  private List<Jogador> artilherios;
 
   final Comparator<Jogador> compareAproveitamento = new Comparator<Jogador>() {
     @Override
@@ -44,9 +43,10 @@ public class ArtilhariaManagedBean implements Serializable {
 
   @Transactional
   public List<Jogador> getArtilheiros() {
-    final List<Jogador> artilheiros = jogadorRepository.artilharia();
-    Collections.sort(artilheiros, compareAproveitamento.reversed());
-    return artilheiros;
+    if (artilherios == null) {
+      artilherios = jogadorService.artilheiros();
+    }
+    return artilherios;
   }
 
   @Transactional

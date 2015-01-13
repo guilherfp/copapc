@@ -157,6 +157,20 @@ a:HOVER {
 }
 
 @media ( min-width : 550px) {
+  .nome-jogo {
+    font-size: 25px;
+  }
+  .escudo-jogo {
+    max-width: 90px;
+  }
+  .x-jogo {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  .gol-jogo {
+    font-size: 90px;
+    font-weight: bold;
+  }
   .placar-jogo-equipes-nome {
     display: inline-block
   }
@@ -173,6 +187,20 @@ a:HOVER {
 }
 
 @media ( max-width : 550px) {
+  .nome-jogo {
+    font-size: 20px;
+  }
+  .escudo-jogo {
+    max-width: 50px;
+  }
+  .x-jogo {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .gol-jogo {
+    font-size: 50px;
+    font-weight: bold;
+  }
   .placar-jogo-equipes-nome {
     display: none
   }

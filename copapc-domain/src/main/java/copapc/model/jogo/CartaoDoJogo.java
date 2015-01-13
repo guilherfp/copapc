@@ -33,6 +33,14 @@ public class CartaoDoJogo extends Entity implements Serializable {
     return jogador;
   }
 
+  public boolean isMandante() {
+    return jogo.getMandante().equals(jogador.getTime());
+  }
+
+  public boolean isVisitante() {
+    return jogo.getVisitante().equals(jogador.getTime());
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;

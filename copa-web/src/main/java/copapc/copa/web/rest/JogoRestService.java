@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,8 @@ public class JogoRestService {
   private JogoRepository jogoRepository;
   @Autowired
   private JogoService jogoService;
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(JogoRestService.class);
 
   @ResponseBody
   @Transactional
@@ -73,6 +77,7 @@ public class JogoRestService {
       }
       return "Sucesso";
     } catch (Exception ex) {
+      LOGGER.info(ex.getMessage());
       return ex.getMessage();
     }
   }
@@ -89,6 +94,7 @@ public class JogoRestService {
       jogoService.adicionarCartao(jogo, jogador, cartaoDTO.getCartao());
       return "Sucesso";
     } catch (Exception ex) {
+      LOGGER.info(ex.getMessage());
       return ex.getMessage();
     }
   }
@@ -103,6 +109,7 @@ public class JogoRestService {
       jogoService.iniciarJogo(jogo);
       return "Sucesso";
     } catch (Exception ex) {
+      LOGGER.info(ex.getMessage());
       return ex.getMessage();
     }
   }
@@ -117,6 +124,7 @@ public class JogoRestService {
       jogoService.encerrarJogo(jogo);
       return "Sucesso";
     } catch (Exception ex) {
+      LOGGER.info(ex.getMessage());
       return ex.getMessage();
     }
   }

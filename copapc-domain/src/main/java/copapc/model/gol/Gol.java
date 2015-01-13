@@ -53,6 +53,14 @@ public class Gol extends Entity {
     return contra;
   }
 
+  public boolean isMandante() {
+    return jogo.getMandante().equals(time);
+  }
+
+  public boolean isVisitante() {
+    return jogo.getVisitante().equals(time);
+  }
+
   public static Gol gol(Jogador jogador, Jogo jogo) {
     return new Gol(jogador, jogo, false);
   }

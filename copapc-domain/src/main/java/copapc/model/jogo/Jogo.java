@@ -67,6 +67,10 @@ public class Jogo extends Entity {
     return inicio != null;
   }
 
+  public boolean isAndamento() {
+    return (inicio != null) && (encerramento == null);
+  }
+
   public int getFase() {
     return fase;
   }
@@ -152,6 +156,10 @@ public class Jogo extends Entity {
         return (g.isContra() == false) && g.getTime().equals(visitante);
       }
     }).count();
+  }
+
+  public List<Gol> getGols() {
+    return gols;
   }
 
   public int getTotalDeGols() {

@@ -52,5 +52,10 @@
     <pattern value="/jogador/#{jogador}" />
     <view-id value="/jogador.jsf" />
   </url-mapping>
+  
+  <url-mapping id="jogo">
+    <pattern value="/jogo/#{jogo}" />
+    <view-id value="/jogo.jsf" />
+  </url-mapping>
 
 </pretty-config>

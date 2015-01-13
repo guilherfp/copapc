@@ -70,6 +70,12 @@
           </span>
         </c:if>
       </div>
+      <div class="text-center">
+        <h:outputLink value="#{request.contextPath}/jogo/#{cc.attrs.jogo.numero}" style="font-size: 11px;"
+          rendered="#{cc.attrs.jogo.andamento}">VEJA AGORA</h:outputLink>
+        <h:outputLink value="#{request.contextPath}/jogo/#{cc.attrs.jogo.numero}" style="font-size: 11px;"
+          rendered="#{cc.attrs.jogo.encerrado}">VEJA COMO FOI</h:outputLink>
+      </div>
     </div>
   </li>
 </composite:implementation>

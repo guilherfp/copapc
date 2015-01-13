@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import copapc.model.jogador.Jogador;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 
-// @Scope("request")
+@Scope("request")
 @Controller("golMB")
-@ManagedBean(name = "golMB")
+// @ManagedBean(name = "golMB")
 public class GolManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 

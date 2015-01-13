@@ -2,8 +2,6 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,7 @@ import copapc.model.jogador.JogadorRepository;
 
 @Scope("request")
 @Controller("jogadorMB")
-@ManagedBean(name = "jogadorMB")
+// @ManagedBean(name = "jogadorMB")
 public class JogadorManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
