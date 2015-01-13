@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="guilherfp@gmail.com" />
-  <title>V COPA <ui:insert name="title">Home</ui:insert></title>
+  <title>V COPA <ui:insert name="title"></ui:insert></title>
   <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
   <h:outputStylesheet name="css/copapc.css" />
   <link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/favicon.ico" />
@@ -66,7 +66,10 @@
               <a href="#{request.contextPath}/ataques">ATAQUES</a>
             </li>
             <li>
-              <a href="#{request.contextPath}/defeasas">DEFESAS</a>
+              <a href="#{request.contextPath}/defesas">DEFESAS</a>
+            </li>
+            <li>
+              <a href="#{request.contextPath}/fairplay">FAIR PLAY</a>
             </li>
           </ul>
         </li>

@@ -7,6 +7,9 @@
   <sec:http auto-config="true">
     <sec:intercept-url pattern="/adm/**" access="ROLE_USER" />
     <sec:intercept-url pattern="/rest/**" access="ROLE_USER" />
+    <sec:session-management>
+      <sec:concurrency-control max-sessions="1" />
+    </sec:session-management>
     <sec:http-basic />
   </sec:http>
 

@@ -76,6 +76,11 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/404.jsf</location>
+  </error-page>
 
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
