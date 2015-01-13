@@ -204,8 +204,13 @@ public class Jogo extends Entity {
   }
 
   public List<Cartao> getCartoesDoJogador(Jogador jogador) {
-    final Predicate<? super CartaoDoJogo> mesmoJogador = c -> c.getJogador().equals(jogador);
+    final Predicate<CartaoDoJogo> mesmoJogador = c -> c.getJogador().equals(jogador);
     return cartoesDoJogo.stream().filter(mesmoJogador).map(CartaoDoJogo::getCartao).collect(Collectors.toList());
+  }
+
+  public List<Cartao> getCartoesDoTime(Time time) {
+    final Predicate<CartaoDoJogo> mesmoTime = c -> c.getJogador().getTime().equals(time);
+    return cartoesDoJogo.stream().filter(mesmoTime).map(CartaoDoJogo::getCartao).collect(Collectors.toList());
   }
 
   @Override

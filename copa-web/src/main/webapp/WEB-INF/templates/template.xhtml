@@ -15,7 +15,8 @@
 </h:head>
 
 <h:body>
-  <a id="back-to-top" href="#"> <span class="glyphicon glyphicon-chevron-up"></span>
+  <a id="back-to-top" href="#">
+    <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +32,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">TIMES <b class="caret"></b>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            TIMES
+            <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <ui:repeat var="time" value="#{homeMB.times}">
@@ -50,11 +53,27 @@
         <li>
           <a href="#{request.contextPath}/jogadores">JOGADORES</a>
         </li>
-        <li>
-          <a href="#{request.contextPath}/artilharia">ARTILHARIA</a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            ESTATÍSTICAS
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#{request.contextPath}/artilharia">ARTILHARIA</a>
+            </li>
+            <li>
+              <a href="#{request.contextPath}/ataques">ATAQUES</a>
+            </li>
+            <li>
+              <a href="#{request.contextPath}/defeasas">DEFESAS</a>
+            </li>
+          </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">OUTROS <b class="caret"></b>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            OUTROS
+            <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li>
@@ -62,6 +81,9 @@
             </li>
             <li>
               <a href="#{request.contextPath}/local">LOCAL</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UC7-3JNvuNKj8jx65eJXfMtA" target="_blank">VÍDEOS DOS JOGOS</a>
             </li>
           </ul>
         </li>

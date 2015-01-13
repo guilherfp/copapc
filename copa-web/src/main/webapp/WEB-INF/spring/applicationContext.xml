@@ -31,4 +31,9 @@
     <constructor-arg name="jogoService" ref="jogoService" />
   </bean>
 
+  <bean id="timeService" class="copapc.service.time.TimeService">
+    <constructor-arg name="jogoRepository" ref="jogoRepository" />
+    <constructor-arg name="timeRepository" ref="timeRepository" />
+  </bean>
+
 </beans>

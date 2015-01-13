@@ -2,6 +2,8 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,7 +18,7 @@ import copapc.service.classificacao.ClassificacaoService;
 
 @Scope("request")
 @Controller("classificacaoMB")
-// @ManagedBean(name = "classificacaoMB")
+@ManagedBean(name = "classificacaoMB")
 public class ClassificacaoManagedBean {
 
   private List<Classificacao> classificacoesFase1GrupoA;

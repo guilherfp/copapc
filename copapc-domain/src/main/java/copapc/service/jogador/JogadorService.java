@@ -37,6 +37,7 @@ public class JogadorService {
     final List<Jogador> artilheiros = jogadorRepository.jogadores();
     artilheiros.sort(compareAproveitamento.reversed());
     artilheiros.sort(Comparator.comparingInt(Jogador::getTotalDeGols).reversed());
+    artilheiros.removeIf(time -> time.getTotalDeGols() == 0);
     return artilheiros;
   }
 

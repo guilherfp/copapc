@@ -3,8 +3,6 @@ package copapc.copa.web.controllers;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import copapc.service.jogo.Rodada;
 
 @Scope("request")
 @Controller("jogoMB")
-@ManagedBean(name = "jogoMB")
+// @ManagedBean(name = "jogoMB")
 public class JogoManagedBean extends AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 

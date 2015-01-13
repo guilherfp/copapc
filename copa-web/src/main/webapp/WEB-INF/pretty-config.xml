@@ -43,6 +43,21 @@
     <view-id value="/artilharia.jsf" />
   </url-mapping>
 
+  <url-mapping id="fairplay">
+    <pattern value="/fairplay" />
+    <view-id value="/fairplay.jsf" />
+  </url-mapping>
+
+  <url-mapping id="ataques">
+    <pattern value="/ataques" />
+    <view-id value="/ataques.jsf" />
+  </url-mapping>
+
+  <url-mapping id="defesas">
+    <pattern value="/defesas" />
+    <view-id value="/defesas.jsf" />
+  </url-mapping>
+
   <url-mapping id="time">
     <pattern value="/time/#{time}" />
     <view-id value="/time.jsf" />
@@ -52,7 +67,7 @@
     <pattern value="/jogador/#{jogador}" />
     <view-id value="/jogador.jsf" />
   </url-mapping>
-  
+
   <url-mapping id="jogo">
     <pattern value="/jogo/#{jogo}" />
     <view-id value="/jogo.jsf" />
