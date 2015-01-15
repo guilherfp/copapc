@@ -3,8 +3,6 @@ package copapc.copa.web.controllers;
 import java.text.NumberFormat;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import copapc.service.jogador.JogadorService;
 
 @Scope("request")
 @Controller("artilhariaMB")
-@ManagedBean(name = "artilhariaMB")
+// @ManagedBean(name = "artilhariaMB")
 public class ArtilhariaManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
