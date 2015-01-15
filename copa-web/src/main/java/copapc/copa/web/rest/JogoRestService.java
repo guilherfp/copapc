@@ -71,9 +71,9 @@ public class JogoRestService {
       final Jogo jogo = jogoRepository.jogoComNumero(golDTO.getJogo());
       Validate.notNull(jogo, "Jogo inválido");
       if (golDTO.isContra() == false) {
-        jogoService.marcarGol(jogador, jogo);
+        jogoService.marcarGol(jogador, jogo, golDTO.getMinuto());
       } else {
-        jogoService.marcarGolContra(jogador, jogo);
+        jogoService.marcarGolContra(jogador, jogo, golDTO.getMinuto());
       }
       return "Sucesso";
     } catch (Exception ex) {
@@ -91,7 +91,7 @@ public class JogoRestService {
       Validate.notNull(jogador, "Jogador inválido");
       final Jogo jogo = jogoRepository.jogoComNumero(cartaoDTO.getJogo());
       Validate.notNull(jogo, "Jogo inválido");
-      jogoService.adicionarCartao(jogo, jogador, cartaoDTO.getCartao());
+      jogoService.adicionarCartao(jogo, jogador, cartaoDTO.getCartao(), cartaoDTO.getMinuto());
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());
@@ -107,6 +107,21 @@ public class JogoRestService {
       final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
       Validate.notNull(jogo, "Jogo inválido");
       jogoService.iniciarJogo(jogo);
+      return "Sucesso";
+    } catch (Exception ex) {
+      LOGGER.info(ex.getMessage());
+      return ex.getMessage();
+    }
+  }
+
+  @ResponseBody
+  @Transactional
+  @RequestMapping("{jogo}/segundoTempo")
+  public String definirSegundoTempoDoJogo(@PathVariable("jogo") int numeroDoJogo) {
+    try {
+      final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
+      Validate.notNull(jogo, "Jogo inválido");
+      jogoService.segundoTempo(jogo);
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());

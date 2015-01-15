@@ -30,8 +30,8 @@ public class JogoService {
     this.golRepository = golRepository;
   }
 
-  public void marcarGol(final Jogador jogador, final Jogo jogo) {
-    final Gol gol = Gol.gol(jogador, jogo);
+  public void marcarGol(final Jogador jogador, final Jogo jogo, int minuto) {
+    final Gol gol = Gol.gol(jogador, jogo, minuto);
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
     validarInicializacaoDoJogo(jogo);
@@ -39,8 +39,8 @@ public class JogoService {
     LOGGER.info("Gol marcado: {}", gol);
   }
 
-  public void marcarGolContra(final Jogador jogador, final Jogo jogo) {
-    final Gol gol = Gol.golContra(jogador, jogo);
+  public void marcarGolContra(final Jogador jogador, final Jogo jogo, int minuto) {
+    final Gol gol = Gol.golContra(jogador, jogo, minuto);
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
     validarInicializacaoDoJogo(jogo);
@@ -70,7 +70,7 @@ public class JogoService {
     LOGGER.info("Jogo encerrado: {}", jogo);
   }
 
-  public void adicionarCartao(Jogo jogo, Jogador jogador, Cartao cartao) {
+  public void adicionarCartao(Jogo jogo, Jogador jogador, Cartao cartao, int minuto) {
     validarInicializacaoDoJogo(jogo);
     Validate.isTrue(jogador.isSuspenso() == false, "Jogador está suspenso");
     if (jogo.getCartoesDoJogador(jogador).contains(Cartao.AMARELO)) {
@@ -83,7 +83,7 @@ public class JogoService {
     } else if (cartao.equals(Cartao.VERMELHO)) {
       jogador.setCartao(Cartao.VERMELHO);
     }
-    final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador);
+    final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador, minuto);
     jogoRepository.salvarCartao(cartaoDoJogo);
     LOGGER.info("Cartão marcado: {}", cartaoDoJogo);
   }
@@ -105,6 +105,14 @@ public class JogoService {
   public boolean faseFinalizada(int fase) {
     final List<Jogo> jogos = jogoRepository.jogosPorFase(fase);
     return jogos.stream().allMatch(Jogo::isEncerrado);
+  }
+
+  public void segundoTempo(Jogo jogo) {
+    Validate.isTrue(jogo.isEncerrado() == false, "Jogo já foi encerrado");
+    Validate.isTrue(jogo.isIniciado(), "O Jogo não iniciado");
+    jogo.iniciarSegundoTempo();
+    jogoRepository.atualizar(jogo);
+    LOGGER.info("Segundo tempo do jogo: {} foi iniciado!", jogo);
   }
 
 }

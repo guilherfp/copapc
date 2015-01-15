@@ -14,6 +14,10 @@
       <column name="numero" not-null="true" unique-key="uk_gol" />
     </property>
 
+    <property name="minuto">
+      <column name="minuto" length="2" />
+    </property>
+
     <many-to-one name="jogador" entity-name="Jogador" foreign-key="fk_gol_jogador">
       <column name="jogador_id" not-null="true" />
     </many-to-one>

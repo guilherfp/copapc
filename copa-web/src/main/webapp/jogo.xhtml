@@ -31,6 +31,15 @@
               </span>
             </a>
           </div>
+          <h:panelGroup rendered="#{jogoMB.jogo.segundoTempo eq false and jogoMB.jogo.encerrado eq false}">
+            <h4 class="col-lg-12 text-center">1º TEMPO</h4>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{jogoMB.jogo.segundoTempo and jogoMB.jogo.encerrado eq false}">
+            <h4 class="col-lg-12 text-center">2º TEMPO</h4>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{jogoMB.jogo.encerrado}">
+            <h4 class="col-lg-12 text-center">ENCERRADO</h4>
+          </h:panelGroup>
         </div>
         <div class="row" style="margin-top: 20px;">
           <table style="width: 100%;">
@@ -40,10 +49,12 @@
                   <td style="text-align: right; width: 50%; padding-right: 8px;">
                     <h:panelGroup rendered="#{g.mandante}">
                       <copa:jogadorNome jogador="#{g.jogador}" />
+                      #{g.minuto}'
                     </h:panelGroup>
                   </td>
                   <td style="width: 50%; padding-left: 8px;">
                     <h:panelGroup rendered="#{g.visitante}">
+                      #{g.minuto}'
                       <copa:jogadorNome jogador="#{g.jogador}" />
                     </h:panelGroup>
                   </td>
@@ -64,10 +75,12 @@
                     <h:panelGroup rendered="#{c.mandante}">
                       <copa:jogadorNome jogador="#{c.jogador}" />
                       <h:graphicImage library="images/cartao" name="#{c.cartao}.png" style="margin: 0 3px 0 3px;" />
+                      #{c.minuto}'
                     </h:panelGroup>
                   </td>
                   <td style="text-align: left; padding-left: 8px; width: 50%;">
                     <h:panelGroup rendered="#{c.visitante}">
+                      #{c.minuto}'
                       <h:graphicImage library="images/cartao" name="#{c.cartao}.png" style="margin: 0 3px 0 3px;" />
                       <copa:jogadorNome jogador="#{c.jogador}" />
                     </h:panelGroup>

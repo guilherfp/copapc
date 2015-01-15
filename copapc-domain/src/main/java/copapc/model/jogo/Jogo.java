@@ -1,6 +1,7 @@
 package copapc.model.jogo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ public class Jogo extends Entity {
   private Time visitante;
   private List<Gol> gols = new ArrayList<>();
   private List<CartaoDoJogo> cartoesDoJogo = new ArrayList<>();
+  private boolean segundoTempo = false;
 
   Jogo() {}
 
@@ -77,6 +79,14 @@ public class Jogo extends Entity {
 
   public void setFase(int fase) {
     this.fase = fase;
+  }
+
+  public void iniciarSegundoTempo() {
+    segundoTempo = true;
+  }
+
+  public boolean isSegundoTempo() {
+    return segundoTempo;
   }
 
   public Gol adicionarGol(Gol gol) {
@@ -159,6 +169,7 @@ public class Jogo extends Entity {
   }
 
   public List<Gol> getGols() {
+    gols.sort(Comparator.comparingInt(Gol::getMinuto));
     return gols;
   }
 
@@ -200,6 +211,7 @@ public class Jogo extends Entity {
   }
 
   public List<CartaoDoJogo> getCartoesDoJogo() {
+    cartoesDoJogo.sort(Comparator.comparingInt(CartaoDoJogo::getMinuto));
     return cartoesDoJogo;
   }
 

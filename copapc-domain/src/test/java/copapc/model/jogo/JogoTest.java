@@ -36,19 +36,19 @@ public class JogoTest {
   @Test
   public void testAdicionarGol() throws Exception {
     assertEquals(0, jogo.getTotalDeGols());
-    jogo.adicionarGol(Gol.gol(jogadoresMandante.get(0), jogo));
+    jogo.adicionarGol(Gol.gol(jogadoresMandante.get(0), jogo, 1));
     assertEquals(1, jogo.getTotalDeGols());
     assertEquals(mandante, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
     assertEquals(0, jogo.getTotalDeGolsDoVisitante());
 
-    jogo.adicionarGol(Gol.gol(jogadoresVisitante.get(0), jogo));
+    jogo.adicionarGol(Gol.gol(jogadoresVisitante.get(0), jogo, 1));
     assertEquals(2, jogo.getTotalDeGols());
     assertEquals(null, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
     assertEquals(1, jogo.getTotalDeGolsDoVisitante());
 
-    jogo.adicionarGol(Gol.gol(jogadoresVisitante.get(0), jogo));
+    jogo.adicionarGol(Gol.gol(jogadoresVisitante.get(0), jogo, 2));
     assertEquals(3, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
@@ -59,7 +59,7 @@ public class JogoTest {
   public void testAdicionarGolContra() throws Exception {
     assertEquals(0, jogo.getTotalDeGols());
     final Jogador jogadorMandante = jogadoresMandante.get(0);
-    jogo.adicionarGol(Gol.golContra(jogadorMandante, jogo));
+    jogo.adicionarGol(Gol.golContra(jogadorMandante, jogo, 3));
     assertEquals(1, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
     assertEquals(0, jogo.getTotalDeGolsDoMandante());
@@ -67,7 +67,7 @@ public class JogoTest {
     assertEquals(0, jogadorMandante.getTotalDeGols());
 
     final Jogador jogadorVisitante = jogadoresVisitante.get(0);
-    jogo.adicionarGol(Gol.gol(jogadorVisitante, jogo));
+    jogo.adicionarGol(Gol.gol(jogadorVisitante, jogo, 4));
     assertEquals(2, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
     assertEquals(0, jogo.getTotalDeGolsDoMandante());

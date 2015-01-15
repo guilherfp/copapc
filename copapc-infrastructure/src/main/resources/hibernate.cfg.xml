@@ -8,7 +8,6 @@
     <mapping resource="mapping/Time.hbm.xml" />
     <mapping resource="mapping/Jogo.hbm.xml" />
     <mapping resource="mapping/Gol.hbm.xml" />
-    <mapping resource="mapping/Usuario.hbm.xml" />
   </session-factory>
 
 </hibernate-configuration>

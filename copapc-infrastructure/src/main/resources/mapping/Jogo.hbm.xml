@@ -17,6 +17,10 @@
     <property name="fase">
       <column name="fase" />
     </property>
+    
+    <property name="segundoTempo">
+      <column name="segundo_tempo" default="false" />
+    </property>
 
     <property name="horario">
       <column name="horario" not-null="true" />
@@ -74,6 +78,10 @@
         <param name="enumClass">copapc.model.jogador.Cartao</param>
         <param name="type">12</param>
       </type>
+    </property>
+
+    <property name="minuto">
+      <column name="minuto" length="2" default="0" />
     </property>
   </class>
 </hibernate-mapping>

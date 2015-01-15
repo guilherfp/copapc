@@ -72,6 +72,9 @@
               <button id="iniciar" type="submit" class="btn btn-success btn-lg btn-block">INICIAR</button>
             </div>
             <div class="form-group controls">
+              <button id="segundoTempo" type="submit" class="btn btn-primary btn-lg btn-block">SEGUNDO TEMPO</button>
+            </div>
+            <div class="form-group controls">
               <button id="encerrar" type="submit" class="btn btn-danger btn-lg btn-block">ENCERRAR</button>
             </div>
           </div>
@@ -145,6 +148,18 @@
                     alert(data);
                   }).fail(function() {
                 alert("Não foi possível obter os jogadores!");
+              });
+            }
+          });
+      $("#segundoTempo").click(
+          function() {
+            if (confirm("Deseja realmente iniciar o segundo tempo do jogo?")) {
+              $.get(
+                  "#{request.contextPath}/rest/jogos/".concat(
+                      $("#jogos").val()).concat("/segundoTempo"), function(data) {
+                    alert(data);
+                  }).fail(function() {
+                alert("Não foi possível iniciar o segundo tempo!");
               });
             }
           });

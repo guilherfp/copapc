@@ -12,13 +12,15 @@ public class CartaoDoJogo extends Entity implements Serializable {
   private Jogo jogo;
   private Cartao cartao;
   private Jogador jogador;
+  private int minuto;
 
   CartaoDoJogo() {}
 
-  public CartaoDoJogo(Cartao cartao, Jogo jogo, Jogador jogador) {
+  public CartaoDoJogo(Cartao cartao, Jogo jogo, Jogador jogador, int minuto) {
     this.jogador = jogador;
     this.cartao = cartao;
     this.jogo = jogo;
+    this.minuto = minuto;
   }
 
   public Jogo getJogo() {
@@ -31,6 +33,10 @@ public class CartaoDoJogo extends Entity implements Serializable {
 
   public Jogador getJogador() {
     return jogador;
+  }
+
+  public int getMinuto() {
+    return minuto;
   }
 
   public boolean isMandante() {

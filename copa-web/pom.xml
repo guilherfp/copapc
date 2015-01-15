@@ -105,7 +105,7 @@
         <version>2.4</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
-          <warName>copa</warName>
+          <!-- <warName>copa</warName> -->
         </configuration>
       </plugin>
     </plugins>
