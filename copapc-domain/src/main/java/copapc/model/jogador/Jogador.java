@@ -13,6 +13,7 @@ import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
+import copapc.util.DomainUtils;
 import copapc.util.UrlUtil;
 
 public class Jogador extends Entity implements Comparable<Jogador> {
@@ -121,13 +122,10 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public Cartao getCartao() {
-    return cartao;
+    return DomainUtils.nullSafe(cartao, Cartao.SEM_CARTAO);
   }
 
   public void setCartao(Cartao cartao) {
-    if (cartao == null) {
-      cartao = Cartao.SEM_CARTAO;
-    }
     this.cartao = cartao;
   }
 

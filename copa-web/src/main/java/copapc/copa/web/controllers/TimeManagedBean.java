@@ -2,6 +2,8 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,7 @@ import copapc.service.time.TimeService;
 
 @Scope("request")
 @Controller("timeMB")
-// @ManagedBean(name = "timeMB")
+@ManagedBean(name = "timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
@@ -67,6 +69,14 @@ public class TimeManagedBean extends AbstractManagedBean {
     return timesPorGolsMarcados;
   }
 
+  public int getTotalDeGolsMarcados() {
+    return getTimesPorGolsMarcados().stream().mapToInt(this::golsMarcados).sum();
+  }
+
+  public int getTotalDeGolsSofridos() {
+    return getTimesPorGolsMenosSofridos().stream().mapToInt(this::golsSofridos).sum();
+  }
+
   @Transactional
   public List<Time> getTimesPorGolsMenosSofridos() {
     if (timesPorGolsMenosSofridos == null) {
@@ -83,12 +93,32 @@ public class TimeManagedBean extends AbstractManagedBean {
     return fairplay;
   }
 
+  public int posicaoFairPlay(Time time) {
+    return getFairplay().indexOf(time) + 1;
+  }
+
+  public int posicaoAtaque(Time time) {
+    return getTimesPorGolsMarcados().indexOf(time) + 1;
+  }
+
+  public int posicaoDefesa(Time time) {
+    return getTimesPorGolsMenosSofridos().indexOf(time) + 1;
+  }
+
   public int vermelho(Time time) {
     return timeService.cartoesVermelho(time);
   }
 
   public int amarelo(Time time) {
     return timeService.cartoesAmarelo(time);
+  }
+
+  public int getTotalDeCartoesAmarelos() {
+    return getFairplay().stream().mapToInt(this::amarelo).sum();
+  }
+
+  public int getTotalDeCartoesVermelhos() {
+    return getFairplay().stream().mapToInt(this::vermelho).sum();
   }
 
   public int golsMarcados(Time time) {

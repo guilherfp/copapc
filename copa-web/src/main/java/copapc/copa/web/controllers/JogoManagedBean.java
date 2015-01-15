@@ -3,6 +3,8 @@ package copapc.copa.web.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import copapc.service.jogo.Rodada;
 
 @Scope("request")
 @Controller("jogoMB")
-// @ManagedBean(name = "jogoMB")
+@ManagedBean(name = "jogoMB")
 public class JogoManagedBean extends AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -28,6 +30,7 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
   private Jogo jogo;
   private List<Jogo> jogos;
   private List<Jogo> proximos;
+  private List<Jogo> ultimos;
   private List<Rodada> rodadas;
 
   public List<Rodada> getRodadasFase1() {
@@ -51,12 +54,27 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
     return proximos;
   }
 
+  public List<Jogo> getUltimos() {
+    if (ultimos == null) {
+      ultimos = jogoRepository.ultimosEncerrados();
+    }
+    return ultimos;
+  }
+
   public Jogo getJogo() {
     if (jogo == null) {
       final String timeUrl = getURLParameterValue(JOGO);
       jogo = jogoRepository.jogoComNumero(Integer.parseInt(timeUrl));
     }
     return jogo;
+  }
+
+  public boolean isShowPrimeiroTempo() {
+    return (getJogo().isSegundoTempo() == false) && (getJogo().isEncerrado() == false);
+  }
+
+  public boolean isShowSegundoTempo() {
+    return (getJogo().isSegundoTempo() == true) && (getJogo().isEncerrado() == false);
   }
 
 }

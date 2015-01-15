@@ -7,16 +7,16 @@
     <div class="container">
       <h:graphicImage library="images" name="banner_copapc.jpg" styleClass="img-responsive" style="margin-top: 50px;" />
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
           <div class="col-lg-12 text-center">
             <h2>Classificação</h2>
             <hr />
           </div>
-          <a href="#{request.contextPath}/classificacao"> <h:graphicImage library="images" name="classificacao.jpg"
-              styleClass="img-responsive" />
+          <a href="#{request.contextPath}/classificacao">
+            <h:graphicImage library="images" name="classificacao.jpg" styleClass="img-responsive" />
           </a>
         </div>
-        <div class="col-lg-6">
+        <div class="row col-md-6" style="margin-top: 15px;">
           <div class="col-lg-12 text-center">
             <h2>Próximos jogos</h2>
           </div>
@@ -27,8 +27,19 @@
             </ui:repeat>
           </ul>
         </div>
+        <div class="row col-md-6" style="margin-top: 15px;">
+          <div class="col-lg-12 text-center">
+            <h2>Últimos jogos</h2>
+          </div>
+          <ul class="lista-de-jogos-conteudo">
+            <ui:repeat var="jogo" value="#{jogoMB.ultimos}" size="3">
+              <hr />
+              <copa:jogo jogo="#{jogo}" />
+            </ui:repeat>
+          </ul>
+        </div>
       </div>
-      <div class="col-lg-12 text-center">
+      <div class="row col-lg-12 text-center">
         <h2>Parceiros</h2>
         <hr />
         <div id="myCarousel" class="carousel slide transparent-bg">
@@ -59,10 +70,11 @@
               </h:outputLink>
             </div>
           </div>
-          <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span
-              class="glyphicon glyphicon-chevron-left"></span>
-          </a> <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span
-              class="glyphicon glyphicon-chevron-right"></span>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>
       </div>

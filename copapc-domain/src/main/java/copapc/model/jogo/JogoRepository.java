@@ -20,4 +20,6 @@ public interface JogoRepository {
 
   List<Jogo> jogosPorFase(int fase);
 
+  List<Jogo> ultimosEncerrados();
+
 }

@@ -3,16 +3,22 @@ package copapc.copa.web.controllers;
 import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.ocpsoft.pretty.PrettyContext;
 
 public abstract class AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  protected static FacesContext getContext() {
+  protected FacesContext getContext() {
     return FacesContext.getCurrentInstance();
   }
 
-  protected static String getURLParameterValue(String parameter) {
+  protected String getURLParameterValue(String parameter) {
     final FacesContext context = getContext();
+    getUrl();
     if (context != null) {
       final String[] parameters = context.getExternalContext().getRequestParameterValuesMap().get(parameter);
       if (parameter != null) {
@@ -20,5 +26,11 @@ public abstract class AbstractManagedBean implements Serializable {
       }
     }
     return null;
+  }
+
+  public String getUrl() {
+    final HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
+    final String url = PrettyContext.getCurrentInstance().getRequestURL().toURL();
+    return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
   }
 }

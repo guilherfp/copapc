@@ -26,10 +26,7 @@ public class ClassificacaoService {
   }
 
   public List<Classificacao> classificacaoFase1PorGrupo(final char grupo) {
-    List<Time> times = timeRepository.timesPorGrupo(grupo);
-    if (times == null) {
-      times = new ArrayList<>();
-    }
+    final List<Time> times = timeRepository.timesPorGrupo(grupo);
     return classificar(times.stream().map(t -> classificacao(t, 1)).collect(Collectors.toList()));
   }
 

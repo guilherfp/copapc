@@ -1,5 +1,6 @@
 package copapc.infrastructure.time;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import copapc.infrastructure.shared.HibernateRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
+import copapc.util.DomainUtils;
 
 @Repository
 public class TimeRepositoryImpl extends HibernateRepository implements TimeRepository {
@@ -23,7 +25,7 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
   @SuppressWarnings("unchecked")
   public List<Time> times() {
     final Query query = getSession().createQuery("from Time order by nome");
-    return query.list();
+    return DomainUtils.nullSafe(query.list(), new ArrayList<>());
   }
 
   @Override
@@ -45,7 +47,7 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
   public List<Time> timesPorGrupo(char grupo) {
     final Query query = getSession().createQuery("from Time where grupo = :grupo order by nome");
     query.setParameter("grupo", grupo);
-    return query.list();
+    return DomainUtils.nullSafe(query.list(), new ArrayList<>());
   }
 
   @Override

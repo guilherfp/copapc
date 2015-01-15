@@ -48,6 +48,13 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
   }
 
   @Override
+  @SuppressWarnings("unchecked")
+  public List<Jogo> ultimosEncerrados() {
+    final Query query = getSession().createQuery("from Jogo where encerramento is not null order by horario desc");
+    return query.list();
+  }
+
+  @Override
   public Jogo jogoComNumero(int numero) {
     final Query query = getSession().createQuery("from Jogo where numero = :numero");
     query.setParameter("numero", numero);
@@ -66,5 +73,4 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
     query.setParameter("fase", fase);
     return query.list();
   }
-
 }

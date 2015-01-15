@@ -191,14 +191,14 @@ a:HOVER {
     font-size: 20px;
   }
   .escudo-jogo {
-    max-width: 50px;
+    max-width: 40px;
   }
   .x-jogo {
     font-size: 20px;
     font-weight: bold;
   }
   .gol-jogo {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
   }
   .placar-jogo-equipes-nome {

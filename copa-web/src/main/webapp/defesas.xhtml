@@ -15,17 +15,31 @@
           </div>
           <div class="col-lg-12">
             <h:dataTable value="#{timeMB.timesPorGolsMenosSofridos}" var="t"
-              styleClass="table table-striped table-hover table-condensed" columnClasses=",text-center">
+              styleClass="table table-striped table-hover table-condensed" columnClasses=",,text-center">
+              <h:column>
+                <f:facet name="header">#</f:facet>
+                <span style="font-weight: bold;">#{timeMB.posicaoDefesa(t)}</span>
+                <f:facet name="footer">
+                  <span style="font-weight: bold;">Total</span>
+                </f:facet>
+              </h:column>
               <h:column>
                 <f:facet name="header">Time</f:facet>
                 <copa:resumoTime time="#{t}" escutoLeft="true" />
               </h:column>
-              <h:column headerClass="text-center">
+              <h:column headerClass="text-center" footerClass="text-center">
                 <f:facet name="header">Gol(s) recebido(s)</f:facet>
                 <span style="font-weight: bold;">#{timeMB.golsSofridos(t)}</span>
+                <f:facet name="footer">
+                  <span style="font-weight: bold;">#{timeMB.totalDeGolsSofridos}</span>
+                </f:facet>
               </h:column>
             </h:dataTable>
           </div>
+        </div>
+        <div class="row">
+          <div class="fb-comments" data-href="#{timeMB.url}" data-numposts="10" data-colorscheme="light"
+            data-width="100%"></div>
         </div>
       </div>
     </div>

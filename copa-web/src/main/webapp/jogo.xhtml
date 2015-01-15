@@ -4,42 +4,40 @@
   template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa"
   xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-  <ui:define name="title">- Jogos</ui:define>
+  <ui:define name="title">- #{jogoMB.jogo.mandante.nome} X #{jogoMB.jogo.visitante.nome}</ui:define>
 
   <ui:define name="content">
     <div class="section">
       <div class="container">
         <div class="row" style="margin-top: 15px;">
-          <div class="col-lg-12 text-center">
-            <a href="#{request.contextPath}/time/#{jogoMB.jogo.mandante.url}" class="col-xs-4 text-right">
-              <span class="nome-jogo">
+          <div class="col-xs-12 text-center">
+            <span class="nome-jogo">
+              <a href="#{request.contextPath}/time/#{jogoMB.jogo.mandante.url}">
                 <span class="placar-jogo-equipes-sigla"> #{jogoMB.jogo.mandante.sigla} </span>
                 <span class="placar-jogo-equipes-nome"> #{jogoMB.jogo.mandante.nome} </span>
                 <h:graphicImage library="images/time" name="#{jogoMB.jogo.mandante.url}.png" styleClass="escudo-jogo" />
-              </span>
-            </a>
-            <div class="col-xs-4">
+              </a>
+            </span>
+            <span>
               <span class="gol-jogo" style="margin: 20px 5px 0 5px;">#{jogoMB.jogo.totalDeGolsDoMandante}</span>
               <span class="x-jogo">X</span>
               <span class="gol-jogo" style="margin: 20px 5px 0 5px;">#{jogoMB.jogo.totalDeGolsDoVisitante}</span>
-            </div>
-            <a href="#{request.contextPath}/time/#{jogoMB.jogo.visitante.url}" class="col-xs-4 text-left">
-              <span class="nome-jogo">
+            </span>
+            <span class="nome-jogo">
+              <a href="#{request.contextPath}/time/#{jogoMB.jogo.visitante.url}">
                 <h:graphicImage library="images/time" name="#{jogoMB.jogo.visitante.url}.png" styleClass="escudo-jogo" />
                 <span class="placar-jogo-equipes-sigla"> #{jogoMB.jogo.visitante.sigla} </span>
                 <span class="placar-jogo-equipes-nome"> #{jogoMB.jogo.visitante.nome} </span>
-              </span>
-            </a>
+              </a>
+            </span>
           </div>
-          <h:panelGroup rendered="#{jogoMB.jogo.segundoTempo eq false and jogoMB.jogo.encerrado eq false}">
-            <h4 class="col-lg-12 text-center">1º TEMPO</h4>
-          </h:panelGroup>
-          <h:panelGroup rendered="#{jogoMB.jogo.segundoTempo and jogoMB.jogo.encerrado eq false}">
-            <h4 class="col-lg-12 text-center">2º TEMPO</h4>
-          </h:panelGroup>
-          <h:panelGroup rendered="#{jogoMB.jogo.encerrado}">
-            <h4 class="col-lg-12 text-center">ENCERRADO</h4>
-          </h:panelGroup>
+        </div>
+        <div class="col-xs-12 text-center">
+          <h4>
+            <h:outputText value="1º TEMPO" rendered="#{jogoMB.showPrimeiroTempo}" />
+            <h:outputText value="2º TEMPO" rendered="#{jogoMB.showSegundoTempo}" />
+            <h:outputText value="ENCERRADO" rendered="#{jogoMB.jogo.encerrado}" />
+          </h4>
         </div>
         <div class="row" style="margin-top: 20px;">
           <table style="width: 100%;">
@@ -89,6 +87,10 @@
               </ui:repeat>
             </tbody>
           </table>
+        </div>
+        <div class="row">
+          <div class="fb-comments" data-href="#{jogoMB.url}" data-numposts="10" data-colorscheme="light"
+            data-width="100%"></div>
         </div>
       </div>
     </div>
