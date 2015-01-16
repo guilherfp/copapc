@@ -1,7 +1,5 @@
 package copapc.copa.web.dto;
 
-import java.time.LocalDateTime;
-
 import copapc.model.jogador.Cartao;
 
 public class CartaoDTO {
@@ -26,9 +24,6 @@ public class CartaoDTO {
   }
 
   public int getMinuto() {
-    if (minuto == 0) {
-      minuto = LocalDateTime.now().getMinute();
-    }
     return minuto;
   }
 }

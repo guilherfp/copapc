@@ -1,7 +1,5 @@
 package copapc.copa.web.dto;
 
-import java.time.LocalDateTime;
-
 public class GolDTO {
 
   private String jogador;
@@ -20,9 +18,6 @@ public class GolDTO {
   }
 
   public int getMinuto() {
-    if (minuto == 0) {
-      minuto = LocalDateTime.now().getMinute();
-    }
     return minuto;
   }
 

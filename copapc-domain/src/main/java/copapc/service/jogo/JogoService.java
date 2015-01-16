@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
+import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,20 +32,28 @@ public class JogoService {
     this.golRepository = golRepository;
   }
 
+  private int checkMinuto(Jogo jogo, int minuto) {
+    if (minuto <= 0) {
+      return Minutes.minutesBetween(jogo.getInicio(), DateTime.now()).getMinutes();
+    } else {
+      return minuto;
+    }
+  }
+
   public void marcarGol(final Jogador jogador, final Jogo jogo, int minuto) {
-    final Gol gol = Gol.gol(jogador, jogo, minuto);
+    validarInicializacaoDoJogo(jogo);
+    final Gol gol = Gol.gol(jogador, jogo, checkMinuto(jogo, minuto));
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
-    validarInicializacaoDoJogo(jogo);
     golRepository.salvar(gol);
     LOGGER.info("Gol marcado: {}", gol);
   }
 
   public void marcarGolContra(final Jogador jogador, final Jogo jogo, int minuto) {
-    final Gol gol = Gol.golContra(jogador, jogo, minuto);
+    validarInicializacaoDoJogo(jogo);
+    final Gol gol = Gol.golContra(jogador, jogo, checkMinuto(jogo, minuto));
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
-    validarInicializacaoDoJogo(jogo);
     golRepository.salvar(gol);
     LOGGER.info("Gol marcado: {}", gol);
   }
@@ -83,7 +93,7 @@ public class JogoService {
     } else if (cartao.equals(Cartao.VERMELHO)) {
       jogador.setCartao(Cartao.VERMELHO);
     }
-    final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador, minuto);
+    final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador, checkMinuto(jogo, minuto));
     jogoRepository.salvarCartao(cartaoDoJogo);
     LOGGER.info("Cartão marcado: {}", cartaoDoJogo);
   }

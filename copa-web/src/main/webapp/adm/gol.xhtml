@@ -30,6 +30,12 @@
             <select id="jogadores" class="form-control"></select>
           </div>
         </div>
+        <div class="control-group form-group">
+          <div class="controls">
+            <label>Minuto</label>
+            <input id="minuto" type="text" class="form-control" />
+          </div>
+        </div>
         <ul id="myTab" class="nav nav-tabs">
           <li class="active">
             <a href="#service-one" data-toggle="tab">GOL</a>
@@ -93,6 +99,7 @@
               var gol = {
                 jogador : $("#jogadores").val(),
                 jogo : $("#jogos").val(),
+                minuto : $("#minuto").val(),
                 contra : $("#contra").is(":checked")
               };
               $.ajax({

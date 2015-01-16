@@ -17,7 +17,8 @@ import copapc.service.classificacao.ClassificacaoService;
 @Scope("request")
 @Controller("classificacaoMB")
 // @ManagedBean(name = "classificacaoMB")
-public class ClassificacaoManagedBean {
+public class ClassificacaoManagedBean extends AbstractManagedBean {
+  private static final long serialVersionUID = 1L;
 
   private List<Classificacao> classificacoesFase1GrupoA;
   private List<Classificacao> classificacoesFase1GrupoB;
