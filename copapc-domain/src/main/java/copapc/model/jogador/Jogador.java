@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
 
@@ -99,12 +100,15 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     return gols;
   }
 
+  public List<Jogo> getGolsPorJogo() {
+    return gols.stream().map(Gol::getJogo).collect(Collectors.toList());
+  }
+
   public Map<Jogo, Integer> getGolsAFavorPorJogo() {
     final Map<Jogo, Integer> golsPorJogo = new HashMap<>();
     for (Gol gol : getGols()) {
-      if (gol.isContra() == false) {
-        golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + 1);
-      }
+      final int aFavor = gol.isContra() == false ? 1 : 0;
+      golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + aFavor);
     }
     return golsPorJogo;
   }

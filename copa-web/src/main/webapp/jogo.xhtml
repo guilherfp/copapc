@@ -48,12 +48,14 @@
                     <h:panelGroup rendered="#{g.mandante}">
                       <copa:jogadorNome jogador="#{g.jogador}" />
                       #{g.minuto}'
+                      <h:outputText value=" (contra) " rendered="#{g.contra}" />
                     </h:panelGroup>
                   </td>
                   <td style="width: 50%; padding-left: 8px;">
                     <h:panelGroup rendered="#{g.visitante}">
                       #{g.minuto}'
                       <copa:jogadorNome jogador="#{g.jogador}" />
+                      <h:outputText value=" (contra) " rendered="#{g.contra}" />
                     </h:panelGroup>
                   </td>
                 </tr>
@@ -90,7 +92,7 @@
         </div>
         <div class="row">
           <div class="fb-comments" data-href="#{jogoMB.url}" data-numposts="10" data-colorscheme="light"
-            data-width="100%"></div>
+            data-width="100%" data-order-by="reverse_time"></div>
         </div>
       </div>
     </div>
