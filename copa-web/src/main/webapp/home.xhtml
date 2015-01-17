@@ -3,6 +3,10 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
   template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
+  <ui:define name="header">
+    <meta property="og:image" content="#{homeMB.imageHome}" />
+  </ui:define>
+
   <ui:define name="content">
     <div class="container">
       <h:graphicImage library="images" name="banner_copapc.jpg" styleClass="img-responsive" style="margin-top: 50px;" />

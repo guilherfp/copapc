@@ -43,6 +43,10 @@ public class TimeManagedBean extends AbstractManagedBean {
     return time;
   }
 
+  public String getImageTimeUrl() {
+    return getResource(String.format("/resources/images/time/%s.png", getTime().getUrl()));
+  }
+
   @Transactional
   public List<Jogo> getJogos() {
     if (jogos == null) {

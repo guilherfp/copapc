@@ -1,6 +1,5 @@
 package copapc.copa.web.controllers;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import copapc.model.time.TimeRepository;
 
 @Controller("homeMB")
 // @ManagedBean(name = "homeMB")
-public class HomeManagedBean implements Serializable {
+public class HomeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
   @Autowired
@@ -26,6 +25,10 @@ public class HomeManagedBean implements Serializable {
       times = timeRepository.times();
     }
     return times;
+  }
+
+  public String getImageHome() {
+    return getResource("/resources/images/banner_copapc.jpg");
   }
 
 }

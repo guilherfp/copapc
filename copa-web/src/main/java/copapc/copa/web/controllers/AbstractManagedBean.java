@@ -28,9 +28,14 @@ public abstract class AbstractManagedBean implements Serializable {
     return null;
   }
 
-  public String getUrl() {
+  public final String getUrl() {
     final HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
     final String url = PrettyContext.getCurrentInstance().getRequestURL().toURL();
+    return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
+  }
+
+  protected String getResource(final String url) {
+    final HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
     return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
   }
 }

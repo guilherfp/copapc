@@ -115,4 +115,8 @@ public class ClassificacaoManagedBean extends AbstractManagedBean {
   public Time getCampeao() {
     return TimeBuilder.timeNaoDefinido(1);
   }
+
+  public String getImageClassificacao() {
+    return getResource("/resources/images/classificacao.jpg");
+  }
 }

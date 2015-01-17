@@ -41,4 +41,7 @@ public class JogadorManagedBean extends AbstractManagedBean {
     return jogador;
   }
 
+  public String getImageTimeUrl() {
+    return getResource(String.format("/resources/images/time/%s.png", getJogador().getTime().getUrl()));
+  }
 }
