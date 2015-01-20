@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import copapc.model.jogador.Cartao;
+import copapc.model.jogo.Cartao;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;

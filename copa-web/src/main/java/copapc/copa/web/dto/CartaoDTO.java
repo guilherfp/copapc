@@ -1,6 +1,6 @@
 package copapc.copa.web.dto;
 
-import copapc.model.jogador.Cartao;
+import copapc.model.jogo.Cartao;
 
 public class CartaoDTO {
 

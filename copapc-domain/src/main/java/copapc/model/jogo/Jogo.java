@@ -10,7 +10,6 @@ import org.apache.commons.lang3.Validate;
 import org.joda.time.DateTime;
 
 import copapc.model.gol.Gol;
-import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 import copapc.shared.Entity;

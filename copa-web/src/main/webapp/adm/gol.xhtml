@@ -93,8 +93,7 @@
   <script>
       $("#gol").click(
           function() {
-            var msg = "Confimar gol de: "
-                + $("#jogadores option:selected").text();
+            var msg = "Confimar gol de: " + $("#jogadores option:selected").text();
             if (confirm(msg)) {
               var gol = {
                 jogador : $("#jogadores").val(),
@@ -120,9 +119,7 @@
       $("#cartao").click(
           function() {
             var msg = "Confimar cartão ("
-                + $("#cartoes option:selected").text()
-                + ") de: "
-                + $("#jogadores option:selected").text();
+                + $("#cartoes option:selected").text() + ") de: " + $("#jogadores option:selected").text();
             if (confirm(msg)) {
               $.ajax({
                 url : "#{request.contextPath}/rest/jogos/cartao",
@@ -130,6 +127,7 @@
                 data : JSON.stringify({
                   jogador : $("#jogadores").val(),
                   jogo : $("#jogos").val(),
+                  minuto : $("#minuto").val(),
                   cartao : $("#cartoes").val()
                 }),
                 contentType : "application/json",
@@ -149,9 +147,8 @@
       $("#iniciar").click(
           function() {
             if (confirm("Deseja realmente iniciar o jogo?")) {
-              $.get(
-                  "#{request.contextPath}/rest/jogos/".concat(
-                      $("#jogos").val()).concat("/iniciar"), function(data) {
+              $.get("#{request.contextPath}/rest/jogos/".concat($("#jogos").val()).concat("/iniciar"), 
+                  function(data) {
                     alert(data);
                   }).fail(function() {
                 alert("Não foi possível obter os jogadores!");

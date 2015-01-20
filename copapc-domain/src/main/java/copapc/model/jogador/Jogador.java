@@ -14,7 +14,6 @@ import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
-import copapc.util.DomainUtils;
 import copapc.util.UrlUtil;
 
 public class Jogador extends Entity implements Comparable<Jogador> {
@@ -24,8 +23,8 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   private String email;
   private Posicao posicao;
   private Time time;
+  private Status status;
   private List<Gol> gols = new ArrayList<>();
-  private Cartao cartao = Cartao.SEM_CARTAO;
   private List<CartaoDoJogo> cartoesPorJogos = new ArrayList<>();
   private String url;
 
@@ -125,16 +124,16 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     return gols;
   }
 
-  public Cartao getCartao() {
-    return DomainUtils.nullSafe(cartao, Cartao.SEM_CARTAO);
+  public Status getStatus() {
+    return status;
   }
 
-  public void setCartao(Cartao cartao) {
-    this.cartao = cartao;
+  public void setStatus(Status status) {
+    this.status = status;
   }
 
   public boolean isPossuiCartao() {
-    return (cartao != null) && (cartao != Cartao.SEM_CARTAO);
+    return (status != null) && (status != Status.SUSPENSO);
   }
 
   public String getUrl() {
@@ -142,7 +141,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public boolean isSuspenso() {
-    return Cartao.VERMELHO.equals(cartao);
+    return Status.SUSPENSO.equals(status);
   }
 
   public double getAproveitamento(JogoRepository jogoRepository) {

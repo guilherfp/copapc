@@ -44,7 +44,7 @@ public class TimeManagedBean extends AbstractManagedBean {
   }
 
   public String getImageTimeUrl() {
-    return getResource(String.format("/resources/images/time/%s.png", getTime().getUrl()));
+    return getResource(String.format("/resources/face/%s.png", getTime().getUrl()));
   }
 
   @Transactional

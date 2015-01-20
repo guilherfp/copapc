@@ -45,11 +45,11 @@
       <one-to-many entity-name="CartaoDoJogo" />
     </bag>
 
-    <property name="cartao">
+    <property name="status">
       <column name="cartao" length="20" not-null="false" />
       <type name="org.hibernate.type.EnumType">
         <param name="useNamed">true</param>
-        <param name="enumClass">copapc.model.jogador.Cartao</param>
+        <param name="enumClass">copapc.model.jogador.Status</param>
         <param name="type">12</param>
       </type>
     </property>

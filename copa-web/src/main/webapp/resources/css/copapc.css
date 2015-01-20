@@ -4,6 +4,10 @@ ul {
   margin: 0px;
 }
 
+.table-gols {
+  vertical-align: middle;
+}
+
 a:HOVER {
   text-decoration: none;
 }

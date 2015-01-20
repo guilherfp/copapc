@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
-  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" template="/WEB-INF/templates/template.xhtml"
+  xmlns:p="http://primefaces.org/ui" xmlns:copa="http://java.sun.com/jsf/composite/components/copa"
   xmlns:c="http://java.sun.com/jsp/jstl/core">
 
   <ui:define name="title">- #{jogoMB.jogo.mandante.nome} X #{jogoMB.jogo.visitante.nome}</ui:define>
@@ -9,90 +9,96 @@
   <ui:define name="content">
     <div class="section">
       <div class="container">
-        <div class="row" style="margin-top: 15px;">
+        <h:form id="formJogo">
+          <div class="row" style="margin-top: 15px;">
+            <div class="col-xs-12 text-center">
+              <span class="nome-jogo">
+                <a href="#{request.contextPath}/time/#{jogoMB.jogo.mandante.url}">
+                  <span class="placar-jogo-equipes-sigla"> #{jogoMB.jogo.mandante.sigla} </span>
+                  <span class="placar-jogo-equipes-nome"> #{jogoMB.jogo.mandante.nome} </span>
+                  <h:graphicImage library="images/time" name="#{jogoMB.jogo.mandante.url}.png" styleClass="escudo-jogo" />
+                </a>
+              </span>
+              <span>
+                <span class="gol-jogo" style="margin: 20px 5px 0 5px;">#{jogoMB.jogo.totalDeGolsDoMandante}</span>
+                <span class="x-jogo">X</span>
+                <span class="gol-jogo" style="margin: 20px 5px 0 5px;">#{jogoMB.jogo.totalDeGolsDoVisitante}</span>
+              </span>
+              <span class="nome-jogo">
+                <a href="#{request.contextPath}/time/#{jogoMB.jogo.visitante.url}">
+                  <h:graphicImage library="images/time" name="#{jogoMB.jogo.visitante.url}.png" styleClass="escudo-jogo" />
+                  <span class="placar-jogo-equipes-sigla"> #{jogoMB.jogo.visitante.sigla} </span>
+                  <span class="placar-jogo-equipes-nome"> #{jogoMB.jogo.visitante.nome} </span>
+                </a>
+              </span>
+            </div>
+          </div>
           <div class="col-xs-12 text-center">
-            <span class="nome-jogo">
-              <a href="#{request.contextPath}/time/#{jogoMB.jogo.mandante.url}">
-                <span class="placar-jogo-equipes-sigla"> #{jogoMB.jogo.mandante.sigla} </span>
-                <span class="placar-jogo-equipes-nome"> #{jogoMB.jogo.mandante.nome} </span>
-                <h:graphicImage library="images/time" name="#{jogoMB.jogo.mandante.url}.png" styleClass="escudo-jogo" />
-              </a>
-            </span>
-            <span>
-              <span class="gol-jogo" style="margin: 20px 5px 0 5px;">#{jogoMB.jogo.totalDeGolsDoMandante}</span>
-              <span class="x-jogo">X</span>
-              <span class="gol-jogo" style="margin: 20px 5px 0 5px;">#{jogoMB.jogo.totalDeGolsDoVisitante}</span>
-            </span>
-            <span class="nome-jogo">
-              <a href="#{request.contextPath}/time/#{jogoMB.jogo.visitante.url}">
-                <h:graphicImage library="images/time" name="#{jogoMB.jogo.visitante.url}.png" styleClass="escudo-jogo" />
-                <span class="placar-jogo-equipes-sigla"> #{jogoMB.jogo.visitante.sigla} </span>
-                <span class="placar-jogo-equipes-nome"> #{jogoMB.jogo.visitante.nome} </span>
-              </a>
-            </span>
+            <h4>
+              <h:outputText value="1º TEMPO" rendered="#{jogoMB.showPrimeiroTempo}" />
+              <h:outputText value="2º TEMPO" rendered="#{jogoMB.showSegundoTempo}" />
+              <h:outputText value="ENCERRADO" rendered="#{jogoMB.jogo.encerrado}" />
+            </h4>
           </div>
-        </div>
-        <div class="col-xs-12 text-center">
-          <h4>
-            <h:outputText value="1º TEMPO" rendered="#{jogoMB.showPrimeiroTempo}" />
-            <h:outputText value="2º TEMPO" rendered="#{jogoMB.showSegundoTempo}" />
-            <h:outputText value="ENCERRADO" rendered="#{jogoMB.jogo.encerrado}" />
-          </h4>
-        </div>
-        <div class="row" style="margin-top: 20px;">
-          <table style="width: 100%;">
-            <tbody>
-              <ui:repeat value="#{jogoMB.jogo.gols}" var="g">
-                <tr>
-                  <td style="text-align: right; width: 50%; padding-right: 8px;">
-                    <h:panelGroup rendered="#{g.mandante}">
-                      <copa:jogadorNome jogador="#{g.jogador}" />
+          <div class="row" style="margin-top: 20px;">
+            <table style="width: 100%;">
+              <tbody>
+                <ui:repeat value="#{jogoMB.jogo.gols}" var="g">
+                  <tr>
+                    <td style="text-align: right; width: 50%; padding-right: 8px;">
+                      <h:panelGroup rendered="#{g.mandante}">
+                        <copa:jogadorNome jogador="#{g.jogador}" />
                       #{g.minuto}'
                       <h:outputText value=" (contra) " rendered="#{g.contra}" />
-                    </h:panelGroup>
-                  </td>
-                  <td style="width: 50%; padding-left: 8px;">
-                    <h:panelGroup rendered="#{g.visitante}">
+                      </h:panelGroup>
+                    </td>
+                    <td style="width: 50%; padding-left: 8px;">
+                      <h:panelGroup rendered="#{g.visitante}">
                       #{g.minuto}'
                       <copa:jogadorNome jogador="#{g.jogador}" />
-                      <h:outputText value=" (contra) " rendered="#{g.contra}" />
-                    </h:panelGroup>
-                  </td>
-                </tr>
-              </ui:repeat>
-            </tbody>
-          </table>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h3>Cartões</h3>
+                        <h:outputText value=" (contra) " rendered="#{g.contra}" />
+                      </h:panelGroup>
+                    </td>
+                  </tr>
+                </ui:repeat>
+              </tbody>
+            </table>
           </div>
-          <table style="width: 100%;">
-            <tbody>
-              <ui:repeat var="c" value="#{jogoMB.jogo.cartoesDoJogo}">
-                <tr>
-                  <td style="text-align: right; padding-right: 8px; width: 50%;">
-                    <h:panelGroup rendered="#{c.mandante}">
-                      <copa:jogadorNome jogador="#{c.jogador}" />
-                      <h:graphicImage library="images/cartao" name="#{c.cartao}.png" style="margin: 0 3px 0 3px;" />
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h3>Cartões</h3>
+            </div>
+            <table style="width: 100%;">
+              <tbody>
+                <ui:repeat var="c" value="#{jogoMB.jogo.cartoesDoJogo}">
+                  <tr>
+                    <td style="text-align: right; padding-right: 8px; width: 50%;">
+                      <h:panelGroup rendered="#{c.mandante}">
+                        <copa:jogadorNome jogador="#{c.jogador}" />
+                        <h:graphicImage library="images/cartao" name="#{c.cartao}.png" style="margin: 0 3px 0 3px;" />
                       #{c.minuto}'
                     </h:panelGroup>
-                  </td>
-                  <td style="text-align: left; padding-left: 8px; width: 50%;">
-                    <h:panelGroup rendered="#{c.visitante}">
+                    </td>
+                    <td style="text-align: left; padding-left: 8px; width: 50%;">
+                      <h:panelGroup rendered="#{c.visitante}">
                       #{c.minuto}'
                       <h:graphicImage library="images/cartao" name="#{c.cartao}.png" style="margin: 0 3px 0 3px;" />
-                      <copa:jogadorNome jogador="#{c.jogador}" />
-                    </h:panelGroup>
-                  </td>
-                </tr>
-              </ui:repeat>
-            </tbody>
-          </table>
+                        <copa:jogadorNome jogador="#{c.jogador}" />
+                      </h:panelGroup>
+                    </td>
+                  </tr>
+                </ui:repeat>
+              </tbody>
+            </table>
+          </div>
+          <p:poll interval="15" update="formJogo" />
+        </h:form>
+        <div class="row">
+          <div class="fb-like" data-share="true" data-href="#{jogoMB.url}" data-show-faces="true"></div>
         </div>
         <div class="row">
-          <div class="fb-comments" data-href="#{jogoMB.url}" data-numposts="10" data-colorscheme="light"
-            data-width="100%" data-order-by="reverse_time"></div>
+          <div class="fb-comments" data-href="#{jogoMB.url}" data-numposts="10" data-width="100%"
+            data-order-by="reverse_time"></div>
         </div>
       </div>
     </div>

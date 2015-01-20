@@ -2,7 +2,6 @@ package copapc.model.jogo;
 
 import java.io.Serializable;
 
-import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
 import copapc.shared.Entity;
 

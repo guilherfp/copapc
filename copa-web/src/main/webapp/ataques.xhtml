@@ -3,6 +3,10 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
   template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
+  <ui:define name="header">
+    <meta property="og:image" content="#{homeMB.imageHome}" />
+  </ui:define>
+
   <ui:define name="title">- Artilharia</ui:define>
 
   <ui:define name="content">
@@ -38,8 +42,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="fb-comments" data-href="#{timeMB.url}" data-numposts="10" data-colorscheme="light"
-            data-width="100%" data-order-by="reverse_time"></div>
+          <div class="fb-like" data-share="true" data-href="#{timeMB.url}" data-show-faces="true"></div>
+        </div>
+        <div class="row">
+          <div class="fb-comments" data-href="#{timeMB.url}" data-numposts="10" data-width="100%"
+            data-order-by="reverse_time"></div>
         </div>
       </div>
     </div>

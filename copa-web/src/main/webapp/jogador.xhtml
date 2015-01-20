@@ -54,13 +54,18 @@
                 </h:column>
                 <h:column>
                   <f:facet name="header">Dia</f:facet>
-                  <h:outputText value="#{gol.key.horario.toString('dd/MM/yy')}" />
+                  <h:outputText value="#{gol.key.horario.toString('dd/MM/yy')}" style="vertical-align: middle;" />
                 </h:column>
                 <h:column>
                   <f:facet name="header">Jogo</f:facet>
-                  <copa:resumoTime time="#{gol.key.mandante}" escutoRight="true" />
-                  <span style="vertical-align: middle; height: 15px; font-weight: bold;">X</span>
-                  <copa:resumoTime time="#{gol.key.visitante}" escutoLeft="true" />
+                  <span style="margin-right: 40px;">
+                    <copa:resumoTime time="#{gol.key.mandante}" escutoRight="true" />
+                    <span style="vertical-align: middle; height: 15px; font-weight: bold;">X</span>
+                    <copa:resumoTime time="#{gol.key.visitante}" escutoLeft="true" />
+                  </span>
+                </h:column>
+                <h:column>
+                  <h:outputLink value="#{request.contextPath}/jogo/#{gol.key.numero}">VER</h:outputLink>
                 </h:column>
               </h:dataTable>
             </div>
@@ -87,13 +92,19 @@
                   <span style="vertical-align: middle; height: 15px; font-weight: bold;">X</span>
                   <copa:resumoTime time="#{c.jogo.visitante}" escutoLeft="true" />
                 </h:column>
+                <h:column>
+                  <h:outputLink value="#{request.contextPath}/jogo/#{c.jogo.numero}">VER</h:outputLink>
+                </h:column>
               </h:dataTable>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="fb-comments" data-href="#{jogadorMB.url}" data-numposts="10" data-colorscheme="light"
-            data-width="100%" data-order-by="reverse_time"></div>
+          <div class="fb-like" data-share="true" data-href="#{jogadorMB.url}" data-show-faces="true"></div>
+        </div>
+        <div class="row">
+          <div class="fb-comments" data-href="#{jogadorMB.url}" data-numposts="10" data-width="100%"
+            data-order-by="reverse_time"></div>
         </div>
       </div>
     </div>

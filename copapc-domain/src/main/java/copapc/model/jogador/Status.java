@@ -1,11 +1,10 @@
 package copapc.model.jogador;
 
-public enum Cartao {
+public enum Status {
 
-  SEM_CARTAO,
-  AMARELO,
   AMARELO_1,
   AMARELO_2,
-  VERMELHO;
+  AMARELO_3,
+  SUSPENSO;
 
 }

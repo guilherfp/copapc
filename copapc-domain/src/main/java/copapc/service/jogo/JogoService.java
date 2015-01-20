@@ -11,8 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import copapc.model.gol.Gol;
 import copapc.model.gol.GolRepository;
-import copapc.model.jogador.Cartao;
 import copapc.model.jogador.Jogador;
+import copapc.model.jogador.Status;
+import copapc.model.jogo.Cartao;
 import copapc.model.jogo.CartaoDoJogo;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
@@ -84,14 +85,14 @@ public class JogoService {
     validarInicializacaoDoJogo(jogo);
     Validate.isTrue(jogador.isSuspenso() == false, "Jogador está suspenso");
     if (jogo.getCartoesDoJogador(jogador).contains(Cartao.AMARELO)) {
-      jogador.setCartao(Cartao.VERMELHO);
+      jogador.setStatus(Status.SUSPENSO);
       cartao = Cartao.VERMELHO;
-    } else if (jogador.getCartao() == null) {
-      jogador.setCartao(Cartao.AMARELO_1);
-    } else if (jogador.getCartao().equals(Cartao.AMARELO_1)) {
-      jogador.setCartao(Cartao.AMARELO_2);
+    } else if (jogador.getStatus() == null) {
+      jogador.setStatus(Status.AMARELO_1);
+    } else if (Status.AMARELO_1.equals(jogador.getStatus())) {
+      jogador.setStatus(Status.AMARELO_2);
     } else if (cartao.equals(Cartao.VERMELHO)) {
-      jogador.setCartao(Cartao.VERMELHO);
+      jogador.setStatus(Status.SUSPENSO);
     }
     final CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador, checkMinuto(jogo, minuto));
     jogoRepository.salvarCartao(cartaoDoJogo);
