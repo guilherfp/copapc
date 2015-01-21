@@ -2,6 +2,8 @@ package copapc.service.jogador;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import copapc.model.jogador.Jogador;
 import copapc.model.jogador.JogadorRepository;
@@ -26,19 +28,31 @@ public class JogadorService {
     jogadorRepository.salvar(jogador);
   }
 
-  private final Comparator<Jogador> compareAproveitamento = new Comparator<Jogador>() {
-    @Override
-    public int compare(Jogador o1, Jogador o2) {
-      return Double.compare(o1.getAproveitamento(jogoRepository), o2.getAproveitamento(jogoRepository));
-    }
-  };
-
-  public List<Jogador> artilheiros() {
-    final List<Jogador> artilheiros = jogadorRepository.jogadores();
-    artilheiros.sort(compareAproveitamento.reversed());
-    artilheiros.sort(Comparator.comparingInt(Jogador::getTotalDeGols).reversed());
-    artilheiros.removeIf(time -> time.getTotalDeGols() == 0);
+  public List<Artilheiro> artilheiros() {
+    final List<Jogador> jogadores = jogadorRepository.jogadores();
+    jogadores.removeIf(j -> j.isPossuiGolAFavor() == false);
+    final Function<Jogador, Artilheiro> mapper = j -> new Artilheiro(j, jogoRepository);
+    final List<Artilheiro> artilheiros = jogadores.stream().map(mapper).collect(Collectors.toList());
+    artilheiros.sort(Comparator.comparingDouble(Artilheiro::getAproveitamento).reversed());
+    artilheiros.sort(Comparator.comparingDouble(Artilheiro::getTotalDeGols).reversed());
+    classificar(artilheiros);
     return artilheiros;
+  }
+
+  private void classificar(final List<Artilheiro> artilheiros) {
+    for (int i = 0; i < artilheiros.size(); i++) {
+      final Artilheiro atual = artilheiros.get(i);
+      if (i == 0) {
+        atual.setPosicao(i + 1);
+      } else {
+        final Artilheiro anterior = artilheiros.get(i - 1);
+        if (anterior.mesmaPosicao(atual)) {
+          atual.setPosicao(anterior.getPosicao());
+        } else {
+          atual.setPosicao(anterior.getPosicao() + 1);
+        }
+      }
+    }
   }
 
 }

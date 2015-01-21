@@ -18,27 +18,27 @@
             <hr />
           </div>
           <div class="col-lg-12">
-            <h:dataTable value="#{artilhariaMB.artilheiros}" var="j"
+            <h:dataTable value="#{artilhariaMB.artilheiros}" var="a"
               styleClass="table table-striped table-hover table-condensed" columnClasses=",,,text-center,text-center">
               <h:column>
                 <f:facet name="header">#</f:facet>
-                <span style="font-weight: bold;">#{artilhariaMB.posicao(j)}</span>
+                <span style="font-weight: bold;">#{a.posicao}</span>
               </h:column>
               <h:column>
                 <f:facet name="header">Nome</f:facet>
-                <copa:jogadorNome jogador="#{j}" />
+                <copa:jogadorNome jogador="#{a.jogador}" />
               </h:column>
               <h:column>
                 <f:facet name="header">Time</f:facet>
-                <copa:resumoTime time="#{j.time}" escutoLeft="true" />
+                <copa:resumoTime time="#{a.jogador.time}" escutoLeft="true" />
               </h:column>
               <h:column headerClass="text-center">
                 <f:facet name="header">Gols</f:facet>
-                <span style="font-weight: bold;">#{j.totalDeGols}</span>
+                <span style="font-weight: bold;">#{a.totalDeGols}</span>
               </h:column>
               <h:column headerClass="text-center">
                 <f:facet name="header">Gol(s)/Jogo</f:facet>
-                <span style="font-weight: bold;">#{artilhariaMB.aproveitamento(j)}</span>
+                <span style="font-weight: bold;">#{a.golsPorJogo}</span>
               </h:column>
             </h:dataTable>
           </div>

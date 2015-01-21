@@ -99,6 +99,18 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     return gols;
   }
 
+  public boolean isPossuiGolAFavor() {
+    return isPossuiGol() && gols.stream().noneMatch(Gol::isContra);
+  }
+
+  public boolean isPossuiGol() {
+    return gols.isEmpty() == false;
+  }
+
+  public boolean isNaoPossuiGol() {
+    return gols.isEmpty();
+  }
+
   public List<Jogo> getGolsPorJogo() {
     return gols.stream().map(Gol::getJogo).collect(Collectors.toList());
   }
@@ -147,11 +159,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   public double getAproveitamento(JogoRepository jogoRepository) {
     final double totalDeGols = getTotalDeGols();
     final long totalDePartidasJogadas = getTotalDePartidasJogadas(jogoRepository);
-    if (totalDePartidasJogadas > 0) {
-      return totalDeGols / totalDePartidasJogadas;
-    } else {
-      return 0;
-    }
+    return (totalDePartidasJogadas > 0) ? (totalDeGols / totalDePartidasJogadas) : 0;
   }
 
   private long getTotalDePartidasJogadas(JogoRepository jogoRepository) {
