@@ -91,6 +91,8 @@ public class JogoService {
       jogador.setStatus(Status.AMARELO_1);
     } else if (Status.AMARELO_1.equals(jogador.getStatus())) {
       jogador.setStatus(Status.AMARELO_2);
+    } else if (Status.AMARELO_2.equals(jogador.getStatus())) {
+      jogador.setStatus(Status.SUSPENSO);
     } else if (cartao.equals(Cartao.VERMELHO)) {
       jogador.setStatus(Status.SUSPENSO);
     }

@@ -1,8 +1,10 @@
 package copapc.model.jogo;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,7 @@ import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
-public class Jogo extends Entity {
+public class Jogo extends Entity implements Comparable<Jogo> {
   private static final long serialVersionUID = 1L;
 
   private int fase;
@@ -198,6 +200,24 @@ public class Jogo extends Entity {
     }
   }
 
+  public Entry<Integer, Integer> getPlacar(Gol gol) {
+    int golsMandante = 0;
+    int golsVisitante = 0;
+    final List<Gol> gols = golsAPartirDoMinuto(gol.getMinuto());
+    for (Gol golMarcado : gols) {
+      if (golMarcado.isAFavorDe(mandante)) {
+        golsMandante++;
+      } else if (golMarcado.isAFavorDe(visitante)) {
+        golsVisitante++;
+      }
+    }
+    return new AbstractMap.SimpleEntry<>(golsMandante, golsVisitante);
+  }
+
+  private List<Gol> golsAPartirDoMinuto(int minuto) {
+    return getGols().stream().filter(g -> g.getMinuto() <= minuto).collect(Collectors.toList());
+  }
+
   public boolean estaNoJogo(Time time) {
     return visitante.equals(time) || mandante.equals(time);
   }
@@ -261,5 +281,10 @@ public class Jogo extends Entity {
     } else {
       return "Não de definido";
     }
+  }
+
+  @Override
+  public int compareTo(Jogo o) {
+    return getHorario().compareTo(o.getHorario());
   }
 }

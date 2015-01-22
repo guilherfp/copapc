@@ -52,6 +52,11 @@
                       <h:outputText value=" (contra) " rendered="#{g.contra}" />
                       </h:panelGroup>
                     </td>
+                    <td style="font-weight: bold; min-width: 50px; text-align: center;">
+                      <span style="font-size: 18px;">#{jogoMB.jogo.getPlacar(g).key}</span>
+                      <span style="font-size: 10px; padding: 0 4px 0 4px;">X</span>
+                      <span style="font-size: 18px;">#{jogoMB.jogo.getPlacar(g).value}</span>
+                    </td>
                     <td style="width: 50%; padding-left: 8px;">
                       <h:panelGroup rendered="#{g.visitante}">
                       #{g.minuto}'
@@ -91,10 +96,11 @@
               </tbody>
             </table>
           </div>
-          <p:poll interval="15" update="formJogo" />
+          <p:poll interval="15" update="formJogo" rendered="#{jogoMB.jogo.andamento}" />
         </h:form>
-        <div class="row">
-          <div class="fb-like" data-share="true" data-href="#{jogoMB.url}" data-show-faces="true"></div>
+        <div class="row" style="margin: 10px 0 10px 0;">
+          <div class="fb-like" data-share="true" data-layout="button_count" data-href="#{jogoMB.url}"
+            data-show-faces="true"></div>
         </div>
         <div class="row">
           <div class="fb-comments" data-href="#{jogoMB.url}" data-numposts="10" data-width="100%"

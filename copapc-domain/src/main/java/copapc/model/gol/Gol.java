@@ -70,6 +70,10 @@ public class Gol extends Entity {
     return new Gol(jogador, jogo, true, minuto);
   }
 
+  public boolean isAFavorDe(Time time) {
+    return (this.time.equals(time)) ? isContra() == false : isContra();
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -108,5 +112,4 @@ public class Gol extends Entity {
   public String toString() {
     return String.format("Gol = numero: %s, jogador: %s, time: %s, jogo: %s", numero, jogador, time, jogo);
   }
-
 }

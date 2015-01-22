@@ -1,9 +1,10 @@
 package copapc.model.jogador;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
@@ -40,6 +41,13 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public List<CartaoDoJogo> getCartoesPorJogos() {
+    cartoesPorJogos.sort(Comparator.comparingInt(CartaoDoJogo::getMinuto));
+    cartoesPorJogos.sort(new Comparator<CartaoDoJogo>() {
+      @Override
+      public int compare(CartaoDoJogo o1, CartaoDoJogo o2) {
+        return o1.getJogo().getHorario().compareTo(o2.getJogo().getHorario());
+      }
+    });
     return cartoesPorJogos;
   }
 
@@ -96,6 +104,14 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public List<Gol> getGols() {
+    gols.sort(Comparator.comparingInt(Gol::getMinuto));
+    gols.sort(new Comparator<Gol>() {
+
+      @Override
+      public int compare(Gol o1, Gol o2) {
+        return o1.getJogo().getHorario().compareTo(o2.getJogo().getHorario());
+      }
+    });
     return gols;
   }
 
@@ -116,7 +132,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public Map<Jogo, Integer> getGolsAFavorPorJogo() {
-    final Map<Jogo, Integer> golsPorJogo = new HashMap<>();
+    final Map<Jogo, Integer> golsPorJogo = new TreeMap<>();
     for (Gol gol : getGols()) {
       final int aFavor = gol.isContra() == false ? 1 : 0;
       golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + aFavor);

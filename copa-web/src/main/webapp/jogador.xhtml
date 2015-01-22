@@ -45,18 +45,19 @@
             </div>
             <div class="table-responsive">
               <h:dataTable value="#{jogadorMB.jogador.golsAFavorPorJogo.entrySet()}" var="gol"
-                styleClass="table table-striped table-hover table-condensed">
-                <h:column>
+                styleClass="table table-striped table-hover table-condensed"
+                columnClasses="text-center,text-center,text-center,">
+                <h:column headerClass="text-center">
                   <f:facet name="header">Gol(s)</f:facet>
                   <span style="vertical-align: middle; height: 15px;">
                     <h:outputText value="#{gol.value} (#{jogadorMB.jogador.getGolsContra(gol.key)})" />
                   </span>
                 </h:column>
-                <h:column>
+                <h:column headerClass="text-center">
                   <f:facet name="header">Dia</f:facet>
                   <h:outputText value="#{gol.key.horario.toString('dd/MM/yy')}" style="vertical-align: middle;" />
                 </h:column>
-                <h:column>
+                <h:column headerClass="text-center">
                   <f:facet name="header">Jogo</f:facet>
                   <span style="margin-right: 40px;">
                     <copa:resumoTime time="#{gol.key.mandante}" escutoRight="true" />
@@ -75,18 +76,19 @@
             </div>
             <div class="table-responsive">
               <h:dataTable value="#{jogadorMB.jogador.cartoesPorJogos}" var="c"
-                styleClass="table table-striped table-hover table-condensed">
-                <h:column>
+                styleClass="table table-striped table-hover table-condensed"
+                columnClasses="text-center,text-center,text-center,">
+                <h:column headerClass="text-center">
                   <f:facet name="header">Cartão</f:facet>
                   <span style="vertical-align: middle; height: 15px;">
                     <h:graphicImage library="images/cartao" name="#{c.cartao}.png" />
                   </span>
                 </h:column>
-                <h:column>
+                <h:column headerClass="text-center">
                   <f:facet name="header">Dia</f:facet>
                   <h:outputText value="#{c.jogo.horario.toString('dd/MM/yy')}" />
                 </h:column>
-                <h:column>
+                <h:column headerClass="text-center">
                   <f:facet name="header">Jogo</f:facet>
                   <copa:resumoTime time="#{c.jogo.mandante}" escutoRight="true" />
                   <span style="vertical-align: middle; height: 15px; font-weight: bold;">X</span>
@@ -99,8 +101,9 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="fb-like" data-share="true" data-href="#{jogadorMB.url}" data-show-faces="true"></div>
+        <div class="row" style="margin: 10px 0 10px 0;">
+          <div class="fb-like" data-share="true" data-layout="button_count" data-href="#{jogadorMB.url}"
+            data-show-faces="true"></div>
         </div>
         <div class="row">
           <div class="fb-comments" data-href="#{jogadorMB.url}" data-numposts="10" data-width="100%"
