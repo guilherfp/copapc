@@ -72,6 +72,7 @@ public class ClassificacaoService {
 
   private List<Classificacao> classificar(final List<Classificacao> classificacoes) {
     classificacoes.sort(Comparator.comparingInt(Classificacao::getSaldoDeGols).reversed());
+    classificacoes.sort(Comparator.comparingInt(Classificacao::getVitorias).reversed());
     classificacoes.sort(Comparator.comparingInt(Classificacao::getPontos).reversed());
     int posicao = 1;
     for (Classificacao classificacao : classificacoes) {
