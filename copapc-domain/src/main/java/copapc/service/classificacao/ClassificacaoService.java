@@ -1,6 +1,5 @@
 package copapc.service.classificacao;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -11,18 +10,15 @@ import copapc.model.jogo.JogoRepository;
 import copapc.model.resumoclassificacao.Classificacao;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
-import copapc.service.jogo.JogoService;
 
 public class ClassificacaoService {
 
   private final JogoRepository jogoRepository;
   private final TimeRepository timeRepository;
-  private final JogoService jogoService;
 
-  public ClassificacaoService(JogoRepository jogoRepository, TimeRepository timeRepository, JogoService jogoService) {
+  public ClassificacaoService(JogoRepository jogoRepository, TimeRepository timeRepository) {
     this.jogoRepository = jogoRepository;
     this.timeRepository = timeRepository;
-    this.jogoService = jogoService;
   }
 
   public List<Classificacao> classificacaoFase1PorGrupo(final char grupo) {
@@ -41,33 +37,13 @@ public class ClassificacaoService {
   }
 
   private List<Time> timesFase2GrupoA() {
-    final List<Time> times = new ArrayList<>(4);
-    if (jogoService.faseFinalizada(1)) {
-      final List<Classificacao> classificacoesGrupoAFase1 = classificacaoFase1PorGrupo('A');
-      final List<Classificacao> classificacoesGrupoBFase1 = classificacaoFase1PorGrupo('B');
-      times.add(posicao(classificacoesGrupoAFase1, 1).getTime());
-      times.add(posicao(classificacoesGrupoBFase1, 1).getTime());
-      times.add(posicao(classificacoesGrupoAFase1, 3).getTime());
-      times.add(posicao(classificacoesGrupoBFase1, 3).getTime());
-    }
-    return times;
+    return classificacaoFase1PorGrupo('A').subList(0, 4).stream().map(Classificacao::getTime).collect(
+      Collectors.toList());
   }
 
   private List<Time> timesFase2GrupoB() {
-    final List<Time> times = new ArrayList<>(4);
-    if (jogoService.faseFinalizada(1)) {
-      final List<Classificacao> classificacoesGrupoAFase1 = classificacaoFase1PorGrupo('A');
-      final List<Classificacao> classificacoesGrupoBFase1 = classificacaoFase1PorGrupo('B');
-      times.add(posicao(classificacoesGrupoAFase1, 2).getTime());
-      times.add(posicao(classificacoesGrupoBFase1, 2).getTime());
-      times.add(posicao(classificacoesGrupoAFase1, 4).getTime());
-      times.add(posicao(classificacoesGrupoBFase1, 4).getTime());
-    }
-    return times;
-  }
-
-  private Classificacao posicao(final List<Classificacao> classificacoes, final int posicao) {
-    return classificacoes.stream().filter(c -> c.getPosicao() == posicao).findFirst().get();
+    return classificacaoFase1PorGrupo('B').subList(0, 4).stream().map(Classificacao::getTime).collect(
+      Collectors.toList());
   }
 
   private List<Classificacao> classificar(final List<Classificacao> classificacoes) {

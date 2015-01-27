@@ -28,7 +28,6 @@
   <bean id="classificacaoService" class="copapc.service.classificacao.ClassificacaoService">
     <constructor-arg name="jogoRepository" ref="jogoRepository" />
     <constructor-arg name="timeRepository" ref="timeRepository" />
-    <constructor-arg name="jogoService" ref="jogoService" />
   </bean>
 
   <bean id="timeService" class="copapc.service.time.TimeService">
