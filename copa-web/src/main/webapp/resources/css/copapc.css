@@ -4,6 +4,10 @@ ul {
   margin: 0px;
 }
 
+a {
+  color: black;
+}
+
 .table-gols {
   vertical-align: middle;
 }

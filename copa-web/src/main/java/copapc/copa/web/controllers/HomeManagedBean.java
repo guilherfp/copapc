@@ -3,12 +3,16 @@ package copapc.copa.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import copapc.model.jogo.Jogo;
+import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
 
+@Scope("request")
 @Controller("homeMB")
 // @ManagedBean(name = "homeMB")
 public class HomeManagedBean extends AbstractManagedBean {
@@ -16,7 +20,11 @@ public class HomeManagedBean extends AbstractManagedBean {
 
   @Autowired
   private TimeRepository timeRepository;
+  @Autowired
+  private JogoRepository jogoRepository;
 
+  private List<Jogo> proximos;
+  private List<Jogo> ultimos;
   private List<Time> times;
 
   @Transactional
@@ -25,6 +33,30 @@ public class HomeManagedBean extends AbstractManagedBean {
       times = timeRepository.times();
     }
     return times;
+  }
+
+  public List<Jogo> getProximos() {
+    if (proximos == null) {
+      proximos = jogoRepository.jogosEmAberto();
+    }
+    return proximos;
+  }
+
+  public List<Jogo> getUltimos() {
+    if (ultimos == null) {
+      ultimos = jogoRepository.ultimosEncerrados();
+    }
+    return ultimos;
+  }
+
+  public int getProximosSize() {
+    final int size = getProximos().size();
+    return size <= 3 ? size : 3;
+  }
+
+  public int getUltimosSize() {
+    final int size = getUltimos().size();
+    return size <= 3 ? size : 3;
   }
 
   public String getImageHome() {

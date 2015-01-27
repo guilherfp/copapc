@@ -103,16 +103,21 @@ public class JogoService {
 
   public List<Rodada> getRodadas(int fase) {
     final List<Jogo> jogos = jogoRepository.jogosPorFase(fase);
-    final int fases = jogos.size() / timeRepository.quantidadeDeGrupos();
+    final int fases = getTamanhoDaRodada(fase, jogos);
     final List<Rodada> rodadas = new ArrayList<>();
-    for (int i = 0; i < fases; i++) {
-      int end = 0 + fases;
-      if (end > jogos.size()) {
-        end = jogos.size() - 1;
-      }
-      rodadas.add(new Rodada(i + 1, jogos.subList(end * i, (end * i) + end)));
+    final int i = fases > jogos.size() ? jogos.size() : fases;
+    for (int start = 0, end = i, rodada = 1; end <= jogos.size(); start += fases, end += fases, rodada++) {
+      rodadas.add(new Rodada(rodada, jogos.subList(start, end)));
     }
     return rodadas;
+  }
+
+  private int getTamanhoDaRodada(int fase, final List<Jogo> jogos) {
+    if (fase == 1) {
+      return jogos.size() / timeRepository.quantidadeDeGrupos();
+    } else {
+      return 4;
+    }
   }
 
   public boolean faseFinalizada(int fase) {

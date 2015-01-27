@@ -31,6 +31,26 @@
             </div>
           </ui:repeat>
         </div>
+        <div class="col-lg-12">
+          <div class="row">
+            <h3 class="col-lg-12 text-center">2ª Fase</h3>
+            <hr />
+          </div>
+          <ui:repeat value="#{jogoMB.rodadasFase2}" var="r">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h4 class="col-lg-12 text-center">#{r.numero}ª Rodada</h4>
+                <hr />
+              </div>
+              <ul class="lista-de-jogos-conteudo">
+                <ui:repeat value="#{r.jogos}" var="j">
+                  <copa:jogo jogo="#{j}" />
+                  <hr />
+                </ui:repeat>
+              </ul>
+            </div>
+          </ui:repeat>
+        </div>
       </div>
     </div>
   </ui:define>

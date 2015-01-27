@@ -3,6 +3,8 @@ package copapc.copa.web.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import copapc.service.jogo.Rodada;
 
 @Scope("request")
 @Controller("jogoMB")
-// @ManagedBean(name = "jogoMB")
+@ManagedBean(name = "jogoMB")
 public class JogoManagedBean extends AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -27,15 +29,21 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
 
   private Jogo jogo;
   private List<Jogo> jogos;
-  private List<Jogo> proximos;
-  private List<Jogo> ultimos;
-  private List<Rodada> rodadas;
+  private List<Rodada> rodadasFase1;
+  private List<Rodada> rodadasFase2;
 
   public List<Rodada> getRodadasFase1() {
-    if (rodadas == null) {
-      rodadas = jogoService.getRodadas(1);
+    if (rodadasFase1 == null) {
+      rodadasFase1 = jogoService.getRodadas(1);
     }
-    return rodadas;
+    return rodadasFase1;
+  }
+
+  public List<Rodada> getRodadasFase2() {
+    if (rodadasFase2 == null) {
+      rodadasFase2 = jogoService.getRodadas(2);
+    }
+    return rodadasFase2;
   }
 
   public List<Jogo> getJogos() {
@@ -43,20 +51,6 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
       jogos = jogoRepository.jogos();
     }
     return jogos;
-  }
-
-  public List<Jogo> getProximos() {
-    if (proximos == null) {
-      proximos = jogoRepository.jogosEmAberto();
-    }
-    return proximos;
-  }
-
-  public List<Jogo> getUltimos() {
-    if (ultimos == null) {
-      ultimos = jogoRepository.ultimosEncerrados();
-    }
-    return ultimos;
   }
 
   public Jogo getJogo() {

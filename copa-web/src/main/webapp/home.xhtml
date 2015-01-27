@@ -25,7 +25,7 @@
             <h2>Próximos jogos</h2>
           </div>
           <ul class="lista-de-jogos-conteudo">
-            <ui:repeat var="jogo" value="#{jogoMB.proximos}" size="3">
+            <ui:repeat var="jogo" value="#{homeMB.proximos}" size="#{homeMB.proximosSize}">
               <hr />
               <copa:jogo jogo="#{jogo}" />
             </ui:repeat>
@@ -36,7 +36,7 @@
             <h2>Últimos jogos</h2>
           </div>
           <ul class="lista-de-jogos-conteudo">
-            <ui:repeat var="jogo" value="#{jogoMB.ultimos}" size="3">
+            <ui:repeat var="jogo" value="#{homeMB.ultimos}" size="#{homeMB.ultimosSize}">
               <hr />
               <copa:jogo jogo="#{jogo}" />
             </ui:repeat>
