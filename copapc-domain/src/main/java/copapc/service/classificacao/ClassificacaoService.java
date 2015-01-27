@@ -1,5 +1,6 @@
 package copapc.service.classificacao;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,15 +11,18 @@ import copapc.model.jogo.JogoRepository;
 import copapc.model.resumoclassificacao.Classificacao;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
+import copapc.service.jogo.JogoService;
 
 public class ClassificacaoService {
 
   private final JogoRepository jogoRepository;
   private final TimeRepository timeRepository;
+  private final JogoService jogoService;
 
-  public ClassificacaoService(JogoRepository jogoRepository, TimeRepository timeRepository) {
+  public ClassificacaoService(JogoRepository jogoRepository, TimeRepository timeRepository, JogoService jogoService) {
     this.jogoRepository = jogoRepository;
     this.timeRepository = timeRepository;
+    this.jogoService = jogoService;
   }
 
   public List<Classificacao> classificacaoFase1PorGrupo(final char grupo) {
@@ -28,12 +32,20 @@ public class ClassificacaoService {
 
   public List<Classificacao> classificacaoGrupoAFase2() {
     final List<Time> times = timesFase2GrupoA();
-    return classificar(times.stream().map(t -> classificacao(t, 2)).collect(Collectors.toList()));
+    if (jogoService.faseFinalizada(1)) {
+      return classificar(times.stream().map(t -> classificacao(t, 2)).collect(Collectors.toList()));
+    } else {
+      return Collections.emptyList();
+    }
   }
 
   public List<Classificacao> classificacaoGrupoBFase2() {
     final List<Time> times = timesFase2GrupoB();
-    return classificar(times.stream().map(t -> classificacao(t, 2)).collect(Collectors.toList()));
+    if (jogoService.faseFinalizada(1)) {
+      return classificar(times.stream().map(t -> classificacao(t, 2)).collect(Collectors.toList()));
+    } else {
+      return Collections.emptyList();
+    }
   }
 
   private List<Time> timesFase2GrupoA() {
