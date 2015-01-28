@@ -18,7 +18,6 @@ public abstract class AbstractManagedBean implements Serializable {
 
   protected String getURLParameterValue(String parameter) {
     final FacesContext context = getContext();
-    getUrl();
     if (context != null) {
       final String[] parameters = context.getExternalContext().getRequestParameterValuesMap().get(parameter);
       if (parameter != null) {
