@@ -117,4 +117,14 @@ public class ClassificacaoService {
   private int golsContra(final Time time, final List<Jogo> jogos) {
     return jogos.stream().mapToInt(j -> j.getGolsContra(time)).sum();
   }
+
+  public Jogo getPrimeiroJogoSemiFinal() {
+    final List<Jogo> jogos = jogoRepository.jogosPorFase(3);
+    return jogos.stream().min(Comparator.comparingInt(Jogo::getNumero)).get();
+  }
+
+  public Jogo getSegundoJogoSemiFinal() {
+    final List<Jogo> jogos = jogoRepository.jogosPorFase(3);
+    return jogos.stream().max(Comparator.comparingInt(Jogo::getNumero)).get();
+  }
 }

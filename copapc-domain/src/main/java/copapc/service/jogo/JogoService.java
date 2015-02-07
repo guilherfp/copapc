@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import copapc.model.gol.Gol;
 import copapc.model.gol.GolRepository;
 import copapc.model.jogador.Jogador;
+import copapc.model.jogador.JogadorRepository;
 import copapc.model.jogador.Status;
 import copapc.model.jogo.Cartao;
 import copapc.model.jogo.CartaoDoJogo;
@@ -24,13 +25,16 @@ public class JogoService {
   private final GolRepository golRepository;
   private final JogoRepository jogoRepository;
   private final TimeRepository timeRepository;
+  private final JogadorRepository jogadorRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(JogoService.class);
 
-  public JogoService(GolRepository golRepository, JogoRepository jogoRepository, TimeRepository timeRepository) {
+  public JogoService(GolRepository golRepository, JogoRepository jogoRepository, TimeRepository timeRepository,
+                     JogadorRepository jogadorRepository) {
     this.jogoRepository = jogoRepository;
     this.timeRepository = timeRepository;
     this.golRepository = golRepository;
+    this.jogadorRepository = jogadorRepository;
   }
 
   private int checkMinuto(Jogo jogo, int minuto) {
@@ -77,6 +81,12 @@ public class JogoService {
     Validate.isTrue(jogo.isEncerrado() == false, "Jogo já foi encerrado");
     Validate.isTrue(jogo.isIniciado(), "O Jogo não iniciado");
     jogo.encerrar();
+    for (Jogador jogador : jogo.getJogadores()) {
+      if (Status.AMARELO_3.equals(jogador.getStatus())) {
+        jogador.setStatus(Status.SUSPENSO);
+        jogadorRepository.atualizar(jogador);
+      }
+    }
     jogoRepository.atualizar(jogo);
     LOGGER.info("Jogo encerrado: {}", jogo);
   }
@@ -92,7 +102,7 @@ public class JogoService {
     } else if (Status.AMARELO_1.equals(jogador.getStatus())) {
       jogador.setStatus(Status.AMARELO_2);
     } else if (Status.AMARELO_2.equals(jogador.getStatus())) {
-      jogador.setStatus(Status.SUSPENSO);
+      jogador.setStatus(Status.AMARELO_3);
     } else if (cartao.equals(Cartao.VERMELHO)) {
       jogador.setStatus(Status.SUSPENSO);
     }

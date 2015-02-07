@@ -18,6 +18,7 @@
     <constructor-arg name="golRepository" ref="golRepository" />
     <constructor-arg name="jogoRepository" ref="jogoRepository" />
     <constructor-arg name="timeRepository" ref="timeRepository" />
+    <constructor-arg name="jogadorRepository" ref="jogadorRepository" />
   </bean>
 
   <bean id="jogadorService" class="copapc.service.jogador.JogadorService">

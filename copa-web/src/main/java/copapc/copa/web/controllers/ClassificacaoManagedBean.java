@@ -66,16 +66,14 @@ public class ClassificacaoManagedBean extends AbstractManagedBean {
 
   public Jogo getSemifinalA() {
     if (semifinalA == null) {
-      semifinalA = new Jogo(1, new Time(1, "1º Grupo A"), new Time(2, "2º Grupo B"));
-      semifinalA.setHorario(DateTime.parse("2015-02-11T20:00"));
+      semifinalA = classificacaoService.getPrimeiroJogoSemiFinal();
     }
     return semifinalA;
   }
 
   public Jogo getSemifinalB() {
     if (semifinalB == null) {
-      semifinalB = new Jogo(1, new Time(1, "1º Grupo B"), new Time(2, "2º Grupo A"));
-      semifinalB.setHorario(DateTime.parse("2015-02-11T21:00"));
+      semifinalB = classificacaoService.getSegundoJogoSemiFinal();
     }
     return semifinalB;
   }
