@@ -2,7 +2,6 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import copapc.model.jogo.Jogo;
 import copapc.model.resumoclassificacao.Classificacao;
 import copapc.model.time.Time;
-import copapc.model.time.TimeBuilder;
 import copapc.service.classificacao.ClassificacaoService;
 
 @Scope("request")
@@ -80,38 +78,20 @@ public class ClassificacaoManagedBean extends AbstractManagedBean {
 
   public Jogo getJogoFinalA() {
     if (jogoFinalA == null) {
-      jogoFinalA = new Jogo(1, new Time(1, "Perd jogo 1"), new Time(2, "Perd jogo 2"));
-      jogoFinalA.setHorario(DateTime.parse("2015-02-21T09:00"));
+      jogoFinalA = classificacaoService.getPrimeiroJogoFinal();
     }
     return jogoFinalA;
   }
 
   public Jogo getJogoFinalB() {
     if (jogoFinalB == null) {
-      jogoFinalB = new Jogo(1, new Time(1, "Venc jogo 1"), new Time(2, "Venc jogo 2"));
-      jogoFinalB.setHorario(DateTime.parse("2015-02-21T11:00"));
+      jogoFinalB = classificacaoService.getSegundoJogoFinal();
     }
     return jogoFinalB;
   }
 
-  public boolean isShowEscudoSemiFinalA() {
-    return false;
-  }
-
-  public boolean isShowEscudoSemiFinalB() {
-    return false;
-  }
-
-  public boolean isShowEscudoFinalA() {
-    return false;
-  }
-
-  public boolean isShowEscudoFinalB() {
-    return false;
-  }
-
   public Time getCampeao() {
-    return TimeBuilder.timeNaoDefinido(1);
+    return getJogoFinalB().getVencedor();
   }
 
   public String getImageClassificacao() {

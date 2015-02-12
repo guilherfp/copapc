@@ -127,4 +127,14 @@ public class ClassificacaoService {
     final List<Jogo> jogos = jogoRepository.jogosPorFase(3);
     return jogos.stream().max(Comparator.comparingInt(Jogo::getNumero)).get();
   }
+
+  public Jogo getPrimeiroJogoFinal() {
+    final List<Jogo> jogos = jogoRepository.jogosPorFase(4);
+    return jogos.stream().min(Comparator.comparingInt(Jogo::getNumero)).get();
+  }
+
+  public Jogo getSegundoJogoFinal() {
+    final List<Jogo> jogos = jogoRepository.jogosPorFase(4);
+    return jogos.stream().max(Comparator.comparingInt(Jogo::getNumero)).get();
+  }
 }
