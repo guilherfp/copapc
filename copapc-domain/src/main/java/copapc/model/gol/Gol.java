@@ -17,7 +17,9 @@ public class Gol extends Entity {
   private Jogo jogo;
   private boolean contra = false;
 
-  Gol() {}
+  Gol() {
+    super();
+  }
 
   private Gol(final Jogador jogador, final Jogo jogo, boolean contra, int minuto) {
     Validate.notNull(jogo);
@@ -110,6 +112,7 @@ public class Gol extends Entity {
 
   @Override
   public String toString() {
-    return String.format("Gol = numero: %s, jogador: %s, time: %s, jogo: %s", numero, jogador, time, jogo);
+    return String.format("Gol = numero: %s, jogador: %s, time: %s, jogo: %s", numero, jogador,
+      time, jogo);
   }
 }

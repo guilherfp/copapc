@@ -16,7 +16,9 @@
   <name>CopaPC</name>
 
   <properties>
-    <rewrite.servlet.version>2.0.11.Final</rewrite.servlet.version>
+    <spring.security.version>3.2.5.RELEASE</spring.security.version>
+    <rewrite.servlet.version>2.0.12.Final</rewrite.servlet.version>
+    <jackson.version>2.5.3</jackson.version>
   </properties>
 
   <dependencies>
@@ -79,32 +81,27 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.5.0</version>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-joda</artifactId>
-      <version>2.5.0</version>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>3.2.5.RELEASE</version>
+      <version>${spring.security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>3.2.5.RELEASE</version>
+      <version>${spring.security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>5.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.social</groupId>
-      <artifactId>spring-social-facebook</artifactId>
-      <version>1.1.1.RELEASE</version>
     </dependency>
   </dependencies>
 

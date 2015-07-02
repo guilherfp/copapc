@@ -3,3 +3,5 @@
 /copapc-domain/target
 .project
 .classpath
+/copa-web/.tern-project
+/copa-web/.springBeans
