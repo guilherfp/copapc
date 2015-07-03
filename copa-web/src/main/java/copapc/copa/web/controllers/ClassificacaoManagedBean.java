@@ -2,6 +2,8 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,12 @@ import copapc.model.resumoclassificacao.Classificacao;
 import copapc.model.time.Time;
 import copapc.service.classificacao.ClassificacaoService;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Scope("request")
 @Controller("classificacaoMB")
-// @ManagedBean(name = "classificacaoMB")
+@ManagedBean(name = "classificacaoMB")
 public class ClassificacaoManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
@@ -62,6 +67,15 @@ public class ClassificacaoManagedBean extends AbstractManagedBean {
     return classificacoesFase2GrupoB;
   }
 
+  @Transactional
+  public boolean isShowFase2() {
+    return !getClassificacoesFase2GrupoA().isEmpty() && !getClassificacoesFase2GrupoB().isEmpty();
+  }
+
+  public boolean isShowSemiFinal() {
+    return (getSemifinalA() != null) && (getSemifinalB() != null);
+  }
+
   public Jogo getSemifinalA() {
     if (semifinalA == null) {
       semifinalA = classificacaoService.getPrimeiroJogoSemiFinal();
@@ -74,6 +88,10 @@ public class ClassificacaoManagedBean extends AbstractManagedBean {
       semifinalB = classificacaoService.getSegundoJogoSemiFinal();
     }
     return semifinalB;
+  }
+
+  public boolean isShowFinal() {
+    return (getJogoFinalA() != null) && (getJogoFinalB() != null);
   }
 
   public Jogo getJogoFinalA() {

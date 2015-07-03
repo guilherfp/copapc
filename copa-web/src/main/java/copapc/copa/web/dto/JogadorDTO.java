@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import copapc.model.jogador.Jogador;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class JogadorDTO implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -11,12 +14,14 @@ public class JogadorDTO implements Serializable {
   private String email;
   private String time;
 
-  JogadorDTO() {}
+  JogadorDTO() {
+    super();
+  }
 
-  public JogadorDTO(String nome, String email, String time) {
-    this.nome = nome;
-    this.email = email;
-    this.time = time;
+  public JogadorDTO(Jogador jogador) {
+    nome = jogador.getNome();
+    email = jogador.getEmail();
+    time = jogador.getTime().getNome();
   }
 
   public String getNome() {
@@ -29,10 +34,6 @@ public class JogadorDTO implements Serializable {
 
   public String getTime() {
     return time;
-  }
-
-  public static JogadorDTO fromJogador(Jogador j) {
-    return new JogadorDTO(j.getNome(), j.getEmail(), j.getTime().getNome());
   }
 
 }

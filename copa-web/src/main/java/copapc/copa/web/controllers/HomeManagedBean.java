@@ -12,9 +12,11 @@ import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Scope("request")
 @Controller("homeMB")
-// @ManagedBean(name = "homeMB")
 public class HomeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
@@ -50,12 +52,12 @@ public class HomeManagedBean extends AbstractManagedBean {
   }
 
   public int getProximosSize() {
-    final int size = getProximos().size();
+    int size = getProximos().size();
     return size <= 3 ? size : 3;
   }
 
   public int getUltimosSize() {
-    final int size = getUltimos().size();
+    int size = getUltimos().size();
     return size <= 3 ? size : 3;
   }
 

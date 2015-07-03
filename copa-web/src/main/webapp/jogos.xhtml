@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+  template="/WEB-INF/templates/template.xhtml"
+  xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
   <ui:define name="title">- Jogos</ui:define>
 
@@ -32,24 +33,24 @@
           </ui:repeat>
         </div>
         <div class="col-lg-12">
-          <div class="row">
-            <h3 class="col-lg-12 text-center">2ª Fase</h3>
+          <h:panelGroup layout="block" styleClass="row" rendered="#{classificacaoMB.showFase2}">
             <hr />
-          </div>
-          <ui:repeat value="#{jogoMB.rodadasFase2}" var="r">
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                <h4 class="col-lg-12 text-center">#{r.numero}ª Rodada</h4>
-                <hr />
-              </div>
-              <ul class="lista-de-jogos-conteudo">
-                <ui:repeat value="#{r.jogos}" var="j">
-                  <copa:jogo jogo="#{j}" />
+            <h3 class="col-lg-12 text-center">2ª Fase</h3>
+            <ui:repeat value="#{jogoMB.rodadasFase2}" var="r">
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <h4 class="col-lg-12 text-center">#{r.numero}ª Rodada</h4>
                   <hr />
-                </ui:repeat>
-              </ul>
-            </div>
-          </ui:repeat>
+                </div>
+                <ul class="lista-de-jogos-conteudo">
+                  <ui:repeat value="#{r.jogos}" var="j">
+                    <copa:jogo jogo="#{j}" />
+                    <hr />
+                  </ui:repeat>
+                </ul>
+              </div>
+            </ui:repeat>
+          </h:panelGroup>
         </div>
       </div>
     </div>

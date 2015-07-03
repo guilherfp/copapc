@@ -7,6 +7,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogo.JogoRepository;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Artilheiro {
 
   private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance();

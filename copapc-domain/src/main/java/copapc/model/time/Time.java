@@ -14,6 +14,9 @@ import copapc.model.jogador.Jogador;
 import copapc.shared.Entity;
 import copapc.util.UrlUtil;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Time extends Entity implements Comparable<Time> {
   private static final long serialVersionUID = 1L;
 
@@ -23,10 +26,11 @@ public class Time extends Entity implements Comparable<Time> {
   private Jogador responsavel;
   private String url;
   private String sigla;
-  private Time time;
   private char grupo = ' ';
 
-  Time() {}
+  Time() {
+    super();
+  }
 
   public Time(int numero, String nome) {
     setNome(nome);
@@ -71,10 +75,6 @@ public class Time extends Entity implements Comparable<Time> {
     this.responsavel = responsavel;
   }
 
-  public Time getTime() {
-    return time;
-  }
-
   public String getUrl() {
     return url;
   }
@@ -93,8 +93,8 @@ public class Time extends Entity implements Comparable<Time> {
   }
 
   public List<Jogador> getArtilheiros() {
-    final List<Jogador> artilheiros = new ArrayList<>(3);
-    final int totalDeGols = artilheiro().get().getTotalDeGols();
+    List<Jogador> artilheiros = new ArrayList<>(3);
+    int totalDeGols = artilheiro().get().getTotalDeGols();
     for (Jogador jogador : getJogadores()) {
       if ((jogador.getTotalDeGols() > 0) && (jogador.getTotalDeGols() >= totalDeGols)) {
         artilheiros.add(jogador);
@@ -128,10 +128,7 @@ public class Time extends Entity implements Comparable<Time> {
     if (this == obj) {
       return true;
     }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
+    if ((obj == null) || (getClass() != obj.getClass())) {
       return false;
     }
     Time other = (Time) obj;

@@ -2,6 +2,9 @@ package copapc.copa.web.dto;
 
 import copapc.model.jogo.Jogo;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class JogoDTO {
 
   private int numero;
@@ -10,12 +13,17 @@ public class JogoDTO {
   private String horario;
   private boolean iniciado;
 
-  public JogoDTO(boolean iniciado, int numero, TimeDTO mandante, TimeDTO visitante, String horario) {
-    this.iniciado = iniciado;
-    this.numero = numero;
-    this.mandante = mandante;
-    this.visitante = visitante;
-    this.horario = horario;
+  JogoDTO() {
+    super();
+  }
+
+  public JogoDTO(Jogo jogo) {
+    numero = jogo.getNumero();
+    iniciado = jogo.isIniciado();
+    mandante = new TimeDTO(jogo.getMandante());
+    visitante = new TimeDTO(jogo.getVisitante());
+    horario = jogo.getHorario().toString("dd/MM HH:mm");
+    ;
   }
 
   public boolean isIniciado() {
@@ -37,12 +45,4 @@ public class JogoDTO {
   public String getHorario() {
     return horario;
   }
-
-  public static JogoDTO fromJogo(Jogo j) {
-    final String horario = j.getHorario().toString("dd/MM HH:mm");
-    final TimeDTO mandante = TimeDTO.fromTime(j.getMandante());
-    final TimeDTO visitante = TimeDTO.fromTime(j.getVisitante());
-    return new JogoDTO(j.isIniciado(), j.getNumero(), mandante, visitante, horario);
-  }
-
 }

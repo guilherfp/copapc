@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogador.JogadorRepository;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Scope("request")
 @Controller("jogadorMB")
-// @ManagedBean(name = "jogadorMB")
 public class JogadorManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
@@ -35,8 +37,7 @@ public class JogadorManagedBean extends AbstractManagedBean {
   @Transactional
   public Jogador getJogador() {
     if (jogador == null) {
-      final String jogadorUrl = getURLParameterValue(JOGADOR);
-      jogador = jogadorRepository.comUrl(jogadorUrl);
+      jogador = jogadorRepository.comUrl(getURLParameterValue(JOGADOR));
     }
     return jogador;
   }

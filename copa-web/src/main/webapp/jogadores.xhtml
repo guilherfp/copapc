@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+  template="/WEB-INF/templates/template.xhtml"
+  xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
   <ui:define name="title">
     <h:outputText value="- Jogadores" />
@@ -23,9 +24,8 @@
                 <copa:jogadorNome jogador="#{jogador}" />
               </h:column>
               <h:column>
-                <f:facet name="header">E-mail</f:facet>
-                <a href="mailto:#{jogador.email}" target="_top"> <h:outputText value="#{jogador.email}" />
-                </a>
+                <f:facet name="header">Time</f:facet>
+                <copa:resumoTime time="#{jogador.time}" escutoLeft="true" />
               </h:column>
               <h:column>
                 <f:facet name="header">Posição</f:facet>

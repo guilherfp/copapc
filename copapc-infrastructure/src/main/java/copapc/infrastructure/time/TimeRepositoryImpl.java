@@ -1,62 +1,64 @@
 package copapc.infrastructure.time;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import copapc.infrastructure.shared.HibernateRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
-import copapc.util.DomainUtils;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Repository
+@SuppressWarnings("unchecked")
 public class TimeRepositoryImpl extends HibernateRepository implements TimeRepository {
 
+  @Autowired
   public TimeRepositoryImpl(SessionFactory factory) {
     super(factory);
   }
 
   @Override
-  @SuppressWarnings("unchecked")
   public List<Time> times() {
-    final Query query = getSession().createQuery("from Time order by nome");
-    return DomainUtils.nullSafe(query.list(), new ArrayList<>());
+    Query query = getSession().createQuery("from Time order by nome");
+    return nullSafe(query);
   }
 
   @Override
   public Time comNumero(int numero) {
-    final Query query = getSession().createQuery("from Time where numero = :numero");
+    Query query = getSession().createQuery("from Time where numero = :numero");
     query.setParameter("numero", numero);
     return (Time) query.uniqueResult();
   }
 
   @Override
   public Time comURL(String url) {
-    final Query query = getSession().createQuery("from Time where url = :url");
+    Query query = getSession().createQuery("from Time where url = :url");
     query.setParameter("url", url);
     return (Time) query.uniqueResult();
   }
 
   @Override
-  @SuppressWarnings("unchecked")
   public List<Time> timesPorGrupo(char grupo) {
-    final Query query = getSession().createQuery("from Time where grupo = :grupo order by nome");
+    Query query = getSession().createQuery("from Time where grupo = :grupo order by nome");
     query.setParameter("grupo", grupo);
-    return DomainUtils.nullSafe(query.list(), new ArrayList<>());
+    return nullSafe(query);
   }
 
   @Override
   public int quantidadeDeGrupos() {
-    final List<Time> times = times();
-    final Set<Character> grupos = new HashSet<>();
-    for (Time time : times) {
-      grupos.add(time.getGrupo());
-    }
-    return times.size() / grupos.size();
+    int grupos = (int) times().stream().map(Time::getGrupo).distinct().count();
+    return grupos > 0 ? (times().size() / grupos) : 0;
+  }
+
+  private List<Time> nullSafe(Query query) {
+    return ObjectUtils.defaultIfNull(query.list(), new ArrayList<>());
   }
 }

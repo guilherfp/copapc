@@ -24,10 +24,10 @@ public class JogoTest {
   public void setUp() throws Exception {
     jogo = new Jogo(1, mandante, visitante);
     for (int i = 0; i < 5; i++) {
-      final Jogador jogadorMandante = new Jogador("Nome " + i, i + "@email.com");
+      Jogador jogadorMandante = new Jogador("Nome " + i, i + "@email.com");
       jogadoresMandante.add(jogadorMandante);
       mandante.adicionarJogador(jogadorMandante);
-      final Jogador jogadorVisitante = new Jogador("Nome " + (i * 2), (i * 2) + "@email.com");
+      Jogador jogadorVisitante = new Jogador("Nome " + (i * 2), (i * 2) + "@email.com");
       jogadoresVisitante.add(jogadorVisitante);
       visitante.adicionarJogador(jogadorVisitante);
     }
@@ -36,19 +36,19 @@ public class JogoTest {
   @Test
   public void testAdicionarGol() throws Exception {
     assertEquals(0, jogo.getTotalDeGols());
-    jogo.adicionarGol(Gol.gol(jogadoresMandante.get(0), jogo, 1));
+    jogo.adicionarGol(Gol.golAFavor(jogadoresMandante.get(0), jogo, 1));
     assertEquals(1, jogo.getTotalDeGols());
     assertEquals(mandante, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
     assertEquals(0, jogo.getTotalDeGolsDoVisitante());
 
-    jogo.adicionarGol(Gol.gol(jogadoresVisitante.get(0), jogo, 1));
+    jogo.adicionarGol(Gol.golAFavor(jogadoresVisitante.get(0), jogo, 1));
     assertEquals(2, jogo.getTotalDeGols());
     assertEquals(null, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
     assertEquals(1, jogo.getTotalDeGolsDoVisitante());
 
-    jogo.adicionarGol(Gol.gol(jogadoresVisitante.get(0), jogo, 2));
+    jogo.adicionarGol(Gol.golAFavor(jogadoresVisitante.get(0), jogo, 2));
     assertEquals(3, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
     assertEquals(1, jogo.getTotalDeGolsDoMandante());
@@ -58,7 +58,7 @@ public class JogoTest {
   @Test
   public void testAdicionarGolContra() throws Exception {
     assertEquals(0, jogo.getTotalDeGols());
-    final Jogador jogadorMandante = jogadoresMandante.get(0);
+    Jogador jogadorMandante = jogadoresMandante.get(0);
     jogo.adicionarGol(Gol.golContra(jogadorMandante, jogo, 3));
     assertEquals(1, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
@@ -66,8 +66,8 @@ public class JogoTest {
     assertEquals(1, jogo.getTotalDeGolsDoVisitante());
     assertEquals(0, jogadorMandante.getTotalDeGols());
 
-    final Jogador jogadorVisitante = jogadoresVisitante.get(0);
-    jogo.adicionarGol(Gol.gol(jogadorVisitante, jogo, 4));
+    Jogador jogadorVisitante = jogadoresVisitante.get(0);
+    jogo.adicionarGol(Gol.golAFavor(jogadorVisitante, jogo, 4));
     assertEquals(2, jogo.getTotalDeGols());
     assertEquals(visitante, jogo.getVencedor());
     assertEquals(0, jogo.getTotalDeGolsDoMandante());

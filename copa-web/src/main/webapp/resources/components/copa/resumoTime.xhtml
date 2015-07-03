@@ -11,16 +11,23 @@
 </composite:interface>
 
 <composite:implementation>
-  <h:outputLink value="#{request.contextPath}/time/#{cc.attrs.time.url}">
-    <span style="margin: 1px;">
+  <h:panelGroup layout="block" rendered="#{cc.attrs.time != null}">
+    <h:outputLink value="#{request.contextPath}/time/#{cc.attrs.time.url}">
+      <span style="margin: 1px;">
+        <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png"
+          styleClass="min-escudo" rendered="#{cc.attrs.escutoLeft}" />
+      </span>
+      <span class="placar-jogo-equipes-sigla" title="#{cc.attrs.time.nome}">
+        #{cc.attrs.time.sigla} </span>
+      <span class="placar-jogo-equipes-nome" title="#{cc.attrs.time.nome}">
+        #{cc.attrs.time.nome} </span>
       <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="min-escudo"
-        rendered="#{cc.attrs.escutoLeft}" />
-    </span>
-    <span class="placar-jogo-equipes-sigla" title="#{cc.attrs.time.nome}"> #{cc.attrs.time.sigla} </span>
-    <span class="placar-jogo-equipes-nome" title="#{cc.attrs.time.nome}"> #{cc.attrs.time.nome} </span>
-    <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="min-escudo"
-      rendered="#{cc.attrs.escutoRight}" style="margin: 3px;" />
-  </h:outputLink>
+        rendered="#{cc.attrs.escutoRight}" style="margin: 3px;" />
+    </h:outputLink>
+  </h:panelGroup>
+  <h:panelGroup rendered="#{cc.attrs.time eq null}">
+    Não definido
+  </h:panelGroup>
 </composite:implementation>
 
 </html>

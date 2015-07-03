@@ -15,9 +15,9 @@
 
   <sec:authentication-manager>
     <sec:authentication-provider>
-      <sec:user-service>
-        <sec:user name="vcopa" password="2015vc0p@" authorities="ROLE_USER" />
-      </sec:user-service>
+      <sec:jdbc-user-service data-source-ref="dataSource"
+        users-by-username-query="select login, senha, ativo from usuario where login=?"
+        authorities-by-username-query="select login, role from usuario where login=?" />
     </sec:authentication-provider>
   </sec:authentication-manager>
 

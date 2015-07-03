@@ -12,9 +12,11 @@ import copapc.model.jogo.JogoRepository;
 import copapc.service.jogo.JogoService;
 import copapc.service.jogo.Rodada;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Scope("request")
 @Controller("jogoMB")
-// @ManagedBean(name = "jogoMB")
 public class JogoManagedBean extends AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -44,6 +46,10 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
     return rodadasFase2;
   }
 
+  public boolean isShowFase2() {
+    return !getRodadasFase2().isEmpty();
+  }
+
   public List<Jogo> getJogos() {
     if (jogos == null) {
       jogos = jogoRepository.jogos();
@@ -53,18 +59,18 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
 
   public Jogo getJogo() {
     if (jogo == null) {
-      final String timeUrl = getURLParameterValue(JOGO);
+      String timeUrl = getURLParameterValue(JOGO);
       jogo = jogoRepository.jogoComNumero(Integer.parseInt(timeUrl));
     }
     return jogo;
   }
 
   public boolean isShowPrimeiroTempo() {
-    return (getJogo().isSegundoTempo() == false) && (getJogo().isEncerrado() == false);
+    return !getJogo().isSegundoTempo() && !getJogo().isEncerrado();
   }
 
   public boolean isShowSegundoTempo() {
-    return (getJogo().isSegundoTempo() == true) && (getJogo().isEncerrado() == false);
+    return !getJogo().isSegundoTempo() && !getJogo().isEncerrado();
   }
 
 }

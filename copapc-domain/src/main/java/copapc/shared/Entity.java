@@ -2,6 +2,9 @@ package copapc.shared;
 
 import java.io.Serializable;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public abstract class Entity implements Serializable {
   private static final long serialVersionUID = 1L;
 

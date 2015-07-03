@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.Validate;
 import org.joda.time.DateTime;
@@ -16,6 +17,9 @@ import copapc.model.jogador.Jogador;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Jogo extends Entity implements Comparable<Jogo> {
   private static final long serialVersionUID = 1L;
 
@@ -30,7 +34,9 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   private List<CartaoDoJogo> cartoesDoJogo = new ArrayList<>();
   private boolean segundoTempo = false;
 
-  Jogo() {}
+  Jogo() {
+    super();
+  }
 
   public Jogo(int numero, Time mandante, Time visitante) {
     setVisitante(visitante);
@@ -91,14 +97,14 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   public Gol adicionarGol(Gol gol) {
-    Validate.isTrue(isEncerrado() == false, "Jogo já foi encerrado");
+    Validate.isTrue(!isEncerrado(), "Jogo já foi encerrado");
     gols.add(gol);
     return gol;
   }
 
   public Time getVencedor() {
-    final int golsMandante = getTotalDeGolsDoMandante();
-    final int golsVisitante = getTotalDeGolsDoVisitante();
+    int golsMandante = getTotalDeGolsDoMandante();
+    int golsVisitante = getTotalDeGolsDoVisitante();
     if (golsMandante > golsVisitante) {
       return mandante;
     } else if (golsVisitante > golsMandante) {
@@ -109,11 +115,11 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   public boolean isVencedor(Time time) {
-    return (estaNoJogo(time) == true) && time.equals(getVencedor());
+    return estaNoJogo(time) && time.equals(getVencedor());
   }
 
   public boolean isDerrotado(Time time) {
-    return (estaNoJogo(time) == true) && (isEmpate() == false) && (time.equals(getVencedor()) == false);
+    return estaNoJogo(time) && !isEmpate() && !time.equals(getVencedor());
   }
 
   public boolean isEmpate() {
@@ -126,7 +132,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
 
   public void setMandante(Time mandante) {
     Validate.notNull(mandante, "Time mandante inválido");
-    Validate.isTrue(mandante.equals(visitante) == false, "Time inválido");
+    Validate.isTrue(!mandante.equals(visitante), "Time inválido");
     this.mandante = mandante;
   }
 
@@ -136,7 +142,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
 
   public void setVisitante(Time visitante) {
     Validate.notNull(visitante, "Time visitante inválido");
-    Validate.isTrue(visitante.equals(mandante) == false, "Time inválido");
+    Validate.isTrue(!visitante.equals(mandante), "Time inválido");
     this.visitante = visitante;
   }
 
@@ -151,27 +157,27 @@ public class Jogo extends Entity implements Comparable<Jogo> {
 
   public int getTotalDeGolsDoMandante() {
     return (int) gols.stream().filter(g -> {
-      if ((g.isContra() == true) && g.getTime().equals(visitante)) {
+      if (g.isContra() && g.getTime().equals(visitante)) {
         return true;
       } else {
-        return (g.isContra() == false) && g.getTime().equals(mandante);
+        return !g.isContra() && g.getTime().equals(mandante);
       }
     }).count();
   }
 
   public int getTotalDeGolsDoVisitante() {
     return (int) gols.stream().filter(g -> {
-      if ((g.isContra() == true) && g.getTime().equals(mandante)) {
+      if (g.isContra() && g.getTime().equals(mandante)) {
         return true;
       } else {
-        return (g.isContra() == false) && g.getTime().equals(visitante);
+        return !g.isContra() && g.getTime().equals(visitante);
       }
     }).count();
   }
 
   public List<Gol> getGols() {
-    gols.sort(Comparator.comparingInt(Gol::getMinuto));
-    return gols;
+    Comparator<Gol> sortPorMinuto = Comparator.comparingInt(Gol::getMinuto);
+    return gols.stream().sorted(sortPorMinuto).collect(Collectors.toList());
   }
 
   public int getTotalDeGols() {
@@ -189,7 +195,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   public int getGolsContra(Time time) {
-    if (estaNoJogo(time) == true) {
+    if (estaNoJogo(time)) {
       if (mandante.equals(time)) {
         return getTotalDeGolsDoVisitante();
       } else {
@@ -215,7 +221,8 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   private List<Gol> golsAPartirDoMinuto(int minuto) {
-    return getGols().stream().filter(g -> g.getMinuto() <= minuto).collect(Collectors.toList());
+    Predicate<Gol> minutoInferiorOuIgual = g -> g.getMinuto() <= minuto;
+    return getGols().stream().filter(minutoInferiorOuIgual).collect(Collectors.toList());
   }
 
   public boolean estaNoJogo(Time time) {
@@ -223,7 +230,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   public List<Jogador> getJogadores() {
-    final List<Jogador> jogadores = new ArrayList<>();
+    List<Jogador> jogadores = new ArrayList<>();
     jogadores.addAll(mandante.getJogadores());
     jogadores.addAll(visitante.getJogadores());
     return jogadores;
@@ -235,13 +242,15 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   public List<Cartao> getCartoesDoJogador(Jogador jogador) {
-    final Predicate<CartaoDoJogo> mesmoJogador = c -> c.getJogador().equals(jogador);
-    return cartoesDoJogo.stream().filter(mesmoJogador).map(CartaoDoJogo::getCartao).collect(Collectors.toList());
+    Predicate<CartaoDoJogo> mesmoJogador = c -> c.getJogador().equals(jogador);
+    Stream<CartaoDoJogo> cartoesDoJogador = cartoesDoJogo.stream().filter(mesmoJogador);
+    return cartoesDoJogador.map(CartaoDoJogo::getCartao).collect(Collectors.toList());
   }
 
   public List<Cartao> getCartoesDoTime(Time time) {
-    final Predicate<CartaoDoJogo> mesmoTime = c -> c.getJogador().getTime().equals(time);
-    return cartoesDoJogo.stream().filter(mesmoTime).map(CartaoDoJogo::getCartao).collect(Collectors.toList());
+    Predicate<CartaoDoJogo> mesmoTime = c -> c.getJogador().getTime().equals(time);
+    Stream<CartaoDoJogo> cartoesDoTime = cartoesDoJogo.stream().filter(mesmoTime);
+    return cartoesDoTime.map(CartaoDoJogo::getCartao).collect(Collectors.toList());
   }
 
   @Override
@@ -257,10 +266,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
     if (this == obj) {
       return true;
     }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
+    if ((obj == null) || (getClass() != obj.getClass())) {
       return false;
     }
     Jogo other = (Jogo) obj;

@@ -1,5 +1,8 @@
 package copapc.model.jogador;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public enum Posicao {
 
   GOLEIRO("Goleiro"),

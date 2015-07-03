@@ -6,6 +6,9 @@ import java.util.List;
 
 import copapc.model.jogo.Jogo;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Rodada implements Serializable {
   private static final long serialVersionUID = 1L;
 

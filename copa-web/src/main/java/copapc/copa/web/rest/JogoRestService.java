@@ -1,80 +1,51 @@
 package copapc.copa.web.rest;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import copapc.copa.web.dto.CartaoDTO;
 import copapc.copa.web.dto.GolDTO;
 import copapc.copa.web.dto.JogadorDTO;
 import copapc.copa.web.dto.JogoDTO;
-import copapc.model.jogador.Jogador;
-import copapc.model.jogador.JogadorRepository;
-import copapc.model.jogo.Jogo;
-import copapc.model.jogo.JogoRepository;
-import copapc.service.jogo.JogoService;
+import copapc.copa.web.service.JogoServiceApplication;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @RestController
 @RequestMapping("/jogos")
 public class JogoRestService {
 
   @Autowired
-  private JogadorRepository jogadorRepository;
-  @Autowired
-  private JogoRepository jogoRepository;
-  @Autowired
-  private JogoService jogoService;
-
+  private JogoServiceApplication jogoServiceApplication;
   private static final Logger LOGGER = LoggerFactory.getLogger(JogoRestService.class);
 
-  @ResponseBody
-  @Transactional
-  @RequestMapping("/{numero}")
+  @RequestMapping(value = "/{numero}", method = RequestMethod.GET)
   public List<JogadorDTO> jogadoresDoJogo(@PathVariable("numero") int numero) {
-    final Jogo jogo = jogoRepository.jogoComNumero(numero);
-    if (jogo != null) {
-      final Predicate<Jogador> naoSuspensos = j -> j.isSuspenso() == false;
-      final Function<Jogador, JogadorDTO> mapper = JogadorDTO::fromJogador;
-      return jogo.getJogadores().stream().filter(naoSuspensos).map(mapper).collect(Collectors.toList());
-    }
-    return new ArrayList<>();
+    return jogoServiceApplication.jogadoresDoJogo(numero);
   }
 
-  @ResponseBody
-  @Transactional
-  @RequestMapping("/abertos")
+  @RequestMapping(value = "/abertos", method = RequestMethod.GET)
   public List<JogoDTO> emAberto() {
-    return jogoRepository.jogosEmAberto().stream().map(JogoDTO::fromJogo).collect(Collectors.toList());
+    return jogoServiceApplication.jogosAbertos();
   }
 
-  @ResponseBody
-  @Transactional
   @RequestMapping(value = "/gol", method = RequestMethod.POST)
   public String adicionarGol(@RequestBody GolDTO golDTO) {
     try {
-      final Jogador jogador = jogadorRepository.comEmail(golDTO.getJogador());
-      Validate.notNull(jogador, "Jogador inválido");
-      final Jogo jogo = jogoRepository.jogoComNumero(golDTO.getJogo());
-      Validate.notNull(jogo, "Jogo inválido");
-      if (golDTO.isContra() == false) {
-        jogoService.marcarGol(jogador, jogo, golDTO.getMinuto());
-      } else {
-        jogoService.marcarGolContra(jogador, jogo, golDTO.getMinuto());
-      }
+      LOGGER.info("{}, adicionando gol: {}", username(), golDTO);
+      jogoServiceApplication.adicionarGol(golDTO);
+      LOGGER.info("{}, adicionou gol: {}", username(), golDTO);
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());
@@ -82,16 +53,12 @@ public class JogoRestService {
     }
   }
 
-  @ResponseBody
-  @Transactional
   @RequestMapping(value = "/cartao", method = RequestMethod.POST)
   public String aplicarCartao(@RequestBody CartaoDTO cartaoDTO) {
     try {
-      final Jogador jogador = jogadorRepository.comEmail(cartaoDTO.getJogador());
-      Validate.notNull(jogador, "Jogador inválido");
-      final Jogo jogo = jogoRepository.jogoComNumero(cartaoDTO.getJogo());
-      Validate.notNull(jogo, "Jogo inválido");
-      jogoService.adicionarCartao(jogo, jogador, cartaoDTO.getCartao(), cartaoDTO.getMinuto());
+      LOGGER.info("{}, aplicando cartão: {}", username(), cartaoDTO);
+      jogoServiceApplication.aplicarCartao(cartaoDTO);
+      LOGGER.info("{}, aplicou cartão: {}", username(), cartaoDTO);
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());
@@ -99,14 +66,12 @@ public class JogoRestService {
     }
   }
 
-  @ResponseBody
-  @Transactional
-  @RequestMapping("{jogo}/iniciar")
+  @RequestMapping(value = "{jogo}/iniciar", method = RequestMethod.GET)
   public String iniciarJogo(@PathVariable("jogo") int numeroDoJogo) {
     try {
-      final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
-      Validate.notNull(jogo, "Jogo inválido");
-      jogoService.iniciarJogo(jogo);
+      LOGGER.info("{}, iniciando o jogo: {}", username(), numeroDoJogo);
+      jogoServiceApplication.iniciarJogo(numeroDoJogo);
+      LOGGER.info("{}, iniciou o jogo: {}", username(), numeroDoJogo);
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());
@@ -114,14 +79,12 @@ public class JogoRestService {
     }
   }
 
-  @ResponseBody
-  @Transactional
-  @RequestMapping("{jogo}/segundoTempo")
+  @RequestMapping(value = "{jogo}/segundoTempo", method = RequestMethod.GET)
   public String definirSegundoTempoDoJogo(@PathVariable("jogo") int numeroDoJogo) {
     try {
-      final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
-      Validate.notNull(jogo, "Jogo inválido");
-      jogoService.segundoTempo(jogo);
+      LOGGER.info("{}, iniciando segundo tempo: {}", username(), numeroDoJogo);
+      jogoServiceApplication.iniciarSegundoTempo(numeroDoJogo);
+      LOGGER.info("{}, iniciou segundo tempo: {}", username(), numeroDoJogo);
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());
@@ -129,14 +92,12 @@ public class JogoRestService {
     }
   }
 
-  @ResponseBody
-  @Transactional
-  @RequestMapping("{jogo}/encerrar")
+  @RequestMapping(value = "{jogo}/encerrar", method = RequestMethod.GET)
   public String encerrarJogo(@PathVariable("jogo") int numeroDoJogo) {
     try {
-      final Jogo jogo = jogoRepository.jogoComNumero(numeroDoJogo);
-      Validate.notNull(jogo, "Jogo inválido");
-      jogoService.encerrarJogo(jogo);
+      LOGGER.info("{}, encerrando jogo: {}", username(), numeroDoJogo);
+      jogoServiceApplication.encerrarJogo(numeroDoJogo);
+      LOGGER.info("{}, encerrou jogo: {}", username(), numeroDoJogo);
       return "Sucesso";
     } catch (Exception ex) {
       LOGGER.info(ex.getMessage());
@@ -144,4 +105,11 @@ public class JogoRestService {
     }
   }
 
+  private String username() {
+    return getUser().getUsername();
+  }
+
+  private User getUser() {
+    return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  }
 }

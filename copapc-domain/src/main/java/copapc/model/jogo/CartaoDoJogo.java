@@ -5,6 +5,9 @@ import java.io.Serializable;
 import copapc.model.jogador.Jogador;
 import copapc.shared.Entity;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class CartaoDoJogo extends Entity implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -13,7 +16,9 @@ public class CartaoDoJogo extends Entity implements Serializable {
   private Jogador jogador;
   private int minuto;
 
-  CartaoDoJogo() {}
+  CartaoDoJogo() {
+    super();
+  }
 
   public CartaoDoJogo(Cartao cartao, Jogo jogo, Jogador jogador, int minuto) {
     this.jogador = jogador;
@@ -61,10 +66,7 @@ public class CartaoDoJogo extends Entity implements Serializable {
     if (this == obj) {
       return true;
     }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
+    if ((obj == null) || (getClass() != obj.getClass())) {
       return false;
     }
     CartaoDoJogo other = (CartaoDoJogo) obj;

@@ -2,7 +2,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://java.sun.com/jsf/composite"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-  xmlns:h="http://java.sun.com/jsf/html" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
 <composite:interface>
   <composite:attribute name="time" required="true" type="copapc.model.time.Time" />
@@ -29,7 +30,8 @@
       </h:column>
       <h:column headerClass="text-center">
         <f:facet name="header">Cartões</f:facet>
-        <h:graphicImage library="images/cartao" name="#{jogador.status}.png" rendered="#{jogador.possuiCartao}" />
+        <h:graphicImage library="images/cartao" name="#{jogador.status}.png"
+          rendered="#{jogador.possuiCartao and !jogador.suspenso}" />
         <h:outputText value="SUSPENSO" rendered="#{jogador.suspenso}" style="font-weight: bold;" />
       </h:column>
     </h:dataTable>

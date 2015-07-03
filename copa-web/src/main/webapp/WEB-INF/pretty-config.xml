@@ -9,8 +9,8 @@
   </url-mapping>
 
   <url-mapping id="adm">
-    <pattern value="/adm" />
-    <view-id value="/adm/adm.jsf" />
+    <pattern value="/adm/gol" />
+    <view-id value="/adm/gol.jsf" />
   </url-mapping>
 
   <url-mapping id="jogos">

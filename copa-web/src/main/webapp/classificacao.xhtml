@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+  template="/WEB-INF/templates/template.xhtml"
+  xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
   <ui:define name="header">
     <meta property="og:image" content="#{classificacaoMB.imageClassificacao}" />
@@ -31,10 +32,10 @@
             <copa:classificacao value="#{classificacaoMB.classificacoesFase1GrupoB}" />
           </div>
         </div>
-        <div class="row">
-          <hr />
+        <h:panelGroup layout="block" styleClass="row" rendered="#{classificacaoMB.showFase2}">
           <div class="col-lg-12 text-center">
-            <h3 class="text-center">2ª Fase</h3>
+            <hr />
+            <h3>2ª Fase</h3>
           </div>
           <div class="col-md-6 col-xs-12">
             <h4 class="text-center">Grupo A</h4>
@@ -44,10 +45,10 @@
             <h4 class="text-center">Grupo B</h4>
             <copa:classificacao value="#{classificacaoMB.classificacoesFase2GrupoB}" />
           </div>
-        </div>
-        <div class="row">
-          <hr />
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="row" rendered="#{classificacaoMB.showSemiFinal}">
           <div class="col-lg-12 text-center">
+            <hr />
             <h3>Semifinal</h3>
           </div>
           <div class="col-xs-12">
@@ -56,36 +57,38 @@
               <copa:jogo jogo="#{classificacaoMB.semifinalB}" />
             </ul>
           </div>
-        </div>
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="row" rendered="#{classificacaoMB.showFinal}">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <hr />
+              <h3>3ª e 4ª Posição</h3>
+            </div>
+            <div class="col-xs-12">
+              <ul class="lista-de-jogos-conteudo">
+                <copa:jogo jogo="#{classificacaoMB.jogoFinalA}" />
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <hr />
+            <div class="col-lg-12 text-center">
+              <h3>Final</h3>
+            </div>
+            <div class="col-xs-12">
+              <ul class="lista-de-jogos-conteudo">
+                <copa:jogo jogo="#{classificacaoMB.jogoFinalB}" />
+              </ul>
+            </div>
+          </div>
+          <div class="row" style="margin: 10px 0 10px 0;">
+            <div class="fb-like" data-share="true" data-layout="button_count"
+              data-href="#{classificacaoMB.url}" data-show-faces="true"></div>
+          </div>
+        </h:panelGroup>
         <div class="row">
-          <hr />
-          <div class="col-lg-12 text-center">
-            <h3>3ª e 4ª Posição</h3>
-          </div>
-          <div class="col-xs-12">
-            <ul class="lista-de-jogos-conteudo">
-              <copa:jogo jogo="#{classificacaoMB.jogoFinalA}" />
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <hr />
-          <div class="col-lg-12 text-center">
-            <h3>Final</h3>
-          </div>
-          <div class="col-xs-12">
-            <ul class="lista-de-jogos-conteudo">
-              <copa:jogo jogo="#{classificacaoMB.jogoFinalB}" />
-            </ul>
-          </div>
-        </div>
-        <div class="row" style="margin: 10px 0 10px 0;">
-          <div class="fb-like" data-share="true" data-layout="button_count" data-href="#{classificacaoMB.url}"
-            data-show-faces="true"></div>
-        </div>
-        <div class="row">
-          <div class="fb-comments" data-href="#{classificacaoMB.url}" data-numposts="10" data-width="100%"
-            data-order-by="reverse_time"></div>
+          <div class="fb-comments" data-href="#{classificacaoMB.url}" data-numposts="10"
+            data-width="100%" data-order-by="reverse_time"></div>
         </div>
       </div>
     </div>

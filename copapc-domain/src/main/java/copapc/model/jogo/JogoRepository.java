@@ -4,6 +4,9 @@ import java.util.List;
 
 import copapc.model.time.Time;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public interface JogoRepository {
 
   List<Jogo> jogos();

@@ -2,6 +2,7 @@ package copapc.copa.web.controllers;
 
 import java.io.Serializable;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.ocpsoft.pretty.PrettyContext;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public abstract class AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -17,9 +21,10 @@ public abstract class AbstractManagedBean implements Serializable {
   }
 
   protected String getURLParameterValue(String parameter) {
-    final FacesContext context = getContext();
+    FacesContext context = getContext();
     if (context != null) {
-      final String[] parameters = context.getExternalContext().getRequestParameterValuesMap().get(parameter);
+      ExternalContext externalContext = context.getExternalContext();
+      String[] parameters = externalContext.getRequestParameterValuesMap().get(parameter);
       if (parameter != null) {
         return parameters[0];
       }
@@ -28,13 +33,13 @@ public abstract class AbstractManagedBean implements Serializable {
   }
 
   public final String getUrl() {
-    final HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
-    final String url = PrettyContext.getCurrentInstance().getRequestURL().toURL();
+    HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
+    String url = PrettyContext.getCurrentInstance().getRequestURL().toURL();
     return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
   }
 
   protected String getResource(final String url) {
-    final HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
+    HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
     return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
   }
 }

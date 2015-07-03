@@ -5,7 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import org.apache.commons.lang3.Validate;
 
@@ -17,6 +21,9 @@ import copapc.model.time.Time;
 import copapc.shared.Entity;
 import copapc.util.UrlUtil;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Jogador extends Entity implements Comparable<Jogador> {
   private static final long serialVersionUID = 1L;
 
@@ -28,8 +35,11 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   private List<Gol> gols = new ArrayList<>();
   private List<CartaoDoJogo> cartoesPorJogos = new ArrayList<>();
   private String url;
+  private boolean suspenso;
 
-  Jogador() {}
+  Jogador() {
+    super();
+  }
 
   public Jogador(String nome, String email) {
     setEmail(email);
@@ -105,13 +115,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
 
   public List<Gol> getGols() {
     gols.sort(Comparator.comparingInt(Gol::getMinuto));
-    gols.sort(new Comparator<Gol>() {
-
-      @Override
-      public int compare(Gol o1, Gol o2) {
-        return o1.getJogo().getHorario().compareTo(o2.getJogo().getHorario());
-      }
-    });
+    gols.sort((o1, o2) -> o1.getJogo().getHorario().compareTo(o2.getJogo().getHorario()));
     return gols;
   }
 
@@ -132,24 +136,19 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public Map<Jogo, Integer> getGolsAFavorPorJogo() {
-    final Map<Jogo, Integer> golsPorJogo = new TreeMap<>();
+    Map<Jogo, Integer> golsPorJogo = new TreeMap<>();
     for (Gol gol : getGols()) {
-      final int aFavor = gol.isContra() == false ? 1 : 0;
+      int aFavor = !gol.isContra() ? 1 : 0;
       golsPorJogo.put(gol.getJogo(), golsPorJogo.getOrDefault(gol.getJogo(), 0) + aFavor);
     }
     return golsPorJogo;
   }
 
   public int getGolsContra(Jogo jogo) {
-    int gols = 0;
-    for (Gol gol : getGols()) {
-      if (gol.getJogo().getNumero() == jogo.getNumero()) {
-        if (gol.isContra() == true) {
-          gols++;
-        }
-      }
-    }
-    return gols;
+    IntegerProperty total = new SimpleIntegerProperty(0);
+    Predicate<Gol> mesmoJogo = g -> g.getJogo().equals(jogo);
+    getGols().stream().filter(mesmoJogo).filter(Gol::isContra).forEach(g -> total.add(1));
+    return total.get();
   }
 
   public Status getStatus() {
@@ -161,7 +160,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public boolean isPossuiCartao() {
-    return (status != null) && (status != Status.SUSPENSO);
+    return status != null;
   }
 
   public String getUrl() {
@@ -169,18 +168,25 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public boolean isSuspenso() {
-    return Status.SUSPENSO.equals(status);
+    return suspenso;
+  }
+
+  public void tirarSuspensao() {
+    suspenso = false;
+  }
+
+  public void suspender() {
+    suspenso = true;
   }
 
   public double getAproveitamento(JogoRepository jogoRepository) {
-    final double totalDeGols = getTotalDeGols();
-    final long totalDePartidasJogadas = getTotalDePartidasJogadas(jogoRepository);
+    double totalDeGols = getTotalDeGols();
+    long totalDePartidasJogadas = getTotalDePartidasJogadas(jogoRepository);
     return (totalDePartidasJogadas > 0) ? (totalDeGols / totalDePartidasJogadas) : 0;
   }
 
   private long getTotalDePartidasJogadas(JogoRepository jogoRepository) {
-    final List<Jogo> jogos = jogoRepository.jogos(time);
-    return jogos.stream().filter(Jogo::isEncerrado).count();
+    return jogoRepository.jogos(time).stream().filter(Jogo::isEncerrado).count();
   }
 
   @Override
@@ -196,10 +202,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     if (this == obj) {
       return true;
     }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
+    if ((obj == null) || (getClass() != obj.getClass())) {
       return false;
     }
     Jogador other = (Jogador) obj;

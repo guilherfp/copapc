@@ -5,6 +5,9 @@ import java.text.NumberFormat;
 
 import copapc.model.time.Time;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Classificacao implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -22,7 +25,9 @@ public class Classificacao implements Serializable {
     NUMBER_FORMAT.setMinimumFractionDigits(0);
   }
 
-  public Classificacao(Time time, int vitorias, int empates, int derrotas, int golsPros, int golsContra) {
+  public Classificacao(Time time, int vitorias, int empates, int derrotas, int golsPros,
+                       int golsContra)
+  {
     this.time = time;
     this.vitorias = vitorias;
     this.empates = empates;
@@ -92,8 +97,9 @@ public class Classificacao implements Serializable {
 
   @Override
   public String toString() {
-    return String.format(
-      "Classificacao = posicao: %s, time: %s, vitorias: %s, empates: %s, derrotas: %s, golsPros: %s, golsContra: %s",
-      posicao, getNomeDoTime(), vitorias, empates, derrotas, golsPros, golsContra);
+    return String
+      .format(
+        "Classificacao = posicao: %s, time: %s, vitorias: %s, empates: %s, derrotas: %s, golsPros: %s, golsContra: %s",
+        posicao, getNomeDoTime(), vitorias, empates, derrotas, golsPros, golsContra);
   }
 }

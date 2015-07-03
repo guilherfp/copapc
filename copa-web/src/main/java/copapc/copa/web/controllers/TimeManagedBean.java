@@ -13,9 +13,11 @@ import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
 import copapc.service.time.TimeService;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Scope("request")
 @Controller("timeMB")
-// @ManagedBean(name = "timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
@@ -37,8 +39,7 @@ public class TimeManagedBean extends AbstractManagedBean {
   @Transactional
   public Time getTime() {
     if (time == null) {
-      final String timeUrl = getURLParameterValue(TIME);
-      time = timeRepository.comURL(timeUrl);
+      time = timeRepository.comURL(getURLParameterValue(TIME));
     }
     return time;
   }

@@ -2,6 +2,9 @@ package copapc.copa.web.dto;
 
 import copapc.model.jogo.Cartao;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class CartaoDTO {
 
   private String jogador;
@@ -9,7 +12,9 @@ public class CartaoDTO {
   private Cartao cartao;
   private int minuto;
 
-  CartaoDTO() {}
+  CartaoDTO() {
+    super();
+  }
 
   public String getJogador() {
     return jogador;
@@ -26,4 +31,11 @@ public class CartaoDTO {
   public int getMinuto() {
     return minuto;
   }
+
+  @Override
+  public String toString() {
+    return String.format("CartaoDTO = jogador: %s, jogo: %s, cartao: %s, minuto: %s", jogador,
+      jogo, cartao, minuto);
+  }
+
 }

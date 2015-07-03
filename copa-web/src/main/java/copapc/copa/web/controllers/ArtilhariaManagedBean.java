@@ -11,9 +11,11 @@ import copapc.model.jogo.JogoRepository;
 import copapc.service.jogador.Artilheiro;
 import copapc.service.jogador.JogadorService;
 
+/**
+ * @author Guilherme Pacheco
+ */
 @Scope("request")
 @Controller("artilhariaMB")
-// @ManagedBean(name = "artilhariaMB")
 public class ArtilhariaManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 

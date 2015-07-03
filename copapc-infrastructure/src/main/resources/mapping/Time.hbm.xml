@@ -27,7 +27,7 @@
     </property>
 
     <property name="grupo">
-      <column name="grupo" length="1" default=" " />
+      <column name="grupo" length="1" />
     </property>
 
     <many-to-one name="responsavel" entity-name="Jogador" foreign-key="fk_time_responsavel">

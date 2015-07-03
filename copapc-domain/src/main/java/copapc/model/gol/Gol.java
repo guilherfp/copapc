@@ -7,6 +7,9 @@ import copapc.model.jogo.Jogo;
 import copapc.model.time.Time;
 import copapc.shared.Entity;
 
+/**
+ * @author Guilherme Pacheco
+ */
 public class Gol extends Entity {
   private static final long serialVersionUID = 1L;
 
@@ -64,7 +67,7 @@ public class Gol extends Entity {
     return jogo.getVisitante().equals(time);
   }
 
-  public static Gol gol(Jogador jogador, Jogo jogo, int minuto) {
+  public static Gol golAFavor(Jogador jogador, Jogo jogo, int minuto) {
     return new Gol(jogador, jogo, false, minuto);
   }
 
@@ -90,10 +93,7 @@ public class Gol extends Entity {
     if (this == obj) {
       return true;
     }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
+    if ((obj == null) || (getClass() != obj.getClass())) {
       return false;
     }
     Gol other = (Gol) obj;
