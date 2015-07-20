@@ -2,7 +2,6 @@ package copapc.copa.web.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,8 +37,7 @@ public class JogoServiceApplication {
   public List<JogadorDTO> jogadoresDoJogo(int numero) {
     Jogo jogo = jogoRepository.jogoComNumero(numero);
     if (jogo != null) {
-      Predicate<Jogador> naoSuspensos = j -> !j.isSuspenso();
-      Stream<Jogador> jogadores = jogo.getJogadores().stream().filter(naoSuspensos);
+      Stream<Jogador> jogadores = jogo.getJogadores().stream().filter(j -> !j.isSuspenso());
       return jogadores.map(JogadorDTO::new).collect(Collectors.toList());
     }
     return new ArrayList<>();
@@ -54,7 +52,7 @@ public class JogoServiceApplication {
     Validate.notNull(jogador, "Jogador inválido");
     Jogo jogo = jogoRepository.jogoComNumero(golDTO.getJogo());
     Validate.notNull(jogo, "Jogo inválido");
-    if (golDTO.isContra() == false) {
+    if (!golDTO.isContra()) {
       jogoService.marcarGol(jogador, jogo, golDTO.getMinuto());
     } else {
       jogoService.marcarGolContra(jogador, jogo, golDTO.getMinuto());

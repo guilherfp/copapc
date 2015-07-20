@@ -168,10 +168,10 @@ a:HOVER {
 
 @media ( min-width : 550px) {
   .nome-jogo {
-    font-size: 25px;
+    font-size: 20px;
   }
   .escudo-jogo {
-    max-width: 90px;
+    max-width: 80px;
   }
   .x-jogo {
     font-size: 40px;

@@ -38,7 +38,7 @@ public class JogadorService {
 
   public List<Artilheiro> artilheiros() {
     List<Jogador> jogadores = jogadorRepository.jogadores();
-    jogadores.removeIf(j -> j.isPossuiGolAFavor() == false);
+    jogadores.removeIf(j -> !j.isPossuiGolAFavor());
     Function<Jogador, Artilheiro> mapper = j -> new Artilheiro(j, jogoRepository);
     List<Artilheiro> artilheiros = jogadores.stream().map(mapper).collect(Collectors.toList());
     artilheiros.sort(Comparator.comparingDouble(Artilheiro::getAproveitamento).reversed());

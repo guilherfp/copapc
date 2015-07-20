@@ -24,11 +24,11 @@ import copapc.copa.web.service.JogoServiceApplication;
  */
 @RestController
 @RequestMapping("/jogos")
-public class JogoRestService {
+public class JogoController {
 
   @Autowired
   private JogoServiceApplication jogoServiceApplication;
-  private static final Logger LOGGER = LoggerFactory.getLogger(JogoRestService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(JogoController.class);
 
   @RequestMapping(value = "/{numero}", method = RequestMethod.GET)
   public List<JogadorDTO> jogadoresDoJogo(@PathVariable("numero") int numero) {

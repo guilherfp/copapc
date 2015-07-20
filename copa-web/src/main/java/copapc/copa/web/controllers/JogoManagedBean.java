@@ -70,7 +70,7 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
   }
 
   public boolean isShowSegundoTempo() {
-    return !getJogo().isSegundoTempo() && !getJogo().isEncerrado();
+    return getJogo().isSegundoTempo() && !getJogo().isEncerrado();
   }
 
 }
