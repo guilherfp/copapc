@@ -1,0 +1,76 @@
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.0 http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.0.xsd">
+
+  <rewrite match="^/(.*)/$" substitute="/$1" redirect="301" />
+
+  <url-mapping id="index">
+    <pattern value="/" />
+    <view-id value="/home.jsf" />
+  </url-mapping>
+
+  <url-mapping id="adm">
+    <pattern value="/adm/gol" />
+    <view-id value="/adm/gol.jsf" />
+  </url-mapping>
+
+  <url-mapping id="jogos">
+    <pattern value="/jogos" />
+    <view-id value="/jogos.jsf" />
+  </url-mapping>
+
+  <url-mapping id="classificacao">
+    <pattern value="/classificacao" />
+    <view-id value="/classificacao.jsf" />
+  </url-mapping>
+
+  <url-mapping id="regulamento">
+    <pattern value="/regulamento" />
+    <view-id value="/regulamento.jsf" />
+  </url-mapping>
+
+  <url-mapping id="local">
+    <pattern value="/local" />
+    <view-id value="/local.jsf" />
+  </url-mapping>
+
+  <url-mapping id="jogadores">
+    <pattern value="/jogadores" />
+    <view-id value="/jogadores.jsf" />
+  </url-mapping>
+
+  <url-mapping id="artilharia">
+    <pattern value="/artilharia" />
+    <view-id value="/artilharia.jsf" />
+  </url-mapping>
+
+  <url-mapping id="fairplay">
+    <pattern value="/fairplay" />
+    <view-id value="/fairplay.jsf" />
+  </url-mapping>
+
+  <url-mapping id="ataques">
+    <pattern value="/ataques" />
+    <view-id value="/ataques.jsf" />
+  </url-mapping>
+
+  <url-mapping id="defesas">
+    <pattern value="/defesas" />
+    <view-id value="/defesas.jsf" />
+  </url-mapping>
+
+  <url-mapping id="time">
+    <pattern value="/time/#{time}" />
+    <view-id value="/time.jsf" />
+  </url-mapping>
+
+  <url-mapping id="jogador">
+    <pattern value="/jogador/#{jogador}" />
+    <view-id value="/jogador.jsf" />
+  </url-mapping>
+
+  <url-mapping id="jogo">
+    <pattern value="/jogo/#{jogo}" />
+    <view-id value="/jogo.jsf" />
+  </url-mapping>
+
+</pretty-config>

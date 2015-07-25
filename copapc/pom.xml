@@ -113,8 +113,8 @@
   </build>
 
   <modules>
-    <module>../copa-web</module>
-    <module>../copapc-domain</module>
-    <module>../copapc-infrastructure</module>
+    <module>copa-web</module>
+    <module>copapc-domain</module>
+    <module>copapc-infrastructure</module>
   </modules>
 </project>

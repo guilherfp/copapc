@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <class name="copapc.model.jogador.Jogador" entity-name="Jogador" table="jogador">
+    <cache usage="read-write" />
+
+    <id name="id" column="id" unsaved-value="none">
+      <generator class="org.hibernate.id.IdentityGenerator" />
+    </id>
+
+    <property name="nome">
+      <column name="nome" length="80" not-null="true" />
+    </property>
+
+    <property name="email">
+      <column name="email" length="80" not-null="true" unique-key="uk-jogador-email" />
+    </property>
+
+    <many-to-one name="time" entity-name="Time" foreign-key="fk_time_jogador">
+      <column name="time_id" not-null="false" />
+    </many-to-one>
+
+    <property name="url">
+      <column name="url" length="80" unique-key="uk-url-jogador" />
+    </property>
+
+    <property name="suspenso">
+      <column name="suspenso" default="false" />
+    </property>
+
+    <property name="posicao">
+      <column name="posicao" length="20" not-null="false" />
+      <type name="org.hibernate.type.EnumType">
+        <param name="useNamed">true</param>
+        <param name="enumClass">copapc.model.jogador.Posicao</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+
+    <bag name="gols" inverse="true">
+      <key column="jogador_id" />
+      <one-to-many entity-name="Gol" />
+    </bag>
+
+    <bag name="cartoesPorJogos" inverse="true" cascade="all">
+      <key column="jogador_id" />
+      <one-to-many entity-name="CartaoDoJogo" />
+    </bag>
+
+    <property name="status">
+      <column name="cartao" length="20" not-null="false" />
+      <type name="org.hibernate.type.EnumType">
+        <param name="useNamed">true</param>
+        <param name="enumClass">copapc.model.jogador.Status</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+
+  </class>
+</hibernate-mapping>
