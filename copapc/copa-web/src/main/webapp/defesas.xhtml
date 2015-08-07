@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-  template="/WEB-INF/templates/template.xhtml" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+  template="/WEB-INF/templates/template.xhtml"
+  xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
   <ui:define name="header">
     <meta property="og:image" content="#{homeMB.imageHome}" />
@@ -19,7 +20,8 @@
           </div>
           <div class="col-lg-12">
             <h:dataTable value="#{timeMB.timesPorGolsMenosSofridos}" var="t"
-              styleClass="table table-striped table-hover table-condensed" columnClasses=",,text-center">
+              styleClass="table table-striped table-hover table-condensed"
+              columnClasses=",,text-center,text-center">
               <h:column>
                 <f:facet name="header">#</f:facet>
                 <span style="font-weight: bold;">#{timeMB.posicaoDefesa(t)}</span>
@@ -38,12 +40,23 @@
                   <span style="font-weight: bold;">#{timeMB.totalDeGolsSofridos}</span>
                 </f:facet>
               </h:column>
+              <h:column headerClass="text-center" footerClass="text-center">
+                <f:facet name="header">Gol(s)/Jogo</f:facet>
+                <h:outputText value="#{timeMB.mediaGolsSofridos(t)}" style="font-weight: bold;">
+                  <f:convertNumber type="number" minFractionDigits="1" maxFractionDigits="1" />
+                </h:outputText>
+                <f:facet name="footer">
+                  <h:outputText value="#{timeMB.mediaDeGolsSofridos}" style="font-weight: bold;">
+                  <f:convertNumber type="number" minFractionDigits="1" maxFractionDigits="1" />
+                  </h:outputText>
+                </f:facet>
+              </h:column>
             </h:dataTable>
           </div>
         </div>
         <div class="row" style="margin: 10px 0 10px 0;">
-          <div class="fb-like" data-share="true" data-layout="button_count" data-href="#{timeMB.url}"
-            data-show-faces="true"></div>
+          <div class="fb-like" data-share="true" data-layout="button_count"
+            data-href="#{timeMB.url}" data-show-faces="true"></div>
         </div>
         <div class="row">
           <div class="fb-comments" data-href="#{timeMB.url}" data-numposts="10" data-width="100%"

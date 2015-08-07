@@ -36,6 +36,7 @@ public class TimeService {
 
   public List<Time> getTimesPorGolsMenosSofridos() {
     List<Time> times = timeRepository.times();
+    times.sort(Comparator.comparing(this::golsSofridos));
     times.sort((o1, o2) -> Double.compare(mediaDeGolsSofridos(o1), mediaDeGolsSofridos(o2)));
     return times;
   }
@@ -88,11 +89,18 @@ public class TimeService {
     return jogos.stream().mapToInt(j -> j.getGolsContra(time)).sum();
   }
 
-  private double mediaDeGolsSofridos(Time time) {
+  public double mediaDeGolsSofridos(Time time) {
     List<Jogo> jogos = jogoRepository.jogos(time);
     int golsSofridos = jogos.stream().mapToInt(j -> j.getGolsContra(time)).sum();
     long totalDePartidas = jogoRepository.jogos(time).stream().filter(Jogo::isEncerrado).count();
-    return totalDePartidas != 0 ? golsSofridos / totalDePartidas : golsSofridos;
+    return totalDePartidas != 0 ? (double) golsSofridos / totalDePartidas : golsSofridos;
+  }
+  
+  public double mediaDeGolsMarcados(Time time) {
+    List<Jogo> jogos = jogoRepository.jogos(time);
+    int golsMarcados = jogos.stream().mapToInt(j -> j.getGols(time)).sum();
+    long totalDePartidas = jogoRepository.jogos(time).stream().filter(Jogo::isEncerrado).count();
+    return totalDePartidas != 0 ? (double) golsMarcados / totalDePartidas : golsMarcados;
   }
 
   private int peso(Cartao cartao) {

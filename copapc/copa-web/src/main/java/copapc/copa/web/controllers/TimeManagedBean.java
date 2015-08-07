@@ -2,6 +2,8 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import copapc.service.time.TimeService;
  */
 @Scope("request")
 @Controller("timeMB")
+@ManagedBean(name = "timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
@@ -130,6 +133,24 @@ public class TimeManagedBean extends AbstractManagedBean {
 
   public int golsSofridos(Time time) {
     return timeService.golsSofridos(time);
+  }
+
+  public double mediaGolsSofridos(Time time) {
+    return timeService.mediaDeGolsSofridos(time);
+  }
+
+  public double getMediaDeGolsSofridos() {
+    List<Time> times = getTimesPorGolsMenosSofridos();
+    return times.stream().mapToInt(this::golsSofridos).average().getAsDouble();
+  }
+
+  public double mediaGolsMarcados(Time time) {
+    return timeService.mediaDeGolsMarcados(time);
+  }
+
+  public double getMediaDeGolsMarcados() {
+    List<Time> times = getTimesPorGolsMarcados();
+    return times.stream().mapToInt(this::golsMarcados).average().getAsDouble();
   }
 
 }

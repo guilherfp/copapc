@@ -2,8 +2,6 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -19,7 +17,6 @@ import copapc.service.classificacao.ClassificacaoService;
  */
 @Scope("request")
 @Controller("classificacaoMB")
-@ManagedBean(name = "classificacaoMB")
 public class ClassificacaoManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 

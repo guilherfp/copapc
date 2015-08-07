@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
-import copapc.model.jogo.JogoRepository;
 import copapc.service.jogador.Artilheiro;
 import copapc.service.jogador.JogadorService;
 
@@ -21,8 +20,6 @@ public class ArtilhariaManagedBean extends AbstractManagedBean {
 
   @Autowired
   private JogadorService jogadorService;
-  @Autowired
-  private JogoRepository jogoRepository;
 
   private List<Artilheiro> artilherios;
 
