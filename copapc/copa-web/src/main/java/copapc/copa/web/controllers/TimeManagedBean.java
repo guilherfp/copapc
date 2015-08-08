@@ -2,11 +2,9 @@ package copapc.copa.web.controllers;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import copapc.model.jogo.Jogo;
@@ -18,9 +16,8 @@ import copapc.service.time.TimeService;
 /**
  * @author Guilherme Pacheco
  */
-@Component
-@ViewScoped
-@ManagedBean(name = "timeMB")
+@Scope("request")
+@Controller("timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
 
