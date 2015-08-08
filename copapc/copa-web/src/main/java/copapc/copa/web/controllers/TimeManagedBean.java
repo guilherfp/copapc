@@ -3,10 +3,10 @@ package copapc.copa.web.controllers;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import copapc.model.jogo.Jogo;
@@ -18,8 +18,8 @@ import copapc.service.time.TimeService;
 /**
  * @author Guilherme Pacheco
  */
-@Scope("request")
-@Controller("timeMB")
+@Component
+@ViewScoped
 @ManagedBean(name = "timeMB")
 public class TimeManagedBean extends AbstractManagedBean {
   private static final long serialVersionUID = 1L;
@@ -139,18 +139,24 @@ public class TimeManagedBean extends AbstractManagedBean {
     return timeService.mediaDeGolsSofridos(time);
   }
 
+  @Transactional
   public double getMediaDeGolsSofridos() {
+    int totalDeJogos = jogoRepository.ultimosEncerrados().size();
     List<Time> times = getTimesPorGolsMenosSofridos();
-    return times.stream().mapToInt(this::golsSofridos).average().getAsDouble();
+    double totalDeGols = times.stream().mapToInt(this::golsSofridos).average().getAsDouble();
+    return totalDeJogos != 0 ? totalDeGols / totalDeJogos : totalDeGols;
   }
 
   public double mediaGolsMarcados(Time time) {
     return timeService.mediaDeGolsMarcados(time);
   }
 
+  @Transactional
   public double getMediaDeGolsMarcados() {
+    int totalDeJogos = jogoRepository.ultimosEncerrados().size();
     List<Time> times = getTimesPorGolsMarcados();
-    return times.stream().mapToInt(this::golsMarcados).average().getAsDouble();
+    double totalDeGols = times.stream().mapToInt(this::golsMarcados).average().getAsDouble();
+    return totalDeJogos != 0 ? totalDeGols / totalDeJogos : totalDeGols;
   }
 
 }
