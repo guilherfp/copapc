@@ -77,7 +77,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   }
 
   public boolean isAndamento() {
-    return (inicio != null) && (encerramento == null);
+    return inicio != null && encerramento == null;
   }
 
   public int getFase() {
@@ -257,7 +257,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + numero;
+    result = prime * result + numero;
     return result;
   }
 
@@ -266,7 +266,7 @@ public class Jogo extends Entity implements Comparable<Jogo> {
     if (this == obj) {
       return true;
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     Jogo other = (Jogo) obj;
