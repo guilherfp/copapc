@@ -14,8 +14,12 @@
     <h:graphicImage library="images/time" name="#{cc.attrs.time.url}.png" styleClass="escudo-time" />
   </div>
   <div class="col-sm-7 col-xs-12 text-center">
-    <h2>#{cc.attrs.time.toString()}</h2>
-    <h5>Responsável: #{cc.attrs.time.responsavel}</h5>
+    <h2>
+      <h:outputText value="#{cc.attrs.time.toString()}" />
+    </h2>
+    <h5>
+      <h:outputText value="Responsável: #{cc.attrs.time.responsavel}" />
+    </h5>
   </div>
   <div class="table-responsive">
     <h:dataTable value="#{cc.attrs.time.jogadores}" var="jogador"
@@ -26,7 +30,7 @@
       </h:column>
       <h:column>
         <f:facet name="header">Posição</f:facet>
-        #{jogador.posicao.toString()}
+        <h:outputText value="#{jogador.posicao.toString()}" />
       </h:column>
       <h:column headerClass="text-center">
         <f:facet name="header">Cartões</f:facet>

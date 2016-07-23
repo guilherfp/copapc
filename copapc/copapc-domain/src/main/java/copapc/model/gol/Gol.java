@@ -11,20 +11,19 @@ import copapc.shared.Entity;
  * @author Guilherme Pacheco
  */
 public class Gol extends Entity {
-  private static final long serialVersionUID = 1L;
 
   private int minuto;
   private int numero;
   private Jogador jogador;
   private Time time;
   private Jogo jogo;
-  private boolean contra = false;
+  private boolean contra;
 
   Gol() {
     super();
   }
 
-  private Gol(final Jogador jogador, final Jogo jogo, boolean contra, int minuto) {
+  private Gol(Jogador jogador, Jogo jogo, boolean contra, int minuto) {
     Validate.notNull(jogo);
     Validate.notNull(jogador);
     this.jogador = jogador;
@@ -67,24 +66,24 @@ public class Gol extends Entity {
     return jogo.getVisitante().equals(time);
   }
 
-  public static Gol golAFavor(Jogador jogador, Jogo jogo, int minuto) {
+  public static Gol aFavor(Jogador jogador, Jogo jogo, int minuto) {
     return new Gol(jogador, jogo, false, minuto);
   }
 
-  public static Gol golContra(Jogador jogador, Jogo jogo, int minuto) {
+  public static Gol contra(Jogador jogador, Jogo jogo, int minuto) {
     return new Gol(jogador, jogo, true, minuto);
   }
 
   public boolean isAFavorDe(Time time) {
-    return (this.time.equals(time)) ? isContra() == false : isContra();
+    return this.time.equals(time) ? !isContra() : isContra();
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + ((jogo == null) ? 0 : jogo.hashCode());
-    result = (prime * result) + numero;
+    result = prime * result + (jogo == null ? 0 : jogo.hashCode());
+    result = prime * result + numero;
     return result;
   }
 
@@ -93,7 +92,7 @@ public class Gol extends Entity {
     if (this == obj) {
       return true;
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     Gol other = (Gol) obj;

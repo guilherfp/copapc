@@ -1,23 +1,15 @@
 package copapc.service.jogador;
 
-import java.text.NumberFormat;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import copapc.model.jogador.Jogador;
 import copapc.model.jogo.JogoRepository;
+import copapc.shared.NumUtils;
 
 /**
  * @author Guilherme Pacheco
  */
 public class Artilheiro {
-
-  private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance();
-
-  static {
-    NUMBER_FORMAT.setMaximumFractionDigits(1);
-    NUMBER_FORMAT.setMinimumFractionDigits(0);
-  }
 
   private int posicao;
   private final Jogador jogador;
@@ -51,7 +43,7 @@ public class Artilheiro {
   }
 
   public String getGolsPorJogo() {
-    return NUMBER_FORMAT.format(aproveitamento);
+    return NumUtils.format(aproveitamento);
   }
 
   public boolean mesmaPosicao(Artilheiro artilheiro) {

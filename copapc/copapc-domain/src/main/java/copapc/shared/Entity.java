@@ -1,12 +1,9 @@
 package copapc.shared;
 
-import java.io.Serializable;
-
 /**
  * @author Guilherme Pacheco
  */
-public abstract class Entity implements Serializable {
-  private static final long serialVersionUID = 1L;
+public abstract class Entity {
 
   private int id;
 
@@ -18,7 +15,7 @@ public abstract class Entity implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + id;
+    result = prime * result + id;
     return result;
   }
 
@@ -27,7 +24,7 @@ public abstract class Entity implements Serializable {
     if (this == obj) {
       return true;
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     Entity other = (Entity) obj;

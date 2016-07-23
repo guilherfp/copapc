@@ -3,14 +3,14 @@ package copapc.copa.web.dto;
 /**
  * @author Guilherme Pacheco
  */
-public class GolDTO {
+public class GolDto {
 
   private String jogador;
   private int jogo;
   private boolean contra;
   private int minuto;
 
-  GolDTO() {
+  GolDto() {
     super();
   }
 

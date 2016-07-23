@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import copapc.copa.web.shared.Lazy;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogador.JogadorRepository;
 
@@ -15,34 +16,29 @@ import copapc.model.jogador.JogadorRepository;
  */
 @Scope("request")
 @Controller("jogadorMB")
-public class JogadorManagedBean extends AbstractManagedBean {
+public class JogadorBean extends AbstractBean {
   private static final long serialVersionUID = 1L;
 
-  private static final String JOGADOR = "jogador";
+  private static final String PARAM_JOGADOR = "jogador";
 
   @Autowired
   private JogadorRepository jogadorRepository;
 
-  private List<Jogador> jogadores;
-  private Jogador jogador;
+  private final Lazy<List<Jogador>> jogadores = Lazy.empty();
+  private final Lazy<Jogador> jogador = Lazy.empty();
 
   @Transactional
   public List<Jogador> getJogadores() {
-    if (jogadores == null) {
-      jogadores = jogadorRepository.jogadores();
-    }
-    return jogadores;
+    return jogadores.get(() -> jogadorRepository.jogadores());
   }
 
   @Transactional
   public Jogador getJogador() {
-    if (jogador == null) {
-      jogador = jogadorRepository.comUrl(getURLParameterValue(JOGADOR));
-    }
-    return jogador;
+    return jogador.get(() -> jogadorRepository.comUrl(urlValue(PARAM_JOGADOR)));
   }
 
   public String getImageTimeUrl() {
     return getResource(String.format("/resources/fase/%s.png", getJogador().getTime().getUrl()));
   }
+
 }

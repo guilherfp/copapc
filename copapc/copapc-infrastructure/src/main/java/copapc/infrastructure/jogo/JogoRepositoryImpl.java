@@ -1,8 +1,7 @@
 package copapc.infrastructure.jogo;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -29,14 +28,12 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
 
   @Override
   public List<Jogo> jogos() {
-    Query query = getSession().createQuery("from Jogo order by horario");
-    return nullSafe(query);
+    return nullSafe(query("from Jogo order by horario"));
   }
 
   @Override
   public List<Jogo> jogos(Time time) {
-    String queryString = "from Jogo where mandante = :time or visitante = :time order by horario";
-    Query query = getSession().createQuery(queryString);
+    Query query = query("from Jogo where mandante = :time or visitante = :time order by horario");
     query.setParameter("time", time);
     return nullSafe(query);
   }
@@ -48,21 +45,17 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
 
   @Override
   public List<Jogo> jogosEmAberto() {
-    String queryString = "from Jogo where encerramento is null order by horario";
-    Query query = getSession().createQuery(queryString);
-    return nullSafe(query);
+    return nullSafe(query("from Jogo where encerramento is null order by horario"));
   }
 
   @Override
   public List<Jogo> ultimosEncerrados() {
-    String queryString = "from Jogo where encerramento is not null order by horario desc";
-    Query query = getSession().createQuery(queryString);
-    return nullSafe(query);
+    return nullSafe(query("from Jogo where encerramento is not null order by horario desc"));
   }
 
   @Override
-  public Jogo jogoComNumero(int numero) {
-    Query query = getSession().createQuery("from Jogo where numero = :numero");
+  public Jogo jogo(int numero) {
+    Query query = query("from Jogo where numero = :numero");
     query.setParameter("numero", numero);
     return (Jogo) query.uniqueResult();
   }
@@ -74,12 +67,13 @@ public class JogoRepositoryImpl extends HibernateRepository implements JogoRepos
 
   @Override
   public List<Jogo> jogosPorFase(int fase) {
-    Query query = getSession().createQuery("from Jogo where fase = :fase order by horario");
+    Query query = query("from Jogo where fase = :fase order by horario");
     query.setParameter("fase", fase);
     return nullSafe(query);
   }
 
   private List<Jogo> nullSafe(Query query) {
-    return ObjectUtils.defaultIfNull(query.list(), new ArrayList<>());
+    return ObjectUtils.defaultIfNull(query.list(), Collections.emptyList());
   }
+
 }

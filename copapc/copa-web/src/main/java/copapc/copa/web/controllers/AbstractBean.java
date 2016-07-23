@@ -13,14 +13,14 @@ import com.ocpsoft.pretty.PrettyContext;
 /**
  * @author Guilherme Pacheco
  */
-public abstract class AbstractManagedBean implements Serializable {
+abstract class AbstractBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  protected FacesContext getContext() {
+  protected final FacesContext getContext() {
     return FacesContext.getCurrentInstance();
   }
 
-  protected String getURLParameterValue(String parameter) {
+  protected final String urlValue(String parameter) {
     FacesContext context = getContext();
     if (context != null) {
       ExternalContext externalContext = context.getExternalContext();
@@ -33,13 +33,22 @@ public abstract class AbstractManagedBean implements Serializable {
   }
 
   public final String getUrl() {
-    HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
+    HttpServletRequest req = servletRequest();
     String url = PrettyContext.getCurrentInstance().getRequestURL().toURL();
-    return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
+    return StringUtils.remove(requestUrl(req), req.getRequestURI()).concat(url);
   }
 
-  protected String getResource(final String url) {
-    HttpServletRequest req = (HttpServletRequest) getContext().getExternalContext().getRequest();
-    return StringUtils.remove(req.getRequestURL().toString(), req.getRequestURI()).concat(url);
+  protected final String getResource(final String url) {
+    HttpServletRequest req = servletRequest();
+    return StringUtils.remove(requestUrl(req), req.getRequestURI()).concat(url);
   }
+
+  private HttpServletRequest servletRequest() {
+    return (HttpServletRequest) getContext().getExternalContext().getRequest();
+  }
+
+  private String requestUrl(HttpServletRequest req) {
+    return req.getRequestURL().toString();
+  }
+
 }

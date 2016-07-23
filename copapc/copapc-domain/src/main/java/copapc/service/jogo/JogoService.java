@@ -28,16 +28,16 @@ import copapc.model.time.TimeRepository;
 @Service
 public class JogoService {
 
+  private static final Logger LOG = LoggerFactory.getLogger(JogoService.class);
+
   private final GolRepository golRepository;
   private final JogoRepository jogoRepository;
   private final TimeRepository timeRepository;
   private final JogadorRepository jogadorRepository;
-  private static final Logger LOGGER = LoggerFactory.getLogger(JogoService.class);
 
   @Autowired
   public JogoService(GolRepository golRepository, JogoRepository jogoRepository,
-                     TimeRepository timeRepository, JogadorRepository jogadorRepository)
-  {
+      TimeRepository timeRepository, JogadorRepository jogadorRepository) {
     this.jogoRepository = jogoRepository;
     this.timeRepository = timeRepository;
     this.golRepository = golRepository;
@@ -54,20 +54,20 @@ public class JogoService {
 
   public void marcarGol(final Jogador jogador, final Jogo jogo, int minuto) {
     validarInicializacaoDoJogo(jogo);
-    Gol gol = Gol.golAFavor(jogador, jogo, checkMinuto(jogo, minuto));
+    Gol gol = Gol.aFavor(jogador, jogo, checkMinuto(jogo, minuto));
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
     golRepository.salvar(gol);
-    LOGGER.info("Gol marcado: {}", gol);
+    LOG.info("Gol marcado: {}", gol);
   }
 
   public void marcarGolContra(final Jogador jogador, final Jogo jogo, int minuto) {
     validarInicializacaoDoJogo(jogo);
-    Gol gol = Gol.golContra(jogador, jogo, checkMinuto(jogo, minuto));
+    Gol gol = Gol.contra(jogador, jogo, checkMinuto(jogo, minuto));
     jogo.adicionarGol(gol);
     jogador.adicionarGol(gol);
     golRepository.salvar(gol);
-    LOGGER.info("Gol marcado: {}", gol);
+    LOG.info("Gol marcado: {}", gol);
   }
 
   public void iniciarJogo(Jogo jogo) {
@@ -75,7 +75,7 @@ public class JogoService {
     Validate.isTrue(!jogo.isEncerrado(), "Jogo já foi encerrado");
     jogo.iniciar();
     jogoRepository.atualizar(jogo);
-    LOGGER.info("Jogo iniciado: {}", jogo);
+    LOG.info("Jogo iniciado: {}", jogo);
   }
 
   public void validarInicializacaoDoJogo(Jogo jogo) {
@@ -100,7 +100,7 @@ public class JogoService {
       jogadorRepository.atualizar(jogador);
     }
     jogoRepository.atualizar(jogo);
-    LOGGER.info("Jogo encerrado: {}", jogo);
+    LOG.info("Jogo encerrado: {}", jogo);
   }
 
   public void adicionarCartao(Jogo jogo, Jogador jogador, Cartao cartao, int minuto) {
@@ -120,16 +120,17 @@ public class JogoService {
     }
     CartaoDoJogo cartaoDoJogo = new CartaoDoJogo(cartao, jogo, jogador, checkMinuto(jogo, minuto));
     jogoRepository.salvarCartao(cartaoDoJogo);
-    LOGGER.info("Cartão marcado: {}", cartaoDoJogo);
+    LOG.info("Cartão marcado: {}", cartaoDoJogo);
   }
 
-  public List<Rodada> getRodadas(int fase) {
+  public List<Rodada> rodadas(int fase) {
     List<Jogo> jogos = jogoRepository.jogosPorFase(fase);
     int fases = getTamanhoDaRodada(fase, jogos);
     List<Rodada> rodadas = new ArrayList<>();
     if (jogos.size() > 0) {
       int i = fases > jogos.size() ? jogos.size() : fases;
-      for (int start = 0, end = i, rodada = 1; end <= jogos.size(); start += fases, end += fases, rodada++) {
+      for (int start = 0, end = i, rodada = 1; end <= jogos
+        .size(); start += fases, end += fases, rodada++) {
         rodadas.add(new Rodada(rodada, jogos.subList(start, end)));
       }
     }
@@ -139,7 +140,7 @@ public class JogoService {
   private int getTamanhoDaRodada(int fase, final List<Jogo> jogos) {
     if (fase == 1) {
       int grupos = timeRepository.quantidadeDeGrupos();
-      return grupos > 0 ? (jogos.size() / grupos) : 0;
+      return grupos > 0 ? jogos.size() / grupos : 0;
     } else {
       return 4;
     }
@@ -154,7 +155,7 @@ public class JogoService {
     Validate.isTrue(jogo.isIniciado(), "O Jogo não iniciado");
     jogo.iniciarSegundoTempo();
     jogoRepository.atualizar(jogo);
-    LOGGER.info("Segundo tempo do jogo: {} foi iniciado!", jogo);
+    LOG.info("Segundo tempo do jogo: {} foi iniciado!", jogo);
   }
 
 }

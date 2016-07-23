@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import copapc.copa.web.dto.JogadorDTO;
+import copapc.copa.web.dto.JogadorDto;
 import copapc.model.jogador.Jogador;
 import copapc.model.jogador.JogadorRepository;
 
@@ -25,9 +25,9 @@ public class JogadorRestService {
 
   @Transactional
   @RequestMapping(value = "/", method = RequestMethod.GET)
-  public List<JogadorDTO> todos() {
+  public List<JogadorDto> todos() {
     List<Jogador> jogadores = jogadorRepository.jogadores();
-    return jogadores.stream().map(JogadorDTO::new).collect(Collectors.toList());
+    return jogadores.stream().map(JogadorDto::new).collect(Collectors.toList());
   }
 
 }

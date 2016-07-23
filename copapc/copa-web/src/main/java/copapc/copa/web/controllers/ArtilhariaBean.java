@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import copapc.copa.web.shared.Lazy;
 import copapc.service.jogador.Artilheiro;
 import copapc.service.jogador.JogadorService;
 
@@ -15,20 +16,17 @@ import copapc.service.jogador.JogadorService;
  */
 @Scope("request")
 @Controller("artilhariaMB")
-public class ArtilhariaManagedBean extends AbstractManagedBean {
+public class ArtilhariaBean extends AbstractBean {
   private static final long serialVersionUID = 1L;
 
   @Autowired
   private JogadorService jogadorService;
 
-  private List<Artilheiro> artilherios;
+  private final Lazy<List<Artilheiro>> artilherios = Lazy.empty();
 
   @Transactional
   public List<Artilheiro> getArtilheiros() {
-    if (artilherios == null) {
-      artilherios = jogadorService.artilheiros();
-    }
-    return artilherios;
+    return artilherios.get(() -> jogadorService.artilheiros());
   }
 
 }

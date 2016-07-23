@@ -21,7 +21,6 @@ import copapc.shared.Entity;
  * @author Guilherme Pacheco
  */
 public class Jogo extends Entity implements Comparable<Jogo> {
-  private static final long serialVersionUID = 1L;
 
   private int fase;
   private int numero;
@@ -30,15 +29,17 @@ public class Jogo extends Entity implements Comparable<Jogo> {
   private DateTime horario;
   private Time mandante;
   private Time visitante;
-  private List<Gol> gols = new ArrayList<>();
-  private List<CartaoDoJogo> cartoesDoJogo = new ArrayList<>();
-  private boolean segundoTempo = false;
+  private List<Gol> gols;
+  private List<CartaoDoJogo> cartoesDoJogo;
+  private boolean segundoTempo;
 
   Jogo() {
-    super();
+    cartoesDoJogo = new ArrayList<>();
+    gols = new ArrayList<>();
   }
 
   public Jogo(int numero, Time mandante, Time visitante) {
+    this();
     setVisitante(visitante);
     setMandante(mandante);
     this.numero = numero;
@@ -234,6 +235,10 @@ public class Jogo extends Entity implements Comparable<Jogo> {
     jogadores.addAll(mandante.getJogadores());
     jogadores.addAll(visitante.getJogadores());
     return jogadores;
+  }
+
+  public List<Jogador> getJogadoresNaoSuspensos() {
+    return getJogadores().stream().filter(j -> !j.isSuspenso()).collect(Collectors.toList());
   }
 
   public List<CartaoDoJogo> getCartoesDoJogo() {

@@ -6,7 +6,6 @@ import copapc.shared.Entity;
  * @author Guilherme Pacheco
  */
 public class Usuario extends Entity {
-  private static final long serialVersionUID = 1L;
 
   private String nome;
   private String login;
@@ -66,7 +65,7 @@ public class Usuario extends Entity {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = (prime * result) + ((login == null) ? 0 : login.hashCode());
+    result = prime * result + (login == null ? 0 : login.hashCode());
     return result;
   }
 

@@ -1,5 +1,6 @@
 package copapc.infrastructure.shared;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -16,6 +17,10 @@ public class HibernateRepository {
 
   protected final Session getSession() {
     return factory.getCurrentSession();
+  }
+
+  protected final Query query(String queryString) {
+    return getSession().createQuery(queryString);
   }
 
 }

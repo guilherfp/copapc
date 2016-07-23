@@ -18,24 +18,25 @@ import copapc.util.UrlUtil;
  * @author Guilherme Pacheco
  */
 public class Time extends Entity implements Comparable<Time> {
-  private static final long serialVersionUID = 1L;
 
   private int numero;
   private String nome;
-  private Set<Jogador> jogadores = new HashSet<>();
+  private Set<Jogador> jogadores;
   private Jogador responsavel;
   private String url;
   private String sigla;
-  private char grupo = ' ';
+  private char grupo;
 
   Time() {
-    super();
+    jogadores = new HashSet<>();
+    grupo = ' ';
   }
 
   public Time(int numero, String nome) {
-    setNome(nome);
+    this();
     Validate.isTrue(numero > 0, "Número do time inválido");
     this.numero = numero;
+    setNome(nome);
   }
 
   public Time(int numero) {
@@ -52,8 +53,8 @@ public class Time extends Entity implements Comparable<Time> {
 
   public void setNome(String nome) {
     Validate.notBlank(nome, "Nome inválido");
-    this.nome = nome;
     url = UrlUtil.formatURL(nome);
+    this.nome = nome;
   }
 
   public Collection<Jogador> getJogadores() {
@@ -96,7 +97,7 @@ public class Time extends Entity implements Comparable<Time> {
     List<Jogador> artilheiros = new ArrayList<>(3);
     int totalDeGols = artilheiro().get().getTotalDeGols();
     for (Jogador jogador : getJogadores()) {
-      if ((jogador.getTotalDeGols() > 0) && (jogador.getTotalDeGols() >= totalDeGols)) {
+      if (jogador.getTotalDeGols() > 0 && jogador.getTotalDeGols() >= totalDeGols) {
         artilheiros.add(jogador);
       }
     }
@@ -119,7 +120,7 @@ public class Time extends Entity implements Comparable<Time> {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + ((nome == null) ? 0 : nome.hashCode());
+    result = prime * result + (nome == null ? 0 : nome.hashCode());
     return result;
   }
 
@@ -128,7 +129,7 @@ public class Time extends Entity implements Comparable<Time> {
     if (this == obj) {
       return true;
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     Time other = (Time) obj;

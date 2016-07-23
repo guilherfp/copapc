@@ -13,7 +13,7 @@ public interface TimeRepository {
 
   Time comNumero(int numero);
 
-  Time comURL(String url);
+  Time comUrl(String url);
 
   int quantidadeDeGrupos();
 

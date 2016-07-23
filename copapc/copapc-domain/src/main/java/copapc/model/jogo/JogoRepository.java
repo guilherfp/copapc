@@ -1,7 +1,6 @@
 package copapc.model.jogo;
 
 import java.util.List;
-
 import copapc.model.time.Time;
 
 /**
@@ -13,11 +12,11 @@ public interface JogoRepository {
 
   List<Jogo> jogos(Time time);
 
+  Jogo jogo(int numero);
+
   void atualizar(Jogo jogo);
 
   List<Jogo> jogosEmAberto();
-
-  Jogo jogoComNumero(int numero);
 
   void salvarCartao(CartaoDoJogo cartaoDoJogo);
 

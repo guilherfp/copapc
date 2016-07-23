@@ -5,14 +5,14 @@ import copapc.model.jogo.Cartao;
 /**
  * @author Guilherme Pacheco
  */
-public class CartaoDTO {
+public class CartaoDto {
 
   private String jogador;
   private int jogo;
   private Cartao cartao;
   private int minuto;
 
-  CartaoDTO() {
+  CartaoDto() {
     super();
   }
 

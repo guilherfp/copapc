@@ -2,7 +2,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://java.sun.com/jsf/composite"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-  xmlns:h="http://java.sun.com/jsf/html" xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:copa="http://java.sun.com/jsf/composite/components/copa">
 
 <composite:interface>
   <composite:attribute name="value" type="java.util.List" required="true" />
@@ -10,52 +11,53 @@
 
 <composite:implementation>
   <div class="table-responsive">
-    <h:dataTable styleClass="table table-hover table-condensed tabela-pontos" value="#{cc.attrs.value}" var="c">
+    <h:dataTable styleClass="table table-hover table-condensed tabela-pontos"
+      value="#{cc.attrs.value}" var="c">
       <h:column>
         <f:facet name="header">#</f:facet>
-        #{c.posicao}
+        <h:outputText value="#{c.posicao}" />
       </h:column>
       <h:column>
         <f:facet name="header">Time</f:facet>
-        <span class="tabela-nome-time" style="margin-right: 13px; margin-left: -2px;">
-          <copa:resumoTime escutoLeft="true" time="#{c.time}" />
+        <span class="tabela-nome-time" style="margin-right: 13px; margin-left: -2px;"> 
+        <copa:resumoTime escutoLeft="true" time="#{c.time}" />
         </span>
       </h:column>
       <h:column>
         <f:facet name="header">P</f:facet>
-        <span style="font-weight: bold;">#{c.pontos}</span>
+        <h:outputText value="#{c.pontos}" style="font-weight: bold;" />
       </h:column>
       <h:column>
         <f:facet name="header">J</f:facet>
-        #{c.jogos}
+        <h:outputText value="#{c.jogos}" />
       </h:column>
       <h:column>
         <f:facet name="header">V</f:facet>
-        #{c.vitorias}
+        <h:outputText value="#{c.vitorias}" />
       </h:column>
       <h:column>
         <f:facet name="header">E</f:facet>
-        #{c.empates}
+        <h:outputText value="#{c.empates}" />
       </h:column>
       <h:column>
         <f:facet name="header">D</f:facet>
-        #{c.derrotas}
+        <h:outputText value="#{c.derrotas}" />
       </h:column>
       <h:column>
         <f:facet name="header">GP</f:facet>
-        #{c.golsPros}
+        <h:outputText value="#{c.golsPros}" />
       </h:column>
       <h:column>
         <f:facet name="header">GC</f:facet>
-        #{c.golsContra}
+        <h:outputText value="#{c.golsContra}" />
       </h:column>
       <h:column>
         <f:facet name="header">SG</f:facet>
-        #{c.saldoDeGols}
+        <h:outputText value="#{c.saldoDeGols}" />
       </h:column>
       <h:column>
         <f:facet name="header">%</f:facet>
-        #{c.aproveitamento}
+        <h:outputText value="#{c.aproveitamento}" />
       </h:column>
     </h:dataTable>
   </div>

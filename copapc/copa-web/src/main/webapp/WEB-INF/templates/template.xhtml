@@ -9,89 +9,58 @@
   <meta property="fb:app_id" content="857461850941747" />
   <meta property="article:author" content="https://www.facebook.com/copapc" />
   <meta property="article:publisher" content="https://www.facebook.com/copapc" />
-  <title>VI COPA <ui:insert name="title"></ui:insert></title>
-  <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css" />
+  <title>VII COPA <ui:insert name="title"></ui:insert></title>
+  <h:outputStylesheet name="css/bootstrap.min.css" />
   <h:outputStylesheet name="css/copapc.css" />
-  <link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/favicon.ico" />
+  <h:outputLink type="image/ico" hreflang="images/favicon.ico" />
   <ui:insert name="header" />
 </h:head>
 
 <h:body>
-  <a id="back-to-top" href="#">
-    <span class="glyphicon glyphicon-chevron-up"></span>
+  <a id="back-to-top" href="#"> <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">MENU</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+        data-target=".navbar-ex1-collapse">
+        <span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <h:outputLink value="/" styleClass="navbar-brand">VI COPA</h:outputLink>
+      <h:outputLink value="/" styleClass="navbar-brand">VII COPA</h:outputLink>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            TIMES
-            <b class="caret"></b>
-          </a>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            TIMES <b class="caret"></b>
+        </a>
           <ul class="dropdown-menu">
             <ui:repeat var="time" value="#{homeMB.times}">
-              <li>
-                <a href="#{request.contextPath}/time/#{time.url}">#{time.nome.toUpperCase()}</a>
+              <li><a href="#{request.contextPath}/time/#{time.url}">#{time.nome.toUpperCase()}</a>
               </li>
             </ui:repeat>
-          </ul>
-        </li>
-        <li>
-          <a href="#{request.contextPath}/classificacao">CLASSIFICAÇÃO</a>
-        </li>
-        <li>
-          <a href="#{request.contextPath}/jogos">JOGOS</a>
-        </li>
-        <li>
-          <a href="#{request.contextPath}/jogadores">JOGADORES</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            ESTATÍSTICAS
-            <b class="caret"></b>
-          </a>
+          </ul></li>
+        <li><a href="#{request.contextPath}/classificacao">CLASSIFICAÇÃO</a></li>
+        <li><a href="#{request.contextPath}/jogos">JOGOS</a></li>
+        <li><a href="#{request.contextPath}/jogadores">JOGADORES</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            ESTATÍSTICAS <b class="caret"></b>
+        </a>
           <ul class="dropdown-menu">
-            <li>
-              <a href="#{request.contextPath}/artilharia">ARTILHARIA</a>
-            </li>
-            <li>
-              <a href="#{request.contextPath}/ataques">ATAQUES</a>
-            </li>
-            <li>
-              <a href="#{request.contextPath}/defesas">DEFESAS</a>
-            </li>
-            <li>
-              <a href="#{request.contextPath}/fairplay">FAIR PLAY</a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            OUTROS
-            <b class="caret"></b>
-          </a>
+            <li><a href="#{request.contextPath}/artilharia">ARTILHARIA</a></li>
+            <li><a href="#{request.contextPath}/ataques">ATAQUES</a></li>
+            <li><a href="#{request.contextPath}/defesas">DEFESAS</a></li>
+            <li><a href="#{request.contextPath}/fairplay">FAIR PLAY</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            OUTROS <b class="caret"></b>
+        </a>
           <ul class="dropdown-menu">
-            <li>
-              <a href="#{request.contextPath}/regulamento">REGULAMENTO</a>
-            </li>
-            <li>
-              <a href="#{request.contextPath}/local">LOCAL</a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/channel/UC7-3JNvuNKj8jx65eJXfMtA" target="_blank">VÍDEOS DOS JOGOS</a>
-            </li>
-          </ul>
-        </li>
+            <li><a href="#{request.contextPath}/regulamento">REGULAMENTO</a></li>
+            <li><a href="#{request.contextPath}/local">LOCAL</a></li>
+            <li><a href="https://www.youtube.com/channel/UC7-3JNvuNKj8jx65eJXfMtA"
+              target="_blank">VÍDEOS DOS JOGOS</a></li>
+          </ul></li>
       </ul>
     </div>
   </div>

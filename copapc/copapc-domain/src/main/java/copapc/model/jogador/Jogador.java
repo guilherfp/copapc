@@ -8,10 +8,8 @@ import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 import copapc.model.gol.Gol;
 import copapc.model.jogo.CartaoDoJogo;
@@ -25,23 +23,24 @@ import copapc.util.UrlUtil;
  * @author Guilherme Pacheco
  */
 public class Jogador extends Entity implements Comparable<Jogador> {
-  private static final long serialVersionUID = 1L;
 
   private String nome;
   private String email;
   private Posicao posicao;
   private Time time;
   private Status status;
-  private List<Gol> gols = new ArrayList<>();
-  private List<CartaoDoJogo> cartoesPorJogos = new ArrayList<>();
-  private String url;
+  private List<Gol> gols;
+  private List<CartaoDoJogo> cartoesPorJogos;
   private boolean suspenso;
+  private String url;
 
   Jogador() {
-    super();
+    cartoesPorJogos = new ArrayList<>();
+    gols = new ArrayList<>();
   }
 
   public Jogador(String nome, String email) {
+    this();
     setEmail(email);
     setNome(nome);
   }
@@ -110,7 +109,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public int getTotalDeGols() {
-    return (int) gols.stream().filter(g -> g.isContra() == false).count();
+    return (int) gols.stream().filter(g -> !g.isContra()).count();
   }
 
   public List<Gol> getGols() {
@@ -124,7 +123,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public boolean isPossuiGol() {
-    return gols.isEmpty() == false;
+    return !gols.isEmpty();
   }
 
   public boolean isNaoPossuiGol() {
@@ -145,10 +144,10 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   }
 
   public int getGolsContra(Jogo jogo) {
-    IntegerProperty total = new SimpleIntegerProperty(0);
+    MutableInt total = new MutableInt();
     Predicate<Gol> mesmoJogo = g -> g.getJogo().equals(jogo);
-    getGols().stream().filter(mesmoJogo).filter(Gol::isContra).forEach(g -> total.add(1));
-    return total.get();
+    getGols().stream().filter(mesmoJogo).filter(Gol::isContra).forEach(g -> total.increment());
+    return total.intValue();
   }
 
   public Status getStatus() {
@@ -182,7 +181,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   public double getAproveitamento(JogoRepository jogoRepository) {
     double totalDeGols = getTotalDeGols();
     long totalDePartidasJogadas = getTotalDePartidasJogadas(jogoRepository);
-    return (totalDePartidasJogadas > 0) ? (totalDeGols / totalDePartidasJogadas) : 0;
+    return totalDePartidasJogadas > 0 ? totalDeGols / totalDePartidasJogadas : 0;
   }
 
   private long getTotalDePartidasJogadas(JogoRepository jogoRepository) {
@@ -193,7 +192,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + ((email == null) ? 0 : email.hashCode());
+    result = prime * result + (email == null ? 0 : email.hashCode());
     return result;
   }
 
@@ -202,7 +201,7 @@ public class Jogador extends Entity implements Comparable<Jogador> {
     if (this == obj) {
       return true;
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     Jogador other = (Jogador) obj;

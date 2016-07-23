@@ -284,3 +284,7 @@ a:HOVER {
   text-decoration: none;
   background: rgba(0, 0, 0, 0.45);
 }
+
+.legenda-jogo {
+  font-size: 11px;
+}

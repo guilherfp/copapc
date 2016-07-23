@@ -1,8 +1,9 @@
 package copapc.service.time;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
+import copapc.shared.NumUtils;
 
 /**
  * @author Guilherme Pacheco
@@ -28,23 +30,21 @@ public class TimeService {
     this.jogoRepository = jogoRepository;
   }
 
-  public List<Time> getTimesPorGolsMarcados() {
+  public List<Time> timesPorGolsMarcados() {
     List<Time> times = timeRepository.times();
-    times.sort(golsMarcados.reversed());
+    Comparator<Time> compare = (o1, o2) -> Integer.compare(golsMarcados(o1), golsMarcados(o2));
+    times.sort(compare.reversed());
     return times;
   }
 
-  public List<Time> getTimesPorGolsMenosSofridos() {
+  public List<Time> timesPorGolsMenosSofridos() {
     List<Time> times = timeRepository.times();
     times.sort(Comparator.comparing(this::golsSofridos));
     times.sort((o1, o2) -> Double.compare(mediaDeGolsSofridos(o1), mediaDeGolsSofridos(o2)));
     return times;
   }
 
-  private Comparator<Time> golsMarcados = (o1, o2) -> Integer.compare(golsMarcados(o1),
-    golsMarcados(o2));
-
-  public List<Time> getFairplayRaking() {
+  public List<Time> fairplayRaking() {
     List<Time> times = timeRepository.times();
     times.sort(comparePesoCartao);
     return times;
@@ -57,50 +57,53 @@ public class TimeService {
   };
 
   public List<Cartao> cartoes(Time time) {
-    List<Cartao> cartoes = new ArrayList<>();
-    List<Jogo> jogos = jogoRepository.jogos(time);
-    jogos.stream().map(j -> j.getCartoesDoTime(time)).forEach(cartoes::addAll);
-    return cartoes;
+    return streamCartoes(time).collect(Collectors.toList());
+  }
+
+  private Stream<Cartao> streamCartoes(Time time) {
+    return jogoRepository.jogos(time).stream().flatMap(j -> j.getCartoesDoTime(time).stream());
   }
 
   public int cartoesVermelho(Time time) {
-    List<Cartao> cartoes = new ArrayList<>();
-    List<Jogo> jogos = jogoRepository.jogos(time);
-    jogos.stream().map(j -> j.getCartoesDoTime(time)).forEach(cartoes::addAll);
-    cartoes.removeIf(c -> c != Cartao.VERMELHO);
-    return cartoes.size();
+    return (int) streamCartoes(time).filter(c -> !Cartao.VERMELHO.equals(c)).count();
   }
 
   public int cartoesAmarelo(Time time) {
-    List<Cartao> cartoes = new ArrayList<>();
-    List<Jogo> jogos = jogoRepository.jogos(time);
-    jogos.stream().map(j -> j.getCartoesDoTime(time)).forEach(cartoes::addAll);
-    cartoes.removeIf(c -> c != Cartao.AMARELO);
-    return cartoes.size();
+    return (int) streamCartoes(time).filter(c -> !Cartao.AMARELO.equals(c)).count();
   }
 
   public int golsMarcados(Time time) {
-    List<Jogo> jogos = jogoRepository.jogos(time);
-    return jogos.stream().mapToInt(j -> j.getGols(time)).sum();
+    return totalMarcado(time, jogoRepository.jogos(time));
   }
 
   public int golsSofridos(Time time) {
-    List<Jogo> jogos = jogoRepository.jogos(time);
-    return jogos.stream().mapToInt(j -> j.getGolsContra(time)).sum();
+    return totalSofrido(time, jogoRepository.jogos(time));
   }
 
   public double mediaDeGolsSofridos(Time time) {
     List<Jogo> jogos = jogoRepository.jogos(time);
-    int golsSofridos = jogos.stream().mapToInt(j -> j.getGolsContra(time)).sum();
-    long totalDePartidas = jogoRepository.jogos(time).stream().filter(Jogo::isEncerrado).count();
-    return totalDePartidas != 0 ? (double) golsSofridos / totalDePartidas : golsSofridos;
+    int gols = totalSofrido(time, jogos);
+    long partidas = partidas(jogos);
+    return NumUtils.media(gols, partidas);
   }
-  
+
   public double mediaDeGolsMarcados(Time time) {
     List<Jogo> jogos = jogoRepository.jogos(time);
-    int golsMarcados = jogos.stream().mapToInt(j -> j.getGols(time)).sum();
-    long totalDePartidas = jogoRepository.jogos(time).stream().filter(Jogo::isEncerrado).count();
-    return totalDePartidas != 0 ? (double) golsMarcados / totalDePartidas : golsMarcados;
+    int gols = totalMarcado(time, jogos);
+    long partidas = partidas(jogos);
+    return NumUtils.media(gols, partidas);
+  }
+
+  private int totalMarcado(Time time, List<Jogo> jogos) {
+    return jogos.stream().mapToInt(j -> j.getGols(time)).sum();
+  }
+
+  private int totalSofrido(Time time, List<Jogo> jogos) {
+    return jogos.stream().mapToInt(j -> j.getGolsContra(time)).sum();
+  }
+
+  private long partidas(List<Jogo> jogos) {
+    return jogos.stream().filter(Jogo::isEncerrado).count();
   }
 
   private int peso(Cartao cartao) {
@@ -113,4 +116,5 @@ public class TimeService {
         return 0;
     }
   }
+
 }

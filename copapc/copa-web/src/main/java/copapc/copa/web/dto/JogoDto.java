@@ -5,23 +5,23 @@ import copapc.model.jogo.Jogo;
 /**
  * @author Guilherme Pacheco
  */
-public class JogoDTO {
+public class JogoDto {
 
   private int numero;
-  private TimeDTO mandante;
-  private TimeDTO visitante;
+  private TimeDto mandante;
+  private TimeDto visitante;
   private String horario;
   private boolean iniciado;
 
-  JogoDTO() {
+  JogoDto() {
     super();
   }
 
-  public JogoDTO(Jogo jogo) {
+  public JogoDto(Jogo jogo) {
     numero = jogo.getNumero();
     iniciado = jogo.isIniciado();
-    mandante = new TimeDTO(jogo.getMandante());
-    visitante = new TimeDTO(jogo.getVisitante());
+    mandante = new TimeDto(jogo.getMandante());
+    visitante = new TimeDto(jogo.getVisitante());
     horario = jogo.getHorario().toString("dd/MM HH:mm");
     ;
   }
@@ -34,11 +34,11 @@ public class JogoDTO {
     return numero;
   }
 
-  public TimeDTO getMandante() {
+  public TimeDto getMandante() {
     return mandante;
   }
 
-  public TimeDTO getVisitante() {
+  public TimeDto getVisitante() {
     return visitante;
   }
 

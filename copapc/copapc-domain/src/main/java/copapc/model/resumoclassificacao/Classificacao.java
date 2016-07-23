@@ -18,16 +18,13 @@ public class Classificacao implements Serializable {
   private final int derrotas;
   private final int golsPros;
   private final int golsContra;
-  private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance();
-
-  static {
-    NUMBER_FORMAT.setMaximumFractionDigits(1);
-    NUMBER_FORMAT.setMinimumFractionDigits(0);
-  }
+  private final NumberFormat NUMBER_FORMAT;
 
   public Classificacao(Time time, int vitorias, int empates, int derrotas, int golsPros,
-                       int golsContra)
-  {
+      int golsContra) {
+    NUMBER_FORMAT = NumberFormat.getInstance();
+    NUMBER_FORMAT.setMaximumFractionDigits(1);
+    NUMBER_FORMAT.setMinimumFractionDigits(0);
     this.time = time;
     this.vitorias = vitorias;
     this.empates = empates;
@@ -54,7 +51,7 @@ public class Classificacao implements Serializable {
 
   public int getPontos() {
     int pontos = 0;
-    pontos += (vitorias * 3);
+    pontos += vitorias * 3;
     pontos += empates;
     return pontos;
   }
@@ -90,7 +87,7 @@ public class Classificacao implements Serializable {
   public String getAproveitamento() {
     double aproveitamento = 0;
     if (getJogos() > 0) {
-      aproveitamento = ((double) getPontos() / (getJogos() * 3)) * 100;
+      aproveitamento = (double) getPontos() / (getJogos() * 3) * 100;
     }
     return NUMBER_FORMAT.format(aproveitamento) + " %";
   }

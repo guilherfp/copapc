@@ -1,6 +1,6 @@
 package copapc.infrastructure.gol;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -28,7 +28,7 @@ public class GolRepositoryImpl extends HibernateRepository implements GolReposit
   @Override
   public List<Gol> gols() {
     Criteria criteria = getSession().createCriteria("Gol");
-    return ObjectUtils.defaultIfNull(criteria.list(), new ArrayList<>());
+    return ObjectUtils.defaultIfNull(criteria.list(), Collections.emptyList());
   }
 
   @Override

@@ -1,27 +1,31 @@
 package copapc.copa.web.controllers;
 
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import copapc.copa.web.shared.Lazy;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.model.time.Time;
 import copapc.model.time.TimeRepository;
 import copapc.service.time.TimeService;
+import copapc.shared.NumUtils;
 
 /**
  * @author Guilherme Pacheco
  */
 @Scope("request")
 @Controller("timeMB")
-public class TimeManagedBean extends AbstractManagedBean {
+public class TimeBean extends AbstractBean {
   private static final long serialVersionUID = 1L;
 
-  private static final String TIME = "time";
+  private static final String PARAM_TIME = "time";
+
   @Autowired
   private TimeRepository timeRepository;
   @Autowired
@@ -29,19 +33,17 @@ public class TimeManagedBean extends AbstractManagedBean {
   @Autowired
   private TimeService timeService;
 
-  private Time time;
-  private List<Jogo> jogos;
-  private List<Time> times;
-  private List<Time> timesPorGolsMarcados;
-  private List<Time> timesPorGolsMenosSofridos;
-  private List<Time> fairplay;
+  private final Lazy<Time> time = Lazy.empty();
+  private final Lazy<List<Jogo>> jogos = Lazy.empty();
+  private final Lazy<List<Time>> times = Lazy.empty();
+  private final Lazy<List<Time>> timesPorGolsMarcados = Lazy.empty();
+  private final Lazy<List<Time>> timesPorGolsMenosSofridos = Lazy.empty();
+  private final Lazy<List<Time>> fairplay = Lazy.empty();
+  private final Lazy<Integer> totalDeJogos = Lazy.empty();
 
   @Transactional
   public Time getTime() {
-    if (time == null) {
-      time = timeRepository.comURL(getURLParameterValue(TIME));
-    }
-    return time;
+    return time.get(() -> timeRepository.comUrl(urlValue(PARAM_TIME)));
   }
 
   public String getImageTimeUrl() {
@@ -50,26 +52,22 @@ public class TimeManagedBean extends AbstractManagedBean {
 
   @Transactional
   public List<Jogo> getJogos() {
-    if (jogos == null) {
-      jogos = jogoRepository.jogos(getTime());
-    }
-    return jogos;
+    return jogos.get(() -> jogoRepository.jogos(getTime()));
   }
 
   @Transactional
   public List<Time> getTimes() {
-    if (times == null) {
-      times = timeRepository.times();
-    }
-    return times;
+    return times.get(() -> timeRepository.times());
   }
 
   @Transactional
   public List<Time> getTimesPorGolsMarcados() {
-    if (timesPorGolsMarcados == null) {
-      timesPorGolsMarcados = timeService.getTimesPorGolsMarcados();
-    }
-    return timesPorGolsMarcados;
+    return timesPorGolsMarcados.get(() -> timeService.timesPorGolsMarcados());
+  }
+
+  @Transactional
+  public List<Time> getTimesPorGolsMenosSofridos() {
+    return timesPorGolsMenosSofridos.get(() -> timeService.timesPorGolsMenosSofridos());
   }
 
   public int getTotalDeGolsMarcados() {
@@ -81,19 +79,8 @@ public class TimeManagedBean extends AbstractManagedBean {
   }
 
   @Transactional
-  public List<Time> getTimesPorGolsMenosSofridos() {
-    if (timesPorGolsMenosSofridos == null) {
-      timesPorGolsMenosSofridos = timeService.getTimesPorGolsMenosSofridos();
-    }
-    return timesPorGolsMenosSofridos;
-  }
-
-  @Transactional
   public List<Time> getFairplay() {
-    if (fairplay == null) {
-      fairplay = timeService.getFairplayRaking();
-    }
-    return fairplay;
+    return fairplay.get(() -> timeService.fairplayRaking());
   }
 
   public int posicaoFairPlay(Time time) {
@@ -138,10 +125,17 @@ public class TimeManagedBean extends AbstractManagedBean {
 
   @Transactional
   public double getMediaDeGolsSofridos() {
-    int totalDeJogos = jogoRepository.ultimosEncerrados().size();
     List<Time> times = getTimesPorGolsMenosSofridos();
-    double totalDeGols = times.stream().mapToInt(this::golsSofridos).average().getAsDouble();
-    return totalDeJogos != 0 ? totalDeGols / totalDeJogos : totalDeGols;
+    double mediaGols = mediaDeGols(times, this::golsSofridos);
+    return NumUtils.media(totalDeJogos(), mediaGols);
+  }
+
+  private int totalDeJogos() {
+    return totalDeJogos.get(() -> jogoRepository.ultimosEncerrados().size());
+  }
+
+  private double mediaDeGols(List<Time> times, ToIntFunction<Time> mapper) {
+    return times.stream().mapToInt(mapper).average().getAsDouble();
   }
 
   public double mediaGolsMarcados(Time time) {
@@ -150,10 +144,9 @@ public class TimeManagedBean extends AbstractManagedBean {
 
   @Transactional
   public double getMediaDeGolsMarcados() {
-    int totalDeJogos = jogoRepository.ultimosEncerrados().size();
     List<Time> times = getTimesPorGolsMarcados();
-    double totalDeGols = times.stream().mapToInt(this::golsMarcados).average().getAsDouble();
-    return totalDeJogos != 0 ? totalDeGols / totalDeJogos : totalDeGols;
+    double mediaGols = mediaDeGols(times, this::golsMarcados);
+    return NumUtils.media(totalDeJogos(), mediaGols);
   }
 
 }

@@ -1,6 +1,6 @@
 package copapc.infrastructure.time;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -27,27 +27,26 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
 
   @Override
   public List<Time> times() {
-    Query query = getSession().createQuery("from Time order by nome");
-    return nullSafe(query);
+    return nullSafe(query("from Time order by nome"));
   }
 
   @Override
   public Time comNumero(int numero) {
-    Query query = getSession().createQuery("from Time where numero = :numero");
+    Query query = query("from Time where numero = :numero");
     query.setParameter("numero", numero);
     return (Time) query.uniqueResult();
   }
 
   @Override
-  public Time comURL(String url) {
-    Query query = getSession().createQuery("from Time where url = :url");
+  public Time comUrl(String url) {
+    Query query = query("from Time where url = :url");
     query.setParameter("url", url);
     return (Time) query.uniqueResult();
   }
 
   @Override
   public List<Time> timesPorGrupo(char grupo) {
-    Query query = getSession().createQuery("from Time where grupo = :grupo order by nome");
+    Query query = query("from Time where grupo = :grupo order by nome");
     query.setParameter("grupo", grupo);
     return nullSafe(query);
   }
@@ -55,10 +54,10 @@ public class TimeRepositoryImpl extends HibernateRepository implements TimeRepos
   @Override
   public int quantidadeDeGrupos() {
     int grupos = (int) times().stream().map(Time::getGrupo).distinct().count();
-    return grupos > 0 ? (times().size() / grupos) : 0;
+    return grupos > 0 ? times().size() / grupos : 0;
   }
 
   private List<Time> nullSafe(Query query) {
-    return ObjectUtils.defaultIfNull(query.list(), new ArrayList<>());
+    return ObjectUtils.defaultIfNull(query.list(), Collections.emptyList());
   }
 }

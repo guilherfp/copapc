@@ -3,10 +3,12 @@ package copapc.copa.web.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import copapc.copa.web.shared.Lazy;
 import copapc.model.jogo.Jogo;
 import copapc.model.jogo.JogoRepository;
 import copapc.service.jogo.JogoService;
@@ -17,33 +19,31 @@ import copapc.service.jogo.Rodada;
  */
 @Scope("request")
 @Controller("jogoMB")
-public class JogoManagedBean extends AbstractManagedBean implements Serializable {
+public class JogoBean extends AbstractBean implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private static final String JOGO = "jogo";
+  private static final String URL_JOGO = "jogo";
 
   @Autowired
   private JogoRepository jogoRepository;
   @Autowired
   private JogoService jogoService;
 
-  private Jogo jogo;
-  private List<Jogo> jogos;
-  private List<Rodada> rodadasFase1;
-  private List<Rodada> rodadasFase2;
+  private final Lazy<List<Rodada>> rodadasFase1 = Lazy.empty();
+  private final Lazy<List<Rodada>> rodadasFase2 = Lazy.empty();
+  private final Lazy<List<Jogo>> jogos = Lazy.empty();
+  private final Lazy<Jogo> jogo = Lazy.empty();
+
+  private int numeroJogo() {
+    return NumberUtils.toInt(urlValue(URL_JOGO), -1);
+  }
 
   public List<Rodada> getRodadasFase1() {
-    if (rodadasFase1 == null) {
-      rodadasFase1 = jogoService.getRodadas(1);
-    }
-    return rodadasFase1;
+    return rodadasFase1.get(() -> jogoService.rodadas(1));
   }
 
   public List<Rodada> getRodadasFase2() {
-    if (rodadasFase2 == null) {
-      rodadasFase2 = jogoService.getRodadas(2);
-    }
-    return rodadasFase2;
+    return rodadasFase2.get(() -> jogoService.rodadas(2));
   }
 
   public boolean isShowFase2() {
@@ -51,18 +51,11 @@ public class JogoManagedBean extends AbstractManagedBean implements Serializable
   }
 
   public List<Jogo> getJogos() {
-    if (jogos == null) {
-      jogos = jogoRepository.jogos();
-    }
-    return jogos;
+    return jogos.get(() -> jogoRepository.jogos());
   }
 
   public Jogo getJogo() {
-    if (jogo == null) {
-      String timeUrl = getURLParameterValue(JOGO);
-      jogo = jogoRepository.jogoComNumero(Integer.parseInt(timeUrl));
-    }
-    return jogo;
+    return jogo.get(() -> jogoRepository.jogo(numeroJogo()));
   }
 
   public boolean isShowPrimeiroTempo() {

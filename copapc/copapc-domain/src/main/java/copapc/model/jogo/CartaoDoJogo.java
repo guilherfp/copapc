@@ -1,6 +1,7 @@
 package copapc.model.jogo;
 
-import java.io.Serializable;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import copapc.model.jogador.Jogador;
 import copapc.shared.Entity;
@@ -8,8 +9,7 @@ import copapc.shared.Entity;
 /**
  * @author Guilherme Pacheco
  */
-public class CartaoDoJogo extends Entity implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class CartaoDoJogo extends Entity {
 
   private Jogo jogo;
   private Cartao cartao;
@@ -53,12 +53,8 @@ public class CartaoDoJogo extends Entity implements Serializable {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = (prime * result) + ((cartao == null) ? 0 : cartao.hashCode());
-    result = (prime * result) + ((jogador == null) ? 0 : jogador.hashCode());
-    result = (prime * result) + ((jogo == null) ? 0 : jogo.hashCode());
-    return result;
+    HashCodeBuilder builder = new HashCodeBuilder();
+    return builder.append(cartao).append(jogador).append(jogo).hashCode();
   }
 
   @Override
@@ -66,28 +62,15 @@ public class CartaoDoJogo extends Entity implements Serializable {
     if (this == obj) {
       return true;
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     CartaoDoJogo other = (CartaoDoJogo) obj;
-    if (cartao != other.cartao) {
-      return false;
-    }
-    if (jogador == null) {
-      if (other.jogador != null) {
-        return false;
-      }
-    } else if (!jogador.equals(other.jogador)) {
-      return false;
-    }
-    if (jogo == null) {
-      if (other.jogo != null) {
-        return false;
-      }
-    } else if (!jogo.equals(other.jogo)) {
-      return false;
-    }
-    return true;
+    EqualsBuilder builder = new EqualsBuilder();
+    builder.append(cartao, other.cartao);
+    builder.append(jogador, other.jogador);
+    builder.append(jogo, other.jogo);
+    return builder.isEquals();
   }
 
   @Override
