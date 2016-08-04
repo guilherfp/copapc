@@ -9,6 +9,10 @@
 
   <name>Parent Projeto Copa PC</name>
 
+  <modules>
+    <module>copa-web</module>
+  </modules>
+
   <properties>
     <java.version>1.8</java.version>
     <copapc.version>0.0.1-SNAPSHOT</copapc.version>
@@ -86,9 +90,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
-  </dependencies>
-
   <build>
     <plugins>
       <plugin>
@@ -112,9 +113,4 @@
     </plugins>
   </build>
 
-  <modules>
-    <module>copa-web</module>
-    <module>copapc-domain</module>
-    <module>copapc-infrastructure</module>
-  </modules>
 </project>
